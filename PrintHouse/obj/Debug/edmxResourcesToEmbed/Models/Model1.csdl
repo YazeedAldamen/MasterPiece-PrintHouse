@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PrintHouseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="PrintHouseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="PrintHouseModel.C__MigrationHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="PrintHouseModel.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="PrintHouseModel.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="PrintHouseModel.AspNetUserLogin" />
+    <EntitySet Name="AspNetUserRoles" EntityType="PrintHouseModel.AspNetUserRole" />
+    <EntitySet Name="AspNetUsers" EntityType="PrintHouseModel.AspNetUser" />
+    <EntitySet Name="Carts" EntityType="PrintHouseModel.Cart" />
+    <EntitySet Name="Categories" EntityType="PrintHouseModel.Category" />
+    <EntitySet Name="Customers" EntityType="PrintHouseModel.Customer" />
+    <EntitySet Name="Maintenances" EntityType="PrintHouseModel.Maintenance" />
+    <EntitySet Name="OrderDetails" EntityType="PrintHouseModel.OrderDetail" />
+    <EntitySet Name="Orders" EntityType="PrintHouseModel.Order" />
+    <EntitySet Name="Products" EntityType="PrintHouseModel.Product" />
+    <EntitySet Name="Reviews" EntityType="PrintHouseModel.Review" />
+    <EntitySet Name="subCategories" EntityType="PrintHouseModel.subCategory" />
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="PrintHouseModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRole" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="PrintHouseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="PrintHouseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="PrintHouseModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRole" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Customers__aspId__52593CB8" Association="PrintHouseModel.FK__Customers__aspId__52593CB8">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cart__customerId__5EBF139D" Association="PrintHouseModel.FK__Cart__customerId__5EBF139D">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cart__productId__5FB337D6" Association="PrintHouseModel.FK__Cart__productId__5FB337D6">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Products__catego__398D8EEE" Association="PrintHouseModel.FK__Products__catego__398D8EEE">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__subCatego__categ__3C69FB99" Association="PrintHouseModel.FK__subCatego__categ__3C69FB99">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="subCategory" EntitySet="subCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Maintenan__custo__5BE2A6F2" Association="PrintHouseModel.FK__Maintenan__custo__5BE2A6F2">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Maintenance" EntitySet="Maintenances" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__customer__5535A963" Association="PrintHouseModel.FK__Orders__customer__5535A963">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reviews__custome__628FA481" Association="PrintHouseModel.FK__Reviews__custome__628FA481">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Review" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderDeta__order__5812160E" Association="PrintHouseModel.FK__OrderDeta__order__5812160E">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderDeta__produ__59063A47" Association="PrintHouseModel.FK__OrderDeta__produ__59063A47">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Reviews__product__6383C8BA" Association="PrintHouseModel.FK__Reviews__product__6383C8BA">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Review" EntitySet="Reviews" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserRoles" Relationship="PrintHouseModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetRole" ToRole="AspNetUserRole" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="PrintHouseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="PrintHouseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserRole">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="RoleId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Note" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AspNetRole" Relationship="PrintHouseModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetUserRole" ToRole="AspNetRole" />
+    <NavigationProperty Name="AspNetUser" Relationship="PrintHouseModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUserRole" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="PrintHouseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="PrintHouseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="AspNetUserRoles" Relationship="PrintHouseModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserRole" />
+    <NavigationProperty Name="Customers" Relationship="PrintHouseModel.FK__Customers__aspId__52593CB8" FromRole="AspNetUser" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="cartId" />
+    </Key>
+    <Property Name="cartId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customerId" Type="Int32" />
+    <Property Name="productId" Type="Int32" />
+    <Property Name="quantity" Type="Int32" />
+    <Property Name="price" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="totalPrice" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="Customer" Relationship="PrintHouseModel.FK__Cart__customerId__5EBF139D" FromRole="Cart" ToRole="Customer" />
+    <NavigationProperty Name="Product" Relationship="PrintHouseModel.FK__Cart__productId__5FB337D6" FromRole="Cart" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="categoryId" />
+    </Key>
+    <Property Name="categoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="categoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="categoryDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="categoryImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Products" Relationship="PrintHouseModel.FK__Products__catego__398D8EEE" FromRole="Category" ToRole="Product" />
+    <NavigationProperty Name="subCategories" Relationship="PrintHouseModel.FK__subCatego__categ__3C69FB99" FromRole="Category" ToRole="subCategory" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="customerId" />
+    </Key>
+    <Property Name="customerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customerFirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="customerLastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="customerPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="aspId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="PrintHouseModel.FK__Customers__aspId__52593CB8" FromRole="Customer" ToRole="AspNetUser" />
+    <NavigationProperty Name="Carts" Relationship="PrintHouseModel.FK__Cart__customerId__5EBF139D" FromRole="Customer" ToRole="Cart" />
+    <NavigationProperty Name="Maintenances" Relationship="PrintHouseModel.FK__Maintenan__custo__5BE2A6F2" FromRole="Customer" ToRole="Maintenance" />
+    <NavigationProperty Name="Orders" Relationship="PrintHouseModel.FK__Orders__customer__5535A963" FromRole="Customer" ToRole="Order" />
+    <NavigationProperty Name="Reviews" Relationship="PrintHouseModel.FK__Reviews__custome__628FA481" FromRole="Customer" ToRole="Review" />
+  </EntityType>
+  <EntityType Name="Maintenance">
+    <Key>
+      <PropertyRef Name="maintenanceId" />
+    </Key>
+    <Property Name="maintenanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="orderDate" Type="DateTime" Precision="3" />
+    <Property Name="customerId" Type="Int32" />
+    <Property Name="maintencanceOrderDetails" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Customer" Relationship="PrintHouseModel.FK__Maintenan__custo__5BE2A6F2" FromRole="Maintenance" ToRole="Customer" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="orderDetailId" />
+    </Key>
+    <Property Name="orderDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="orderId" Type="Int32" />
+    <Property Name="productId" Type="Int32" />
+    <Property Name="quantity" Type="Int32" />
+    <Property Name="price" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="Order" Relationship="PrintHouseModel.FK__OrderDeta__order__5812160E" FromRole="OrderDetail" ToRole="Order" />
+    <NavigationProperty Name="Product" Relationship="PrintHouseModel.FK__OrderDeta__produ__59063A47" FromRole="OrderDetail" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="orderId" />
+    </Key>
+    <Property Name="orderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="orderDate" Type="DateTime" Precision="3" />
+    <Property Name="totalAmount" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="customerId" Type="Int32" />
+    <NavigationProperty Name="Customer" Relationship="PrintHouseModel.FK__Orders__customer__5535A963" FromRole="Order" ToRole="Customer" />
+    <NavigationProperty Name="OrderDetails" Relationship="PrintHouseModel.FK__OrderDeta__order__5812160E" FromRole="Order" ToRole="OrderDetail" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="productId" />
+    </Key>
+    <Property Name="productId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="productName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="productDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="productImage1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="productImage2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="productImage3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="productPrice" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="categoryId" Type="Int32" />
+    <Property Name="stock" Type="Int32" />
+    <NavigationProperty Name="Carts" Relationship="PrintHouseModel.FK__Cart__productId__5FB337D6" FromRole="Product" ToRole="Cart" />
+    <NavigationProperty Name="Category" Relationship="PrintHouseModel.FK__Products__catego__398D8EEE" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="OrderDetails" Relationship="PrintHouseModel.FK__OrderDeta__produ__59063A47" FromRole="Product" ToRole="OrderDetail" />
+    <NavigationProperty Name="Reviews" Relationship="PrintHouseModel.FK__Reviews__product__6383C8BA" FromRole="Product" ToRole="Review" />
+  </EntityType>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="reviewId" />
+    </Key>
+    <Property Name="reviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customerId" Type="Int32" />
+    <Property Name="productId" Type="Int32" />
+    <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="rating" Type="Int32" />
+    <NavigationProperty Name="Customer" Relationship="PrintHouseModel.FK__Reviews__custome__628FA481" FromRole="Review" ToRole="Customer" />
+    <NavigationProperty Name="Product" Relationship="PrintHouseModel.FK__Reviews__product__6383C8BA" FromRole="Review" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="subCategory">
+    <Key>
+      <PropertyRef Name="subCategoryId" />
+    </Key>
+    <Property Name="subCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="subCategoryName" Type="Int32" Nullable="false" />
+    <Property Name="subCategoryImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="subCategoryDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="categoryId" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="PrintHouseModel.FK__subCatego__categ__3C69FB99" FromRole="subCategory" ToRole="Category" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Type="PrintHouseModel.AspNetRole" Role="AspNetRole" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="PrintHouseModel.AspNetUserRole" Role="AspNetUserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRole">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRole">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="PrintHouseModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="PrintHouseModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaim">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="PrintHouseModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="PrintHouseModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Type="PrintHouseModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="PrintHouseModel.AspNetUserRole" Role="AspNetUserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRole">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Customers__aspId__52593CB8">
+    <End Type="PrintHouseModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="PrintHouseModel.Customer" Role="Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="aspId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cart__customerId__5EBF139D">
+    <End Type="PrintHouseModel.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="PrintHouseModel.Cart" Role="Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customerId" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="customerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cart__productId__5FB337D6">
+    <End Type="PrintHouseModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="PrintHouseModel.Cart" Role="Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productId" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Products__catego__398D8EEE">
+    <End Type="PrintHouseModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="PrintHouseModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="categoryId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__subCatego__categ__3C69FB99">
+    <End Type="PrintHouseModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="PrintHouseModel.subCategory" Role="subCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="categoryId" />
+      </Principal>
+      <Dependent Role="subCategory">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Maintenan__custo__5BE2A6F2">
+    <End Type="PrintHouseModel.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="PrintHouseModel.Maintenance" Role="Maintenance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customerId" />
+      </Principal>
+      <Dependent Role="Maintenance">
+        <PropertyRef Name="customerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__customer__5535A963">
+    <End Type="PrintHouseModel.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="PrintHouseModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customerId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="customerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reviews__custome__628FA481">
+    <End Type="PrintHouseModel.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="PrintHouseModel.Review" Role="Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="customerId" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="customerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderDeta__order__5812160E">
+    <End Type="PrintHouseModel.Order" Role="Order" Multiplicity="0..1" />
+    <End Type="PrintHouseModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="orderId" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="orderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderDeta__produ__59063A47">
+    <End Type="PrintHouseModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="PrintHouseModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productId" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Reviews__product__6383C8BA">
+    <End Type="PrintHouseModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="PrintHouseModel.Review" Role="Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productId" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

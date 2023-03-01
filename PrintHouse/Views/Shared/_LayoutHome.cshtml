@@ -1,0 +1,377 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Print House</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="~/Content/assets/img/print house logo.png" rel="icon" />
+    <link href="~/Content/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+    <script src="https://kit.fontawesome.com/72467fec0a.js"
+            crossorigin="anonymous"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap"
+          rel="stylesheet" />
+
+
+    @Styles.Render("~/Main/css")
+</head>
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header"
+            class="fixed-top d-flex align-items-center header-transparent">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="logo">
+                <h1 class="text-light">
+                    <a href="index.html">
+                        <img src="../../Content/assets\img\print house logo.png" alt="" class="img-fluid" />
+                    </a>
+                </h1>
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+            </div>
+
+            <nav id="navbar" class="navbar d-flex justify-content-between">
+                <ul>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li><a href="Categories.html">Categories</a></li>
+                    <li>@Html.ActionLink("Register", "Register", "Account")</li>
+                    <li>@Html.ActionLink("Log In", "Login", "Account")</li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+            <!-- .navbar -->
+        </div>
+    </header>
+    <!-- End Header -->
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex justify-cntent-center align-items-center">
+        <div id="heroCarousel"
+             class="container carousel carousel-fade"
+             data-bs-ride="carousel"
+             data-bs-interval="5000">
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <div class="carousel-container">
+                    <h2 class="animate__animated animate__fadeInDown">
+                        Welcome to <span style="color: #fbae30">Print</span><span style="color: #35b3f1"> House</span>
+                    </h2>
+                    <p class="animate__animated animate__fadeInUp">
+                        Revolutionize Your Printing Experience with Our High-Quality 3D
+                        Printers
+                    </p>
+                    <a href="Categories.html"
+                       class="btn-get-started animate__animated animate__fadeInUp">Shop Now</a>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <div class="carousel-container">
+                    <h2 class="animate__animated animate__fadeInDown">
+                        High precision
+                    </h2>
+                    <p class="animate__animated animate__fadeInUp">
+                        Print Precise and Detailed Objects with Our State-of-the-Art 3D
+                        Printers
+                    </p>
+                    <a href="Categories.html"
+                       class="btn-get-started animate__animated animate__fadeInUp">Shop Now</a>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+                <div class="carousel-container">
+                    <h2 class="animate__animated animate__fadeInDown">Versatility</h2>
+                    <p class="animate__animated animate__fadeInUp">
+                        <!-- Experience the Power of 3D Printing and Turn Your Ideas into
+                        Reality -->
+                        Your One-Stop-Shop For All Your 3D Printing Needs
+                    </p>
+                    <a href="Categories.html"
+                       class="btn-get-started animate__animated animate__fadeInUp">Shop Now</a>
+                </div>
+            </div>
+
+            <a class="carousel-control-prev"
+               href="#heroCarousel"
+               role="button"
+               data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bx bx-chevron-left"
+                      aria-hidden="true"></span>
+            </a>
+
+            <a class="carousel-control-next"
+               href="#heroCarousel"
+               role="button"
+               data-bs-slide="next">
+                <span class="carousel-control-next-icon bx bx-chevron-right"
+                      aria-hidden="true"></span>
+            </a>
+        </div>
+    </section>
+    <!-- End Hero -->
+
+    <main id="main">
+        <!-- ======= Services Section ======= -->
+        <section class="services">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch"
+                         data-aos="fade-up">
+                        <div class="icon-box icon-box-pink">
+                            <div class="icon"><i class="fa-solid fa-print"></i></div>
+                            <h4 class="title"><a href="">3D Printers</a></h4>
+                            <p class="description">
+                                Description: Experience the future of fabrication with our
+                                state-of-the-art 3D printers
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch"
+                         data-aos="fade-up"
+                         data-aos-delay="100">
+                        <div class="icon-box icon-box-cyan">
+                            <div class="icon"><i class="fa-solid fa-cubes"></i></div>
+                            <h4 class="title"><a href="">Filamnets</a></h4>
+                            <p class="description">
+                                Bring your 3D printing projects to life with our selection of
+                                premium filaments
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch"
+                         data-aos="fade-up"
+                         data-aos-delay="200">
+                        <div class="icon-box icon-box-green">
+                            <div class="icon"><i class="fa-solid fa-gears"></i></div>
+                            <h4 class="title"><a href="">Parts</a></h4>
+                            <p class="description">
+                                Maintain the performance and longevity of your 3D printer with
+                                our selection of premium parts
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch"
+                         data-aos="fade-up"
+                         data-aos-delay="200">
+                        <div class="icon-box icon-box-blue">
+                            <div class="icon">
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
+                            </div>
+                            <h4 class="title"><a href="">Technical Support</a></h4>
+                            <p class="description">
+                                Our knowledgeable and friendly support team is here to help
+                                you with any questions or issues you may have
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Services Section -->
+        <!-- ======= Why Us Section ======= -->
+        <section class="why-us section-bg"
+                 data-aos="fade-up"
+                 date-aos-delay="200">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 video-box">
+                        <img src="~/Content/assets/img/3dprintingasharkyusstock.png"
+                             class="img-fluid"
+                             alt="" />
+                        <a href="https://www.youtube.com/watch?v=aVmJShnA8jE"
+                           class="venobox play-btn mb-4 glightbox play-btn"
+                           data-vbtype="video"
+                           data-autoplay="true"
+                           target="_blank"></a>
+                    </div>
+
+                    <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
+                        <div class="icon-box">
+                            <div class="icon"><i class="fa-solid fa-video"></i></div>
+                            <h4 class="title">
+                                <a href="">Discover the Power of 3D Printing: Watch Our Demo Video</a>
+                            </h4>
+                            <p class="description">
+                                From complex designs to simple objects, our demo videos
+                                provide a glimpse into the endless possibilities of 3D
+                                printing
+                            </p>
+                        </div>
+
+                        <div class="icon-box">
+                            <div class="icon"><i class="bx bx-fingerprint"></i></div>
+                            <h4 class="title">
+                                <a href="">Experience the Capabilities of Our 3D Printers</a>
+                            </h4>
+                            <p class="description">
+                                Get a firsthand look at the power and versatility of our 3D
+                                printers
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Why Us Section -->
+        <!-- ======= Features Section ======= -->
+
+        @RenderBody()
+
+    </main>
+    <!-- End #main -->
+    <!-- ======= Footer ======= -->
+    <footer id="footer"
+            data-aos="fade-up"
+            data-aos-easing="ease-in-out"
+            data-aos-duration="500">
+        <div class="footer-newsletter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h4>Our Newsletter</h4>
+                        <p>Subscribe To Our Newsletter To Be Updated With What's New</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <form action="" method="post">
+                            <input type="email" name="email" /><input type="submit"
+                                                                      value="Subscribe" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li>
+                                <i class="bx bx-chevron-right"></i> <a href="#">Home</a>
+                            </li>
+                            <li>
+                                <i class="bx bx-chevron-right"></i> <a href="#">About us</a>
+                            </li>
+                            <li>
+                                <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
+                            </li>
+                            <li>
+                                <i class="bx bx-chevron-right"></i>
+                                <a href="#">Terms of service</a>
+                            </li>
+                            <li>
+                                <i class="bx bx-chevron-right"></i>
+                                <a href="#">Privacy policy</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li>
+                                <i class="bx bx-chevron-right"></i>
+                                <a href="#">3D Printers</a>
+                            </li>
+                            <li>
+                                <i class="bx bx-chevron-right"></i>
+                                <a href="#">Filaments</a>
+                            </li>
+                            <li>
+                                <i class="bx bx-chevron-right"></i>
+                                <a href="#">Parts</a>
+                            </li>
+                            <li>
+                                <i class="bx bx-chevron-right"></i>
+                                <a href="#">Technical Support</a>
+                            </li>
+                            <li>
+                                <i class="bx bx-chevron-right"></i>
+                                <a href="#">Maintenance</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h4>Contact Us</h4>
+                        <p>
+                            A108 Hatem Street <br />
+                            Irbid, Irbid 535022<br />
+                            Jordan <br /><br />
+                            <strong>Phone:</strong> +962 778-929-863<br />
+                            <strong>Email:</strong> PrintHouse@gmail.com<br />
+                        </p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-info">
+                        <h3>About Print House</h3>
+                        <p>
+                            At Print House, we're dedicated to providing the best 3D
+                            printing solutions for professionals and hobbyists alike. From
+                            top-of-the-line printers to expert technical support, we're here
+                            to bring your ideas to life. Discover the endless possibilities
+                            of 3D printing with us.
+                        </p>
+                        <div class="social-links mt-3">
+                            <a href="https://www.twitter.com" class="twitter">
+                                <i class="bx bxl-twitter"></i>
+                            </a>
+                            <a href="https://www.facebook.com/YazeedAldamen44/"
+                               class="facebook">
+                                <i class="bx bxl-facebook"></i>
+                            </a>
+                            <a href="https://www.instagram.com" class="instagram">
+                                <i class="bx bxl-instagram"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/yazeed-aldamen-2b562b175/"
+                               class="linkedin">
+                                <i class="bx bxl-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Print House</span></strong>. All Rights Reserved
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <a href="#"
+       class="back-to-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
+
+    <!-- Vendor JS Files -->
+    <script src="~/Content/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+        <script src="~/Content/assets/vendor/aos/aos.js"></script>
+        <script src="~/Content/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="~/Content/assets/vendor/glightbox/js/glightbox.min.js"></script>
+        <script src="~/Content/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+        <script src="~/Content/assets/vendor/swiper/swiper-bundle.min.js"></script>
+        <script src="~/Content/assets/vendor/waypoints/noframework.waypoints.js"></script>
+     Main JS File 
+    <script src="~/Content/assets/js/main.js"></script>
+    @*@Scripts.Render("~/bundles/Main")*@
+</body>
+</html>

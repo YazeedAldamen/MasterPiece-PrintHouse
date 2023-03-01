@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="443f0ce13e6c4afa8ca866c8a745f724" Name="Diagram1">
+        <EntityTypeShape EntityType="PrintHouseModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="1.375" />
+        <EntityTypeShape EntityType="PrintHouseModel.AspNetRole" Width="1.5" PointX="0.75" PointY="5.375" />
+        <EntityTypeShape EntityType="PrintHouseModel.AspNetUserClaim" Width="1.5" PointX="3" PointY="12.75" />
+        <EntityTypeShape EntityType="PrintHouseModel.AspNetUserLogin" Width="1.5" PointX="3" PointY="15.5" />
+        <EntityTypeShape EntityType="PrintHouseModel.AspNetUserRole" Width="1.5" PointX="3" PointY="5.125" />
+        <EntityTypeShape EntityType="PrintHouseModel.AspNetUser" Width="1.5" PointX="0.75" PointY="10.125" />
+        <EntityTypeShape EntityType="PrintHouseModel.Cart" Width="1.5" PointX="5.25" PointY="8.25" />
+        <EntityTypeShape EntityType="PrintHouseModel.Category" Width="1.5" PointX="0.75" PointY="1.375" />
+        <EntityTypeShape EntityType="PrintHouseModel.Customer" Width="1.5" PointX="3" PointY="8" />
+        <EntityTypeShape EntityType="PrintHouseModel.Maintenance" Width="1.5" PointX="5.25" PointY="16.375" />
+        <EntityTypeShape EntityType="PrintHouseModel.OrderDetail" Width="1.5" PointX="7.5" PointY="13.375" />
+        <EntityTypeShape EntityType="PrintHouseModel.Order" Width="1.5" PointX="5.25" PointY="13.5" />
+        <EntityTypeShape EntityType="PrintHouseModel.Product" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="PrintHouseModel.Review" Width="1.5" PointX="8.25" PointY="8.375" />
+        <EntityTypeShape EntityType="PrintHouseModel.subCategory" Width="1.5" PointX="3" PointY="18.375" />
+        <AssociationConnector Association="PrintHouseModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" />
+        <AssociationConnector Association="PrintHouseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="PrintHouseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="PrintHouseModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="PrintHouseModel.FK__Customers__aspId__52593CB8" />
+        <AssociationConnector Association="PrintHouseModel.FK__Cart__customerId__5EBF139D" />
+        <AssociationConnector Association="PrintHouseModel.FK__Cart__productId__5FB337D6" />
+        <AssociationConnector Association="PrintHouseModel.FK__Products__catego__398D8EEE" />
+        <AssociationConnector Association="PrintHouseModel.FK__subCatego__categ__3C69FB99" />
+        <AssociationConnector Association="PrintHouseModel.FK__Maintenan__custo__5BE2A6F2" />
+        <AssociationConnector Association="PrintHouseModel.FK__Orders__customer__5535A963" />
+        <AssociationConnector Association="PrintHouseModel.FK__Reviews__custome__628FA481" />
+        <AssociationConnector Association="PrintHouseModel.FK__OrderDeta__order__5812160E" />
+        <AssociationConnector Association="PrintHouseModel.FK__OrderDeta__produ__59063A47" />
+        <AssociationConnector Association="PrintHouseModel.FK__Reviews__product__6383C8BA" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
