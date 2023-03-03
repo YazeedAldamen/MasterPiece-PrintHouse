@@ -54,11 +54,12 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-
                     <li><a href="Categories.html">Categories</a></li>
 
-                    <li>@Html.ActionLink("Register", "Register", "Account")</li>
-                    <li>@Html.ActionLink("Log In", "Login", "Account")</li>
+                    @*<li>@Html.ActionLink("Register", "Register", "Account")</li>
+                    <li>@Html.ActionLink("Log In", "Login", "Account")</li>*@
+                <li>    @Html.Partial("_LoginPartial")</li>
+
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>
@@ -199,7 +200,7 @@
     </a>
 
     <!-- Vendor JS Files -->
-    <script src="~/Content/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="~/Content/assetsD/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="~/Content/assets/vendor/aos/aos.js"></script>
     <script src="~/Content/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/Content/assets/vendor/glightbox/js/glightbox.min.js"></script>

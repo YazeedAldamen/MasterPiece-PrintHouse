@@ -1,64 +1,12 @@
 ﻿@model PrintHouse.Models.RegisterViewModel
 @{
     ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutGeneral.cshtml";
 }
 
-<h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <label>First Name</label>
-        <div class="col-md-10">
-            <input type="text" name="customerFirstName" id="customerFirstName" value="" class="form-control" required />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Last Name</label>
-        <div class="col-md-10">
-            <input type="text" name="customerLastName" id="customerLastName" value="" class="form-control" required />
-        </div>
-    </div>
-    <div class="form-group">
-        <label>Phone</label>
-        <div class="col-md-10">
-            <input type="text" name="customerPhone" id="customerPhone" value="" class="form-control" required />
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
-
-<main>
+<main style="margin-top:50px">
     <div class="container">
         <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
             <div class="container">
@@ -67,7 +15,7 @@
                         <div class="d-flex justify-content-center py-4">
                             <a href="index.html"
                                class="logo d-flex align-items-center w-auto">
-                                <img src="assets/img/print house logo.png"
+                                <img src="~/Content/assets/img/print house logo.png"
                                      alt=""
                                      style="width: 100px; height: 50px" />
                             </a>
@@ -88,6 +36,27 @@
                                 @*<form class="row g-3 needs-validation">*@
                                 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "row g-3 needs-validation", role = "form" }))
                                 {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                                    <div class="col-12">
+                                        <label>First Name</label>
+                                        <input type="text" name="customerFirstName" id="customerFirstName" value="" class="form-control" required />
+
+
+                                        <div class="invalid-feedback">
+                                            Enter your name!
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label>Last Name</label>
+                                        <input type="text" name="customerLastName" id="customerLastName" value="" class="form-control" required />
+
+
+                                        <div class="invalid-feedback">
+                                            Enter your last name!
+                                        </div>
+                                    </div>
                                     <div class="col-12">
                                         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
                                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
@@ -98,43 +67,46 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="yourPassword" class="form-label">Password</label>
-                                        <input type="password"
-                                               name="password"
-                                               class="form-control"
-                                               id="yourPassword"
-                                               required />
+                                        @*@Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })*@
+                                        <label>Password</label>
+                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+
                                         <div class="invalid-feedback">
                                             Please enter your password!
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                        <input type="password"
-                                               name="confirmpassword"
-                                               class="form-control"
-                                               id="confirmPassword"
-                                               required />
+                                        @*@Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })*@
+                                        <label>Confirm Password</label>
+                                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+
                                         <div class="invalid-feedback">
                                             Retype your password!
                                         </div>
                                     </div>
-
                                     <div class="col-12">
-                                        <button class="btn btn-primary w-100" type="submit">
-                                            Create Account
-                                        </button>
+                                        <label>Phone</label>
+                                        <input type="text" name="customerPhone" id="customerPhone" value="" class="form-control" required />
+
+
+
+                                        <div class="invalid-feedback">
+                                            Enter your phone!
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="submit" class="btn btn-dark w-100" value="Register" />
+
                                     </div>
                                     <div class="col-12">
                                         <p class="small mb-0">
                                             Already have an account?
-                                            <a href="login.html">Log in</a>
+                                           @Html.ActionLink("Log In","Login","Account")
                                         </p>
                                     </div>
                                 }
 
 
-                                </form>
                             </div>
                         </div>
                     </div>
