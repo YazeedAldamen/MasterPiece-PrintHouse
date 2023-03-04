@@ -31,9 +31,9 @@ namespace PrintHouse.Controllers
             return View();
         }
 
-        public ActionResult Single(int id){
+        public ActionResult SingleProduct(int id){
         var singleProduct = db.Products.Where(x=>x.productId == id).FirstOrDefault();
-        return View();
+        return View(singleProduct);
         }
 
         // GET: Products/Details/5

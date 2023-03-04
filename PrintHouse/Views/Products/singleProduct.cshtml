@@ -5,87 +5,319 @@
     Layout = "~/Views/Shared/_LayoutGeneral.cshtml";
 }
 
-<h2>singleProduct</h2>
 
-<div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.productName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.productName)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.productDescription)
-        </dt>
+<main id="main">
+    <!-- ======= Our Portfolio Section ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2><b>@Model.productName</b></h2>
+                <ol>
+                    <li><a href="~/Home/Index">Home</a></li>
+                    <li><a href="PrintersCategories.html">3D Printers</a></li>
+                    <li><a href="Products.html">FDM</a></li>
+                    <li>@Model.productName</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <!-- End Our Portfolio Section -->
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-8">
+                    <div class="portfolio-details-slider swiper">
+                        <div class="swiper-wrapper align-items-center">
+                            <div class="swiper-slide">
+                                <img src="~/Content/assets/img/Printers/FDM/The MakerBot Replicator Mini/@Model.productImage1"
+                                     alt="" />
+                            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.productDescription)
-        </dd>
+                            <div class="swiper-slide">
+                                <img src="~/Content/assets/img/Printers/FDM/The MakerBot Replicator Mini/@Model.productImage2"
+                                     alt="" />
+                            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.productImage1)
-        </dt>
+                            <div class="swiper-slide">
+                                <img src="~/Content/assets/img/Printers/FDM/The MakerBot Replicator Mini/@Model.productImage3"
+                                     alt="" />
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.productImage1)
-        </dd>
+                <div class="col-lg-4">
+                    <div class="portfolio-info">
+                        <h3>@Model.productName</h3>
+                        <ul>
+                            <li><strong>Category</strong>: @Model.Category.categoryName</li>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.productImage2)
-        </dt>
+                            <li><strong>Maker</strong>: MakerBot</li>
+                            <li><strong>Price</strong>: @Model.productPrice JOD</li>
+                            <li>
+                                <strong>Specifications</strong>:
+                                <a href="#specs">Check</a>
+                            </li>
+                        </ul>
+                        <input type="submit" value="Buy" class="btn btn-danger" />
+                    </div>
+                    <div class="portfolio-description">
+                        <h2>Description</h2>
+                        <p>
+                            @Model.productDescription
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="blog" class="blog">
+        <div class="container" data-aos="fade-up">
+            <div class="row">
+                <h4 class="comments-count">2 Reviews</h4>
+                <br />
+                <br />
+                @{
+                    PrintHouse.Models.PrintHouseEntities db = new PrintHouse.Models.PrintHouseEntities();
+                    PrintHouse.Models.Review reviews = new PrintHouse.Models.Review();
+                    var review = db.Reviews.Where(x => x.productId == Model.productId).ToList();
 
-        <dd>
-            @Html.DisplayFor(model => model.productImage2)
-        </dd>
+                    foreach (var item in review)
+                    {
+                        <div class="col-lg-8 entries">
+                            <div class="blog-author d-flex align-items-center">
+                                <img src="~/Content/assets/img/blog/blog-author.jpg"
+                                     class="rounded-circle float-left"
+                                     alt="" />
+                                <div>
+                                    <h4>@item.Customer.customerFirstName @item.Customer.customerLastName</h4>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.productImage3)
-        </dt>
+                                    <p>
 
-        <dd>
-            @Html.DisplayFor(model => model.productImage3)
-        </dd>
+                                        @item.comment
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.productPrice)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.productPrice)
-        </dd>
+            </div>
+        </div>
+        <div class="container" data-aos="fade-up">
+            <div class="row">
+                <div class="col-lg-8 entries">
+                    <div class="blog-comments">
+                        <div class="reply-form">
+                            <h4>Leave a Comment</h4>
+                            <p>
+                                Your email address will not be published. Required fields
+                                are marked *
+                            </p>
+                            <form action="">
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <input name="name"
+                                               type="text"
+                                               class="form-control"
+                                               placeholder="Your Name*" />
+                                    </div>
+                                    <!-- <div class="col-md-6 form-group">
+                                      <input
+                                        name="email"
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Your Email*"
+                                      />
+                                    </div> -->
+                                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.stock)
-        </dt>
+                                <div class="row">
+                                    <div class="col form-group">
+                                        <textarea name="comment"
+                                                  class="form-control"
+                                                  placeholder="Your Comment*"></textarea>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    Post Comment
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End blog author bio -->
+    <section id="specs"
+             data-aos="fade-up"
+             data-aos-easing="ease-in-out"
+             data-aos-duration="500">
+        <div class="container">
+            <div class="row gy-4">
+                <h3>Specisfications</h3>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque error
+                earum obcaecati cupiditate doloribus, ducimus, eligendi, perferendis
+                reiciendis voluptates dolorem beatae expedita sapiente animi maiores
+                tempore veritatis recusandae veniam rerum! Minima dolorem cumque,
+                error aliquam, dignissimos veritatis quos deleniti esse doloremque
+                illum, ea neque iure. Ea provident earum vero soluta maiores,
+                molestiae, labore dolor error nulla quo debitis, ad porro! Molestiae
+                aut minima accusamus nam, pariatur autem, explicabo totam quo vel
+                laudantium aliquam earum non quos eaque porro fuga! Quos fugiat
+                voluptatibus illo ex accusamus voluptas dicta repudiandae cupiditate
+                temporibus! Cupiditate vel vitae reiciendis ad illum libero, et
+                maxime necessitatibus! Obcaecati iure, suscipit vero deserunt totam
+                nihil, accusantium mollitia odit ipsa, ipsam voluptatibus natus
+                veniam velit provident placeat tempora adipisci! Numquam fuga
+                temporibus minima necessitatibus modi itaque, commodi obcaecati cum
+                maxime minus debitis facere ipsa accusamus a officia quia repellat
+                illum esse. Mollitia, saepe voluptatem adipisci quis velit nulla
+                consequatur. Praesentium aliquam maiores harum officiis nemo iure
+                voluptates dolorum odit nihil voluptas laboriosam, amet quos iste
+                unde. Ipsa nesciunt harum impedit rerum, laudantium unde
+                perspiciatis mollitia suscipit, deleniti corporis accusamus?
+                Quibusdam esse adipisci laudantium iste ad dolore praesentium
+                delectus maxime! Dolores aperiam vero quaerat amet alias et
+                exercitationem, ipsam magni adipisci soluta enim accusamus est porro
+                similique nobis voluptatum hic? Obcaecati doloribus aliquid corrupti
+                inventore harum fuga incidunt? Commodi fugiat pariatur explicabo
+                dolorem quae nemo eligendi nulla mollitia! Quibusdam, eaque. Sit
+                fugit expedita quo quas voluptates sapiente asperiores odio nam.
+                Quisquam corrupti, exercitationem non nam esse quidem eum, unde
+                veniam eligendi quia dolores nihil, in dolor! Ipsum neque laboriosam
+                maxime quis commodi inventore tenetur voluptas cum ipsa itaque? Ut,
+                sed! Inventore officiis mollitia quos veniam reiciendis at ullam
+                quo, sapiente alias labore consequatur voluptate neque fugit et
+                quaerat illo eligendi ratione molestiae odit aliquid ipsa dolor aut
+                ut. Consequuntur, doloremque! Asperiores veniam rerum quo obcaecati
+                totam repellendus necessitatibus iure quos? Similique distinctio id,
+                assumenda pariatur facere incidunt voluptatum? Fuga dolorum laborum
+                asperiores maiores placeat? Minus quis similique delectus pariatur
+                deleniti. Sed, a. Ipsa id assumenda consequuntur quae sed soluta
+                aliquam, asperiores molestiae, eveniet praesentium, eius eos
+                pariatur inventore tempora ullam modi perspiciatis aliquid nemo
+                nulla nesciunt quis. Numquam, commodi itaque? Provident veniam sequi
+                quod odio rem minus id voluptate repellat amet, at dolorem
+                reiciendis eaque fugiat commodi quae laborum facere qui optio quis
+                eveniet nesciunt a porro adipisci autem! Fuga. Excepturi id cum
+                commodi delectus, enim tenetur sunt. Dicta et ex laboriosam quod
+                voluptas eligendi. Explicabo voluptatum aperiam harum. Sunt soluta
+                corporis ex modi, esse ea quisquam nobis culpa voluptatem? Obcaecati
+                deleniti excepturi repudiandae quam facere ab amet, esse reiciendis
+                voluptates sed rerum voluptatibus odio minima atque ullam tempora
+                illum numquam incidunt aut aliquam, aliquid nostrum perferendis. Ab,
+                quasi quam? Maiores eveniet, repudiandae quidem vero iusto rem
+                commodi, dolorum minima magnam omnis alias in sequi delectus
+                corrupti ad hic magni veritatis laborum! Nemo eos, eligendi
+                voluptatem alias ea atque quae? Maiores, nemo! Molestias hic aut
+                assumenda optio eveniet officia ducimus voluptatibus consectetur,
+                esse impedit, nam commodi. Repellat voluptate minus corrupti, ipsum
+                modi illo magni quidem ipsa? Ipsum architecto eveniet praesentium.
+                Consequuntur, cumque vero amet voluptatem vitae cum ut rerum in
+                voluptate quam qui, sapiente, ullam sequi porro odio dolorum nihil
+                non eaque et quo impedit. Iusto incidunt ducimus hic labore!
+                Adipisci quibusdam ut vitae dolore non. Quidem dicta quo sequi sint
+                asperiores velit error! Deleniti vero voluptate accusantium nemo
+                nobis fuga. Harum aperiam dolores corrupti quasi cum fuga. Adipisci,
+                nam. Error facere voluptatibus corporis itaque qui fugit dolores
+                provident delectus distinctio cum dicta amet rerum voluptates illum
+                consequatur, fuga iusto quis autem obcaecati ea nam suscipit ullam?
+                Voluptate, numquam officiis?
+            </div>
+        </div>
+    </section>
+    <!-- End Portfolio Details Section -->
+</main>
 
-        <dd>
-            @Html.DisplayFor(model => model.stock)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Category.categoryName)
-        </dt>
+@*<h2>singleProduct</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.Category.categoryName)
-        </dd>
+    <div>
+        <h4>Product</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.productName)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.subCategory.subCategoryName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.productName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.subCategory.subCategoryName)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.productDescription)
+            </dt>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.productId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            <dd>
+                @Html.DisplayFor(model => model.productDescription)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.productImage1)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.productImage1)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.productImage2)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.productImage2)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.productImage3)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.productImage3)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.productPrice)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.productPrice)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.stock)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.stock)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Category.categoryName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category.categoryName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.subCategory.subCategoryName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.subCategory.subCategoryName)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.productId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
