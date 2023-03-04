@@ -1,0 +1,51 @@
+﻿@model PrintHouse.Models.subCategory
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutGeneral.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>subCategory</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.subCategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.subCategoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.subCategoryImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.subCategoryImage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.subCategoryDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.subCategoryDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.categoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.categoryName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.subCategoryId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

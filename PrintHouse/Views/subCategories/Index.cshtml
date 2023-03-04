@@ -1,0 +1,166 @@
+﻿@model IEnumerable<PrintHouse.Models.subCategory>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutGeneral.cshtml";
+}
+
+@*<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.subCategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.subCategoryImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.subCategoryDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.categoryName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.subCategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.subCategoryImage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.subCategoryDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.categoryName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.subCategoryId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.subCategoryId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.subCategoryId })
+            </td>
+        </tr>
+    }
+
+</table>*@
+
+<main id="main">
+    <!-- ======= Our Portfolio Section ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>3D Printers</h2>
+                <ol>
+                    <li><a href="index.html">Home</a></li>
+                    <li>Printers</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <!-- End Our Portfolio Section -->
+    <!-- ======= Portfolio Section ======= -->
+    <section class="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul id="portfolio-flters">
+                        <li data-filter="*" class="filter-active">All</li>
+                        <li data-filter=".filter-app">FDM</li>
+                        <li data-filter=".filter-web">SLS</li>
+                        <li data-filter=".filter-card">SLA</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row portfolio-container"
+                 data-aos="fade-up"
+                 data-aos-easing="ease-in-out"
+                 data-aos-duration="500">
+                @foreach (var item in Model)
+                {
+                    <a href="~/Products/Index/@item.subCategoryId">
+                        <div class="col-lg-4 col-md-6 portfolio-wrap filter-@item.filter">
+                            <div class="portfolio-item">
+                                <img src="~/Content/assets/img/@item.subCategoryImage"
+                                     class="img-fluid"
+                                     style="height: max-content"
+                                     alt="" />
+                                <div class="portfolio-info">
+                                    <h3>@item.subCategoryName</h3>
+                                    <div>
+                                        <a href="~/Content/assets/img/@item.subCategoryImage"
+                                           data-gallery="portfolioGallery"
+                                           class="portfolio-lightbox"
+                                           title="@item.subCategoryDescription">
+                                            <i class="bx bx-plus"></i>
+                                        </a>
+                                        <a href="~/Products/Index/@item.subCategoryId" title="Details">
+                                            <i class="bx bx-link"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                }
+                    @*<a href="Products.html">
+                        <div class="col-lg-4 col-md-6 portfolio-wrap filter-web">
+                            <div class="portfolio-item">
+                                <img src="assets/img/Printers/SLS/SLSCategory_800x600.jpg"
+                                     class="img-fluid"
+                                     alt="" />
+                                <div class="portfolio-info">
+                                    <h3>SLS</h3>
+
+                                    <div>
+                                        <a href="assets/img/Printers/SLS/SLSCategory_800x600.jpg"
+                                           data-gallery="portfolioGallery"
+                                           class="portfolio-lightbox"
+                                           title="Selective Laser Sintering">
+                                            <i class="bx bx-plus"></i>
+                                        </a>
+                                        <a href="portfolio-details.html" title="Portfolio Details">
+                                            <i class="bx bx-link"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="Products.html">
+                        <div class="col-lg-4 col-md-6 portfolio-wrap filter-card">
+                            <div class="portfolio-item">
+                                <img src="assets/img/Printers/SLA/SLACategory.png"
+                                     class="img-fluid"
+                                     alt="" />
+                                <div class="portfolio-info">
+                                    <h3>ٍٍSLA</h3>
+
+                                    <div>
+                                        <a href="assets/img/portfolio/portfolio-3.jpg"
+                                           data-gallery="portfolioGallery"
+                                           class="portfolio-lightbox"
+                                           title="App 2">
+                                            <i class="bx bx-plus"></i>
+                                        </a>
+                                        <a href="portfolio-details.html" title="Portfolio Details">
+                                            <i class="bx bx-link"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>*@
+                </div>
+        </div>
+    </section>
+    <!-- End Portfolio Section -->
+</main>

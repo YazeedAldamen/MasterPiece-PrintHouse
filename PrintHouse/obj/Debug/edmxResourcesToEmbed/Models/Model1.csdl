@@ -76,6 +76,10 @@
       <End Role="Product" EntitySet="Products" />
       <End Role="Review" EntitySet="Reviews" />
     </AssociationSet>
+    <AssociationSet Name="FK_Products_subCategories" Association="PrintHouseModel.FK_Products_subCategories">
+      <End Role="subCategory" EntitySet="subCategories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="C__MigrationHistory">
     <Key>
@@ -233,10 +237,12 @@
     <Property Name="productPrice" Type="Decimal" Precision="10" Scale="2" />
     <Property Name="categoryId" Type="Int32" />
     <Property Name="stock" Type="Int32" />
+    <Property Name="subCategoryId" Type="Int32" />
     <NavigationProperty Name="Carts" Relationship="PrintHouseModel.FK__Cart__productId__5FB337D6" FromRole="Product" ToRole="Cart" />
     <NavigationProperty Name="Category" Relationship="PrintHouseModel.FK__Products__catego__398D8EEE" FromRole="Product" ToRole="Category" />
     <NavigationProperty Name="OrderDetails" Relationship="PrintHouseModel.FK__OrderDeta__produ__59063A47" FromRole="Product" ToRole="OrderDetail" />
     <NavigationProperty Name="Reviews" Relationship="PrintHouseModel.FK__Reviews__product__6383C8BA" FromRole="Product" ToRole="Review" />
+    <NavigationProperty Name="subCategory" Relationship="PrintHouseModel.FK_Products_subCategories" FromRole="Product" ToRole="subCategory" />
   </EntityType>
   <EntityType Name="Review">
     <Key>
@@ -255,11 +261,13 @@
       <PropertyRef Name="subCategoryId" />
     </Key>
     <Property Name="subCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="subCategoryName" Type="Int32" Nullable="false" />
-    <Property Name="subCategoryImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="subCategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="subCategoryImage" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="subCategoryDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="categoryId" Type="Int32" />
+    <Property Name="filter" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Category" Relationship="PrintHouseModel.FK__subCatego__categ__3C69FB99" FromRole="subCategory" ToRole="Category" />
+    <NavigationProperty Name="Products" Relationship="PrintHouseModel.FK_Products_subCategories" FromRole="subCategory" ToRole="Product" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
     <End Type="PrintHouseModel.AspNetRole" Role="AspNetRole" Multiplicity="1">
@@ -446,6 +454,18 @@
       </Principal>
       <Dependent Role="Review">
         <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_subCategories">
+    <End Type="PrintHouseModel.subCategory" Role="subCategory" Multiplicity="0..1" />
+    <End Type="PrintHouseModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subCategory">
+        <PropertyRef Name="subCategoryId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="subCategoryId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -132,6 +132,7 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="PrintHouseModel.Product">
         <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="subCategoryId" ColumnName="subCategoryId" />
           <ScalarProperty Name="stock" ColumnName="stock" />
           <ScalarProperty Name="categoryId" ColumnName="categoryId" />
           <ScalarProperty Name="productPrice" ColumnName="productPrice" />
@@ -158,6 +159,7 @@
     <EntitySetMapping Name="subCategories">
       <EntityTypeMapping TypeName="PrintHouseModel.subCategory">
         <MappingFragment StoreEntitySet="subCategories">
+          <ScalarProperty Name="filter" ColumnName="filter" />
           <ScalarProperty Name="categoryId" ColumnName="categoryId" />
           <ScalarProperty Name="subCategoryDescription" ColumnName="subCategoryDescription" />
           <ScalarProperty Name="subCategoryImage" ColumnName="subCategoryImage" />

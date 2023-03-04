@@ -1,0 +1,91 @@
+﻿@model PrintHouse.Models.Product
+
+@{
+    ViewBag.Title = "singleProduct";
+    Layout = "~/Views/Shared/_LayoutGeneral.cshtml";
+}
+
+<h2>singleProduct</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.productName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.productName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.productDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.productDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.productImage1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.productImage1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.productImage2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.productImage2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.productImage3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.productImage3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.productPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.productPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.categoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.categoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.subCategory.subCategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.subCategory.subCategoryName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.productId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

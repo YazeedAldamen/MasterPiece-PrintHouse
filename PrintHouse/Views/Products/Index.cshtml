@@ -1,0 +1,145 @@
+﻿@model IEnumerable<PrintHouse.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutGeneral.cshtml";
+}
+
+
+<main id="main">
+    <!-- ======= Our Portfolio Section ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Our Printers</h2>
+                <ol>
+                    <li><a href="index.html">Home</a></li>
+                    <li>Products</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <!-- End Our Portfolio Section -->
+    <!-- ======= Portfolio Section ======= -->
+    <section class="portfolio">
+        <div class="container">
+            <!-- <div class="row">
+              <div class="col-lg-12">
+                <ul id="portfolio-flters">
+                  <li data-filter="*" class="filter-active">All</li>
+                  <li data-filter=".filter-app">App</li>
+                  <li data-filter=".filter-card">Card</li>
+                  <li data-filter=".filter-web">Web</li>
+                </ul>
+              </div>
+            </div> -->
+
+            <div class="row portfolio-container"
+                 data-aos="fade-up"
+                 data-aos-easing="ease-in-out"
+                 data-aos-duration="500">
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-4 col-md-6 portfolio-wrap filter-app">
+                        <a href="~/Products/singleProduct/@item.productId">
+                            <div class="portfolio-item">
+                                <img src="~/Content/assets/img/@item.Category.categoryName/@item.productImage1"
+                                     class="img-fluid"
+                                     style="height: fit-content"
+                                     alt="" />
+                                <div class="portfolio-info">
+                                    <h3>@item.productName</h3>
+                                    <div>
+                                        <a href="~/Content/assets/img/@item.Category.categoryName/@item.productImage1"
+                                           data-gallery="portfolioGallery"
+                                           class="portfolio-lightbox">
+                                            <i class="bx bx-plus"></i>
+                                        </a>
+                                        <a href="~/Products/singleProduct/@item.productId" title="Portfolio Details">
+                                            <i class="bx bx-link"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </section>
+    <!-- End Portfolio Section -->
+</main>
+
+
+
+@*<h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.productName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productImage1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productImage2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productImage3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.productPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.stock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category.categoryName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.productName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.productDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.productImage1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.productImage2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.productImage3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.productPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.stock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.categoryName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.productId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.productId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.productId })
+                </td>
+            </tr>
+        }
+
+    </table>*@

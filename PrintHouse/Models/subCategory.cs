@@ -14,12 +14,21 @@ namespace PrintHouse.Models
     
     public partial class subCategory
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public subCategory()
+        {
+            this.Products = new HashSet<Product>();
+        }
+    
         public int subCategoryId { get; set; }
-        public int subCategoryName { get; set; }
+        public string subCategoryName { get; set; }
         public string subCategoryImage { get; set; }
         public string subCategoryDescription { get; set; }
         public Nullable<int> categoryId { get; set; }
+        public string filter { get; set; }
     
         public virtual Category Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Products { get; set; }
     }
 }
