@@ -16,9 +16,9 @@ namespace PrintHouse.Models
     {
         public int maintenanceId { get; set; }
         public Nullable<System.DateTime> orderDate { get; set; }
-        public Nullable<int> customerId { get; set; }
+        public string userId { get; set; }
         public string maintencanceOrderDetails { get; set; }
     
-        public virtual Customer Customer { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

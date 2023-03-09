@@ -30,16 +30,16 @@ namespace PrintHouse.Models
         public string productImage3 { get; set; }
         public Nullable<decimal> productPrice { get; set; }
         public Nullable<int> categoryId { get; set; }
-        public Nullable<int> stock { get; set; }
         public Nullable<int> subCategoryId { get; set; }
+        public Nullable<int> stock { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual subCategory subCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Review> Reviews { get; set; }
-        public virtual subCategory subCategory { get; set; }
     }
 }

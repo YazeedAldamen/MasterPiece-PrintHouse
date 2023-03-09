@@ -27,21 +27,23 @@ CREATE TABLE subCategories
   categoryId int foreign key references Categories (categoryId),
 );
 
-CREATE TABLE Customers
-(
-  customerId int primary key identity(1,1),
-  customerFirstName varchar(20),
-  customerLastName varchar(20),
-  customerPhone varchar(20),
-  aspId nvarchar(128) foreign key references AspNetUsers (Id)
-);
+
+--alter table aspnetusers add customerFirstName varchar(20)
+--alter table aspnetusers add customerLastName varchar(20)
+--alter table aspnetusers add customerPhone varchar(20)
+--alter table aspnetuserroles add Email nvarchar(256)
+--alter table Products add subCategoryId int foreign key references subCategories(subCategoryId)
+--alter table subCategories add filter varchar(20)
+--alter table products add stock int
+--alter table reviews add rating int
+--alter table reviews add show bit
 
 CREATE TABLE Orders
 (
   orderId int primary key identity(1,1),
   orderDate datetime,
   totalAmount decimal(10,2),
-  customerId int foreign key references Customers (customerId)
+  userId nvarchar(128) foreign key references aspnetusers (Id)
 );
 
 CREATE TABLE OrderDetails
@@ -57,7 +59,7 @@ CREATE TABLE Maintenances
 (
   maintenanceId int primary key identity(1,1),
   orderDate datetime,
-  customerId int foreign key references Customers (customerId),
+  userId nvarchar(128) foreign key references aspnetusers (Id),
   maintencanceOrderDetails varchar(255)
 );
 
@@ -66,7 +68,7 @@ CREATE TABLE Maintenances
 CREATE TABLE Cart
 (
   cartId int primary key identity(1,1),
-  customerId int foreign key references Customers (customerId),
+  userId nvarchar(128) foreign key references aspnetusers (Id),
   productId int foreign key references Products (productId),
   quantity int,
   price decimal(10,2),
@@ -76,7 +78,16 @@ CREATE TABLE Cart
 CREATE TABLE Reviews
 (
 reviewId int primary key identity(1,1),
-  customerId int foreign key references Customers (customerId),
+  userId nvarchar(128) foreign key references aspnetusers (Id),
   productId int foreign key references Products (productId),
 	comment varchar(max) 
 )
+
+--CREATE TABLE Customers
+--(
+--  customerId int primary key identity(1,1),
+--  customerFirstName varchar(20),
+--  customerLastName varchar(20),
+--  customerPhone varchar(20),
+--  aspId nvarchar(128) foreign key references AspNetUsers (Id)
+--);

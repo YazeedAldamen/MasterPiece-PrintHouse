@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using PrintHouse.Models;
 
 namespace PrintHouse.Controllers
@@ -38,12 +39,17 @@ namespace PrintHouse.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             subCategory subCategory = db.subCategories.Find(id);
+            
             if (subCategory == null)
             {
                 return HttpNotFound();
             }
             return View(subCategory);
         }
+
+       
+
+       
 
         // GET: subCategories/Create
         public ActionResult Create()

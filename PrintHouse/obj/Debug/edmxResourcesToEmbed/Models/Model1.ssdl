@@ -43,7 +43,7 @@
     </Key>
     <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="Note" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
   </EntityType>
   <EntityType Name="AspNetUsers">
     <Key>
@@ -61,13 +61,16 @@
     <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="customerFirstName" Type="varchar" MaxLength="20" />
+    <Property Name="customerLastName" Type="varchar" MaxLength="20" />
+    <Property Name="customerPhone" Type="varchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="Cart">
     <Key>
       <PropertyRef Name="cartId" />
     </Key>
     <Property Name="cartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="customerId" Type="int" />
+    <Property Name="userId" Type="nvarchar" MaxLength="128" />
     <Property Name="productId" Type="int" />
     <Property Name="quantity" Type="int" />
     <Property Name="price" Type="decimal" Precision="10" Scale="2" />
@@ -82,23 +85,13 @@
     <Property Name="categoryDescription" Type="varchar(max)" />
     <Property Name="categoryImage" Type="varchar" MaxLength="50" />
   </EntityType>
-  <EntityType Name="Customers">
-    <Key>
-      <PropertyRef Name="customerId" />
-    </Key>
-    <Property Name="customerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="customerFirstName" Type="varchar" MaxLength="20" />
-    <Property Name="customerLastName" Type="varchar" MaxLength="20" />
-    <Property Name="customerPhone" Type="varchar" MaxLength="20" />
-    <Property Name="aspId" Type="nvarchar" MaxLength="128" />
-  </EntityType>
   <EntityType Name="Maintenances">
     <Key>
       <PropertyRef Name="maintenanceId" />
     </Key>
     <Property Name="maintenanceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="orderDate" Type="datetime" />
-    <Property Name="customerId" Type="int" />
+    <Property Name="userId" Type="nvarchar" MaxLength="128" />
     <Property Name="maintencanceOrderDetails" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="OrderDetails">
@@ -118,7 +111,7 @@
     <Property Name="orderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="orderDate" Type="datetime" />
     <Property Name="totalAmount" Type="decimal" Precision="10" Scale="2" />
-    <Property Name="customerId" Type="int" />
+    <Property Name="userId" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="Products">
     <Key>
@@ -132,18 +125,19 @@
     <Property Name="productImage3" Type="varchar" MaxLength="50" />
     <Property Name="productPrice" Type="decimal" Precision="10" Scale="2" />
     <Property Name="categoryId" Type="int" />
-    <Property Name="stock" Type="int" />
     <Property Name="subCategoryId" Type="int" />
+    <Property Name="stock" Type="int" />
   </EntityType>
   <EntityType Name="Reviews">
     <Key>
       <PropertyRef Name="reviewId" />
     </Key>
     <Property Name="reviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="customerId" Type="int" />
+    <Property Name="userId" Type="nvarchar" MaxLength="128" />
     <Property Name="productId" Type="int" />
     <Property Name="comment" Type="varchar(max)" />
     <Property Name="rating" Type="int" />
+    <Property Name="show" Type="bit" />
   </EntityType>
   <EntityType Name="subCategories">
     <Key>
@@ -151,24 +145,22 @@
     </Key>
     <Property Name="subCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="subCategoryName" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="subCategoryImage" Type="varchar" MaxLength="255" />
+    <Property Name="subCategoryImage" Type="varchar" MaxLength="50" />
     <Property Name="subCategoryDescription" Type="varchar(max)" />
     <Property Name="categoryId" Type="int" />
-    <Property Name="filter" Type="varchar" MaxLength="50" />
+    <Property Name="filter" Type="varchar" MaxLength="20" />
   </EntityType>
-  <Association Name="FK__Cart__customerId__5EBF139D">
-    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
-    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customers">
-        <PropertyRef Name="customerId" />
-      </Principal>
-      <Dependent Role="Cart">
-        <PropertyRef Name="customerId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Cart__productId__5FB337D6">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK__Cart__productId__59063A47">
     <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
     <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
     <ReferentialConstraint>
@@ -180,31 +172,31 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Customers__aspId__52593CB8">
+  <Association Name="FK__Cart__userId__5812160E">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-    <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="AspNetUsers">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Customers">
-        <PropertyRef Name="aspId" />
+      <Dependent Role="Cart">
+        <PropertyRef Name="userId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Maintenan__custo__5BE2A6F2">
-    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+  <Association Name="FK__Maintenan__userI__5535A963">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
     <End Role="Maintenances" Type="Self.Maintenances" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Customers">
-        <PropertyRef Name="customerId" />
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Maintenances">
-        <PropertyRef Name="customerId" />
+        <PropertyRef Name="userId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrderDeta__order__5812160E">
+  <Association Name="FK__OrderDeta__order__5165187F">
     <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
     <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
     <ReferentialConstraint>
@@ -216,7 +208,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrderDeta__produ__59063A47">
+  <Association Name="FK__OrderDeta__produ__52593CB8">
     <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
     <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
     <ReferentialConstraint>
@@ -228,19 +220,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Orders__customer__5535A963">
-    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+  <Association Name="FK__Orders__userId__4E88ABD4">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
     <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Customers">
-        <PropertyRef Name="customerId" />
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Orders">
-        <PropertyRef Name="customerId" />
+        <PropertyRef Name="userId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Products__catego__398D8EEE">
+  <Association Name="FK__Products__catego__48CFD27E">
     <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
     <End Role="Products" Type="Self.Products" Multiplicity="*" />
     <ReferentialConstraint>
@@ -252,19 +244,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Reviews__custome__628FA481">
-    <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
-    <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+  <Association Name="FK__Products__subCat__5DCAEF64">
+    <End Role="subCategories" Type="Self.subCategories" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Customers">
-        <PropertyRef Name="customerId" />
+      <Principal Role="subCategories">
+        <PropertyRef Name="subCategoryId" />
       </Principal>
-      <Dependent Role="Reviews">
-        <PropertyRef Name="customerId" />
+      <Dependent Role="Products">
+        <PropertyRef Name="subCategoryId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Reviews__product__6383C8BA">
+  <Association Name="FK__Reviews__product__5CD6CB2B">
     <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
     <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
     <ReferentialConstraint>
@@ -276,7 +268,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__subCatego__categ__3C69FB99">
+  <Association Name="FK__Reviews__userId__5BE2A6F2">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reviews">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__subCatego__categ__4BAC3F29">
     <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
     <End Role="subCategories" Type="Self.subCategories" Multiplicity="*" />
     <ReferentialConstraint>
@@ -344,18 +348,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Products_subCategories">
-    <End Role="subCategories" Type="Self.subCategories" Multiplicity="0..1" />
-    <End Role="Products" Type="Self.Products" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="subCategories">
-        <PropertyRef Name="subCategoryId" />
-      </Principal>
-      <Dependent Role="Products">
-        <PropertyRef Name="subCategoryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="PrintHouseModelStoreContainer">
     <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -365,54 +357,54 @@
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Maintenances" EntityType="Self.Maintenances" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="subCategories" EntityType="Self.subCategories" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Cart__customerId__5EBF139D" Association="Self.FK__Cart__customerId__5EBF139D">
-      <End Role="Customers" EntitySet="Customers" />
-      <End Role="Cart" EntitySet="Cart" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Cart__productId__5FB337D6" Association="Self.FK__Cart__productId__5FB337D6">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Cart__productId__59063A47" Association="Self.FK__Cart__productId__59063A47">
       <End Role="Products" EntitySet="Products" />
       <End Role="Cart" EntitySet="Cart" />
     </AssociationSet>
-    <AssociationSet Name="FK__Customers__aspId__52593CB8" Association="Self.FK__Customers__aspId__52593CB8">
+    <AssociationSet Name="FK__Cart__userId__5812160E" Association="Self.FK__Cart__userId__5812160E">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Cart" EntitySet="Cart" />
     </AssociationSet>
-    <AssociationSet Name="FK__Maintenan__custo__5BE2A6F2" Association="Self.FK__Maintenan__custo__5BE2A6F2">
-      <End Role="Customers" EntitySet="Customers" />
+    <AssociationSet Name="FK__Maintenan__userI__5535A963" Association="Self.FK__Maintenan__userI__5535A963">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Maintenances" EntitySet="Maintenances" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrderDeta__order__5812160E" Association="Self.FK__OrderDeta__order__5812160E">
+    <AssociationSet Name="FK__OrderDeta__order__5165187F" Association="Self.FK__OrderDeta__order__5165187F">
       <End Role="Orders" EntitySet="Orders" />
       <End Role="OrderDetails" EntitySet="OrderDetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrderDeta__produ__59063A47" Association="Self.FK__OrderDeta__produ__59063A47">
+    <AssociationSet Name="FK__OrderDeta__produ__52593CB8" Association="Self.FK__OrderDeta__produ__52593CB8">
       <End Role="Products" EntitySet="Products" />
       <End Role="OrderDetails" EntitySet="OrderDetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__Orders__customer__5535A963" Association="Self.FK__Orders__customer__5535A963">
-      <End Role="Customers" EntitySet="Customers" />
+    <AssociationSet Name="FK__Orders__userId__4E88ABD4" Association="Self.FK__Orders__userId__4E88ABD4">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
-    <AssociationSet Name="FK__Products__catego__398D8EEE" Association="Self.FK__Products__catego__398D8EEE">
+    <AssociationSet Name="FK__Products__catego__48CFD27E" Association="Self.FK__Products__catego__48CFD27E">
       <End Role="Categories" EntitySet="Categories" />
       <End Role="Products" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="FK__Reviews__custome__628FA481" Association="Self.FK__Reviews__custome__628FA481">
-      <End Role="Customers" EntitySet="Customers" />
-      <End Role="Reviews" EntitySet="Reviews" />
+    <AssociationSet Name="FK__Products__subCat__5DCAEF64" Association="Self.FK__Products__subCat__5DCAEF64">
+      <End Role="subCategories" EntitySet="subCategories" />
+      <End Role="Products" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="FK__Reviews__product__6383C8BA" Association="Self.FK__Reviews__product__6383C8BA">
+    <AssociationSet Name="FK__Reviews__product__5CD6CB2B" Association="Self.FK__Reviews__product__5CD6CB2B">
       <End Role="Products" EntitySet="Products" />
       <End Role="Reviews" EntitySet="Reviews" />
     </AssociationSet>
-    <AssociationSet Name="FK__subCatego__categ__3C69FB99" Association="Self.FK__subCatego__categ__3C69FB99">
+    <AssociationSet Name="FK__Reviews__userId__5BE2A6F2" Association="Self.FK__Reviews__userId__5BE2A6F2">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Reviews" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK__subCatego__categ__4BAC3F29" Association="Self.FK__subCatego__categ__4BAC3F29">
       <End Role="Categories" EntitySet="Categories" />
       <End Role="subCategories" EntitySet="subCategories" />
     </AssociationSet>
@@ -431,10 +423,6 @@
     <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Products_subCategories" Association="Self.FK_Products_subCategories">
-      <End Role="subCategories" EntitySet="subCategories" />
-      <End Role="Products" EntitySet="Products" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

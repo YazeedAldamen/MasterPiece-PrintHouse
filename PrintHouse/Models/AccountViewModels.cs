@@ -79,6 +79,10 @@ namespace PrintHouse.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        //public string CustomerFirstName { get; set; }
+        //public string CustomerLastName { get; set; }
+        //public string CustomerPhone { get; set; }
     }
 
     public class ResetPasswordViewModel

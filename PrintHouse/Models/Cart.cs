@@ -15,13 +15,13 @@ namespace PrintHouse.Models
     public partial class Cart
     {
         public int cartId { get; set; }
-        public Nullable<int> customerId { get; set; }
+        public string userId { get; set; }
         public Nullable<int> productId { get; set; }
         public Nullable<int> quantity { get; set; }
         public Nullable<decimal> price { get; set; }
         public Nullable<decimal> totalPrice { get; set; }
     
-        public virtual Customer Customer { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual Product Product { get; set; }
     }
 }

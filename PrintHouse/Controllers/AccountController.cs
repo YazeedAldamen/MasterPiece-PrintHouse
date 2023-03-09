@@ -80,6 +80,10 @@ namespace PrintHouse.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    if(Session["productId"] != null){
+                        return RedirectToAction("SingleProduct", "Products", new { id = int.Parse(Session["productId"].ToString()) });
+
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -153,27 +157,27 @@ namespace PrintHouse.Controllers
             PrintHouseEntities db = new PrintHouseEntities();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    Customer customer = new Customer();
-                    customer.aspId = user.Id;
-                    customer.customerFirstName = customerFirstName;
-                    customer.customerLastName = customerLastName;
-                    customer.customerPhone = customerPhone;
-                    
-                    db.Customers.Add(customer);
+                    var newUser = db.AspNetUsers.Where(x=>x.Id == user.Id).FirstOrDefault();
+                    newUser.customerFirstName= customerFirstName;
+                    newUser.customerLastName= customerLastName;
+                    newUser.customerPhone= customerPhone;
                     db.SaveChanges();
+
 
                     var newCustomer = await UserManager.FindByNameAsync(model.Email);
                     if (newCustomer != null)
                     {
-                        var role = new AspNetUserRole { UserId = newCustomer.Id, RoleId = "2", Note = model.Email };
+                        var role = new AspNetUserRole { UserId = newCustomer.Id, RoleId = "2", Email = model.Email };
+
                         db.AspNetUserRoles.Add(role);
                         db.SaveChanges();
                     }
-
+                    
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

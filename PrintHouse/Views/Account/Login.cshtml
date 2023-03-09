@@ -4,12 +4,14 @@
     ViewBag.Title = "Log in";
     Layout = "~/Views/Shared/_LayoutGeneral.cshtml";
 }
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 
 
 
-<main >
+
+<main>
     <div class="container">
         <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
             <div class="container">
@@ -86,10 +88,10 @@
                                 }
                             </div>
                             @*<div class="col-md-4">
-                                <section id="socialLoginForm">
-                                    @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-                                </section>
-                            </div>*@
+                                    <section id="socialLoginForm">
+                                        @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                                    </section>
+                                </div>*@
                         </div>
                     </div>
                 </div>

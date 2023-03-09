@@ -20,7 +20,10 @@ namespace PrintHouse.Models
             this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
             this.AspNetUserRoles = new HashSet<AspNetUserRole>();
-            this.Customers = new HashSet<Customer>();
+            this.Carts = new HashSet<Cart>();
+            this.Maintenances = new HashSet<Maintenance>();
+            this.Orders = new HashSet<Order>();
+            this.Reviews = new HashSet<Review>();
         }
     
         public string Id { get; set; }
@@ -35,6 +38,9 @@ namespace PrintHouse.Models
         public bool LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
+        public string customerFirstName { get; set; }
+        public string customerLastName { get; set; }
+        public string customerPhone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
@@ -43,6 +49,12 @@ namespace PrintHouse.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserRole> AspNetUserRoles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Customer> Customers { get; set; }
+        public virtual ICollection<Cart> Carts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Maintenance> Maintenances { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Review> Reviews { get; set; }
     }
 }

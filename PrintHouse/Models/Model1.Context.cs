@@ -33,12 +33,12 @@ namespace PrintHouse.Models
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Maintenance> Maintenances { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
         public virtual DbSet<subCategory> subCategories { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

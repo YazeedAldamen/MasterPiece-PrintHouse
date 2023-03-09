@@ -41,7 +41,7 @@
     <EntitySetMapping Name="AspNetUserRoles">
       <EntityTypeMapping TypeName="PrintHouseModel.AspNetUserRole">
         <MappingFragment StoreEntitySet="AspNetUserRoles">
-          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="RoleId" ColumnName="RoleId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
@@ -50,6 +50,9 @@
     <EntitySetMapping Name="AspNetUsers">
       <EntityTypeMapping TypeName="PrintHouseModel.AspNetUser">
         <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="customerPhone" ColumnName="customerPhone" />
+          <ScalarProperty Name="customerLastName" ColumnName="customerLastName" />
+          <ScalarProperty Name="customerFirstName" ColumnName="customerFirstName" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
           <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
@@ -72,7 +75,7 @@
           <ScalarProperty Name="price" ColumnName="price" />
           <ScalarProperty Name="quantity" ColumnName="quantity" />
           <ScalarProperty Name="productId" ColumnName="productId" />
-          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
           <ScalarProperty Name="cartId" ColumnName="cartId" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -87,22 +90,11 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Customers">
-      <EntityTypeMapping TypeName="PrintHouseModel.Customer">
-        <MappingFragment StoreEntitySet="Customers">
-          <ScalarProperty Name="aspId" ColumnName="aspId" />
-          <ScalarProperty Name="customerPhone" ColumnName="customerPhone" />
-          <ScalarProperty Name="customerLastName" ColumnName="customerLastName" />
-          <ScalarProperty Name="customerFirstName" ColumnName="customerFirstName" />
-          <ScalarProperty Name="customerId" ColumnName="customerId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Maintenances">
       <EntityTypeMapping TypeName="PrintHouseModel.Maintenance">
         <MappingFragment StoreEntitySet="Maintenances">
           <ScalarProperty Name="maintencanceOrderDetails" ColumnName="maintencanceOrderDetails" />
-          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
           <ScalarProperty Name="orderDate" ColumnName="orderDate" />
           <ScalarProperty Name="maintenanceId" ColumnName="maintenanceId" />
         </MappingFragment>
@@ -122,7 +114,7 @@
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="PrintHouseModel.Order">
         <MappingFragment StoreEntitySet="Orders">
-          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
           <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
           <ScalarProperty Name="orderDate" ColumnName="orderDate" />
           <ScalarProperty Name="orderId" ColumnName="orderId" />
@@ -132,8 +124,8 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="PrintHouseModel.Product">
         <MappingFragment StoreEntitySet="Products">
-          <ScalarProperty Name="subCategoryId" ColumnName="subCategoryId" />
           <ScalarProperty Name="stock" ColumnName="stock" />
+          <ScalarProperty Name="subCategoryId" ColumnName="subCategoryId" />
           <ScalarProperty Name="categoryId" ColumnName="categoryId" />
           <ScalarProperty Name="productPrice" ColumnName="productPrice" />
           <ScalarProperty Name="productImage3" ColumnName="productImage3" />
@@ -148,10 +140,11 @@
     <EntitySetMapping Name="Reviews">
       <EntityTypeMapping TypeName="PrintHouseModel.Review">
         <MappingFragment StoreEntitySet="Reviews">
+          <ScalarProperty Name="show" ColumnName="show" />
           <ScalarProperty Name="rating" ColumnName="rating" />
           <ScalarProperty Name="comment" ColumnName="comment" />
           <ScalarProperty Name="productId" ColumnName="productId" />
-          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
           <ScalarProperty Name="reviewId" ColumnName="reviewId" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -165,6 +158,17 @@
           <ScalarProperty Name="subCategoryImage" ColumnName="subCategoryImage" />
           <ScalarProperty Name="subCategoryName" ColumnName="subCategoryName" />
           <ScalarProperty Name="subCategoryId" ColumnName="subCategoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="PrintHouseModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

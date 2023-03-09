@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using PrintHouse.Models;
 
 namespace PrintHouse.Controllers
@@ -31,10 +32,162 @@ namespace PrintHouse.Controllers
             return View();
         }
 
-        public ActionResult SingleProduct(int id){
-        var singleProduct = db.Products.Where(x=>x.productId == id).FirstOrDefault();
-        return View(singleProduct);
+        public ActionResult SingleProduct(int id)
+        {
+            var singleProduct = db.Products.Where(x => x.productId == id).FirstOrDefault();
+            return View(singleProduct);
         }
+        [HttpPost]
+        public ActionResult SingleProduct(int id, int quantity)
+        {
+            var userId = User.Identity.GetUserId();
+            int cartCount = db.Carts.Where(x=>x.userId == userId).Count();
+
+            if (User.Identity.IsAuthenticated )
+            {
+                Cart cart = new Cart();
+                cart.productId = id;
+                cart.userId = User.Identity.GetUserId();
+                cart.quantity = quantity;
+                cart.price = db.Products.Find(id).productPrice;
+                cart.totalPrice = db.Products.Find(id).productPrice * quantity;
+                db.Carts.Add(cart);
+                db.SaveChanges();
+                return RedirectToAction("SingleProduct", "Products", new { id = id });
+            }
+            else
+            {
+
+                List<int> productIds = GetProductIdsFromCookie();
+                List<int> quantities = GetProductQuantityFromCookie();
+                productIds.Add(id);
+                quantities.Add(quantity);
+                SetProductIdsInCookie(productIds);
+                SetProductQuantityCookie(quantities);
+
+                //List<int> productIds = GetProductIdsFromSession();
+                //productIds.Add(id);
+                //Session["ProductIds"] = productIds;
+
+                //Session["productId"] = id;
+                //Session["quantity"] = quantity;
+                ////TempData["SweetAlertMessage"] = "You need to log in before you can add this product to your cart.";
+                ////TempData["SweetAlertType"] = "warning";
+                //TempData["SweetAlertMessage"] = "Item have been added to cart";
+                //TempData["SweetAlertType"] = "warning";
+
+
+                ViewBag.ProductIds = productIds;
+                ViewBag.ProductQuantity = quantities;
+
+                var singleProduct = db.Products.Where(x => x.productId == id).FirstOrDefault();
+                return View(singleProduct);
+
+
+
+            }
+
+
+        }
+        private List<int> GetProductIdsFromCookie()
+        {
+            List<int> productIds = new List<int>();
+
+            HttpCookie cookie = Request.Cookies["ProductIds"];
+
+            if (cookie != null && !string.IsNullOrEmpty(cookie.Value))
+            {
+                productIds = cookie.Value.Split(',').Select(int.Parse).ToList();
+            }
+
+            return productIds;
+        }
+
+        private List<int> GetProductQuantityFromCookie(){
+
+            List<int> quantity = new List<int>();
+            HttpCookie cookie = Request.Cookies["ProductQuantity"];
+            if (cookie != null && !string.IsNullOrEmpty(cookie.Value))
+            {
+                quantity = cookie.Value.Split(',').Select(int.Parse).ToList();
+            }
+            return quantity;
+        }
+
+        private void SetProductIdsInCookie(List<int> productIds)
+        {
+            string value = string.Join(",", productIds);
+
+            HttpCookie cookie = new HttpCookie("ProductIds", value);
+            cookie.Expires = DateTime.Now.AddDays(1);
+
+            Response.Cookies.Add(cookie);
+
+
+        }
+
+        private void SetProductQuantityCookie(List<int> quantities){
+        string value = string.Join(",", quantities);
+            HttpCookie cookie = new HttpCookie("ProductQuantity", value);
+            cookie.Expires= DateTime.Now.AddDays(1); 
+            Response.Cookies.Add(cookie);
+        }
+        //private List<int> GetProductIdsFromSession()
+        //{
+        //    List<int> productIds = (List<int>)Session["ProductIds"];
+
+        //    if (productIds == null)
+        //    {
+        //        productIds = new List<int>();
+        //        Session["ProductIds"] = productIds;
+        //    }
+
+        //    return productIds;
+        //}
+
+
+
+
+
+
+
+
+        //public ActionResult Carts(int id)
+        //{
+        //    if (User.Identity.IsAuthenticated)
+        //    {
+        //        Cart cart = new Cart();
+        //        cart.productId = id;
+        //        cart.userId = User.Identity.GetUserId();
+        //        cart.quantity = 1;
+        //        cart.price = db.Products.Find(id).productPrice;
+        //        cart.totalPrice = db.Products.Find(id).productPrice * 100;
+        //        db.Carts.Add(cart);
+        //        db.SaveChanges();
+        //        return RedirectToAction("SingleProduct", "Products", new { id = id });
+        //    }
+        //    else
+        //    {
+        //        Session["productId"] = id;
+        //        TempData["SweetAlertMessage"] = "You need to log in before you can add this product to your cart.";
+        //        TempData["SweetAlertType"] = "warning";
+        //        return RedirectToAction("Login", "Account");
+
+        //    }
+
+        //}
+
+
+        //public ActionResult Carts(int id){ 
+        //Cart cart = new Cart();
+        //cart.productId = id;
+        //cart.customerId = User.Identity.GetUserId();
+        //cart.quantity = 1;
+        //cart.price = db.Products.Find(id).productPrice;
+        //cart.totalPrice = db.Products.Find(id).productPrice * 3;
+        //    return View();
+        //}
+
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)
