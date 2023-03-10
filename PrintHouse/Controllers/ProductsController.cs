@@ -252,7 +252,7 @@ namespace PrintHouse.Controllers
                 product.subCategoryId = subCategoryId;
                 db.Products.Add(product);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AdminProducts");
             }
 
             ViewBag.categoryId = new SelectList(db.Categories, "categoryId", "categoryName", product.categoryId);
@@ -267,11 +267,19 @@ namespace PrintHouse.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Products.Find(id);
+            ;
+            Session["productImage1"] = product.productImage1;
+            Session["productImage2"] = product.productImage2;
+            Session["productImage3"] = product.productImage3;
+
+
             if (product == null)
             {
                 return HttpNotFound();
             }
             ViewBag.categoryId = new SelectList(db.Categories, "categoryId", "categoryName", product.categoryId);
+            ViewBag.categories = db.Categories.ToList();
+            ViewBag.subcategories = db.subCategories.ToList();
             return View(product);
         }
 
@@ -280,13 +288,48 @@ namespace PrintHouse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "productId,productName,productDescription,productImage1,productImage2,productImage3,productPrice,categoryId,stock")] Product product)
+        public ActionResult Edit([Bind(Include = "productId,productName,productDescription,productImage1,productImage2,productImage3,productPrice,categoryId,stock")] Product product, int subCategoryId, HttpPostedFileBase productImage1, HttpPostedFileBase productImage2, HttpPostedFileBase productImage3)
         {
             if (ModelState.IsValid)
             {
+                if (productImage1 != null && productImage1.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(productImage1.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/assets/img"), fileName);
+                    productImage1.SaveAs(path);
+                    product.productImage1 = fileName;
+                }
+                else{
+                    product.productImage1 = Session["productImage1"].ToString();
+
+                }
+                if (productImage2 != null && productImage2.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(productImage2.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/assets/img"), fileName);
+                    productImage2.SaveAs(path);
+                    product.productImage2 = fileName;
+                }
+                else{
+                    product.productImage2 = Session["productImage2"].ToString();
+
+                }
+                if (productImage3 != null && productImage3.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(productImage3.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/assets/img"), fileName);
+                    productImage3.SaveAs(path);
+                    product.productImage3 = fileName;
+                }
+                else
+                {
+                    product.productImage3 = Session["productImage3"].ToString();
+
+                }
+                product.subCategoryId = subCategoryId;
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AdminProducts");
             }
             ViewBag.categoryId = new SelectList(db.Categories, "categoryId", "categoryName", product.categoryId);
             return View(product);
@@ -315,7 +358,7 @@ namespace PrintHouse.Controllers
             Product product = db.Products.Find(id);
             db.Products.Remove(product);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("AdminProducts");
         }
 
         protected override void Dispose(bool disposing)

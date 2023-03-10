@@ -5,13 +5,13 @@
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
-<h2>AdminProducts</h2>
+<h2>Products</h2>
 
 
 
 
-<p>
-    @Html.ActionLink("Add a Product", "Create", "", new { @class = "btn btn-warning" })
+<p class="d-flex justify-content-end">
+    @Html.ActionLink("Add a Product", "Create", "", new { @class = "btn btn-warning btn-sm" })
 </p>
 <div class="table-responsive">
     <table class="table">
@@ -80,10 +80,11 @@
                 <td class="text-center">
                     @Html.DisplayFor(modelItem => item.stock)
                 </td>
-                <td class="text-center">
-                    @Html.ActionLink("Edit", "Edit", new { id = item.categoryId }, new { @class = "btn btn-secondary" })
-                    @Html.ActionLink("Details", "Details", new { id = item.categoryId }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Delete", "Delete", new { id = item.categoryId }, new { @class = "btn btn-danger" })
+                <td class="d-flex justify-content-between" >
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.productId }, new { @class = "btn btn-secondary btn-sm" })
+                    @Html.ActionLink("Details", "Details", new { id = item.productId }, new { @class = "btn btn-primary btn-sm" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.productId }, new { @class = "btn btn-danger btn-sm" })
                 </td>
             </tr>
         }

@@ -9,9 +9,7 @@
 
 
 
-@*@section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }*@
+
 
 @using (Html.BeginForm("Edit", "Categories", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -46,18 +44,18 @@
                         <label for="categoryImage">Image</label>
                         <img src="~/Content/assets/img/@Model.categoryImage" alt="@Model.categoryName" style="width: 75px; height: 50px" class="mb-3"/>
 
-                        <input type="file" name="categoryImage" id="categoryImage" class="form-control" value="@Model.categoryImage" />
+                        <input type="file" name="categoryImage" id="categoryImage" class="form-control" value="@Model.categoryImage" accept="image/*"/>
 
                         @Html.ValidationMessageFor(model => model.categoryImage, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="form-group mb-3">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Edit" class="btn btn-warning" />
+                            <input type="submit" value="Edit" class="btn btn-warning btn-sm" />
                         </div>
                     </div>
                     <div class="form-group">
-                        @Html.ActionLink("Back to List", "AdminCategories", "", new { @class = "btn btn-dark" })
+                        @Html.ActionLink("Back to List", "AdminCategories", "", new { @class = "btn btn-dark btn-sm" })
                     </div>
                 </div>
             </div>
