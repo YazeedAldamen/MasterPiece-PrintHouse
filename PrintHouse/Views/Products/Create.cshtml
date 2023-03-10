@@ -23,7 +23,7 @@
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-floating mb-3">
 
-                        <input type="text" name="productName" class="form-control" id="productName" placeholder="Name" value="" required />
+                        <input type="text" name="productName" class="form-control" id="productName" placeholder="Name" value="" required autofocus />
                         @*@Html.EditorFor(model => model.categoryName, new { htmlAttributes = new { @class = "form-control", @id = "categoryName" }, placeholder = "Name" })*@
                         <label for="categoryName">Name</label>
 
@@ -89,24 +89,24 @@
                         @*@Html.EditorFor(model => model.categoryName, new { htmlAttributes = new { @class = "form-control", @id = "categoryName" }, placeholder = "Name" })*@
                         <label for="categoryName">Category</label>
 
-                        @Html.ValidationMessageFor(model => model.stock, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.categoryId, "", new { @class = "text-danger" })
 
                     </div>
                     <div class="form-floating mb-3">
 
                         @*<input type="number" min="1" name="stock" class="form-control" id="stock" placeholder="Units in Stock" value="" required />*@
-                        <select name="sub" id="categoryId" class="form-control" required>
+                        <select name="subCategoryId" id="subCategoryId" class="form-control" required>
 
-                            @foreach (var item in ViewBag.categories)
+                            @foreach (var item in ViewBag.subcategories)
                             {
-                                <option value="@item.categoryId">@item.categoryName</option>
+                                <option value="@item.subCategoryId">@item.subCategoryName</option>
                             }
 
                         </select>
                         @*@Html.EditorFor(model => model.categoryName, new { htmlAttributes = new { @class = "form-control", @id = "categoryName" }, placeholder = "Name" })*@
-                        <label for="categoryName">Category</label>
+                        <label for="subCategoryId">Subcategory</label>
 
-                        @Html.ValidationMessageFor(model => model.stock, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.subCategoryId, "", new { @class = "text-danger" })
 
                     </div>
                     <div class="form-group mb-3">

@@ -215,6 +215,7 @@ namespace PrintHouse.Controllers
         {
             ViewBag.categoryId = new SelectList(db.Categories, "categoryId", "categoryName");
             ViewBag.categories = db.Categories.ToList();
+            ViewBag.subcategories = db.subCategories.ToList();
             return View();
         }
 
@@ -223,7 +224,7 @@ namespace PrintHouse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "productId,productName,productDescription,productImage1,productImage2,productImage3,productPrice,categoryId,stock")] Product product, HttpPostedFileBase productImage1, HttpPostedFileBase productImage2, HttpPostedFileBase productImage3)
+        public ActionResult Create([Bind(Include = "productId,productName,productDescription,productImage1,productImage2,productImage3,productPrice,categoryId,stock")] Product product,int subCategoryId ,HttpPostedFileBase productImage1, HttpPostedFileBase productImage2, HttpPostedFileBase productImage3)
         {
             if (ModelState.IsValid)
             {
@@ -248,6 +249,7 @@ namespace PrintHouse.Controllers
                     productImage3.SaveAs(path);
                     product.productImage3 = fileName;
                 }
+                product.subCategoryId = subCategoryId;
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
