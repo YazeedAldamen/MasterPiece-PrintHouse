@@ -7,77 +7,86 @@
 
 <h2>AdminProducts</h2>
 
+
+
+
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add a Product", "Create", "", new { @class = "btn btn-warning" })
 </p>
+<div class="table-responsive">
     <table class="table">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.productName)
+            <th>#</th>
+            <th class="text-center">
+                @*@Html.DisplayNameFor(model => model.categoryName)*@
+                Product
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.productDescription)
+            <th class="text-center">
+                Category
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.productImage1)
+            <th class="text-center">
+                Subcategory
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.productImage2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.productImage3)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.productPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.stock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category.categoryName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.subCategory.subCategoryName)
-            </th>
-            <th></th>
-        </tr>
 
+            <th class="text-center">
+                @*@Html.DisplayNameFor(model => model.categoryDescription)*@
+                Description
+            </th>
+            <th class="text-center">
+                @*@Html.DisplayNameFor(model => model.categoryImage)*@
+                Images
+            </th>
+            <th class="text-center">
+                Price
+            </th>
+            <th class="text-center">
+                Units in Stock
+            </th>
+            <th class="text-center"></th>
+        </tr>
+        @{
+            int count = 1;
+        }
         @foreach (var item in Model)
         {
             <tr>
                 <td>
+                    @count
+                    @{ count++;}
+                </td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.productName)
                 </td>
-                <td style="max-width: 150px;overflow:hidden; text-overflow: ellipsis; white-space: nowrap;">
-                    @Html.DisplayFor(modelItem => item.productDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.productImage1)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.productImage2)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.productImage3)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.productPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.stock)
-                </td>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.Category.categoryName)
                 </td>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.subCategory.subCategoryName)
                 </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.productId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.productId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.productId })
+                <td class="text-center" style="max-width: 150px;overflow:hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    @Html.DisplayFor(modelItem => item.productDescription)
+                </td>
+                <td class="text-center">
+                    <div class="d-flex justify-content-between">
+                        <img src="~/Content/assets/img/@item.productImage1" alt="@item.productName" style="width: 75px; height: 50px" />
+                        <img src="~/Content/assets/img/@item.productImage2" alt="@item.productName" style="width: 75px; height: 50px" />
+                        <img src="~/Content/assets/img/@item.productImage3" alt="@item.productName" style="width: 75px; height: 50px" />
+                    </div>
+                    @*@Html.DisplayFor(modelItem => item.categoryImage)*@
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.productPrice)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.stock)
+                </td>
+                <td class="text-center">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.categoryId }, new { @class = "btn btn-secondary" })
+                    @Html.ActionLink("Details", "Details", new { id = item.categoryId }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.categoryId }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }
 
     </table>
+</div>

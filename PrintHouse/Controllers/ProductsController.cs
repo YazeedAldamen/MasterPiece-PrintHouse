@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -213,6 +214,7 @@ namespace PrintHouse.Controllers
         public ActionResult Create()
         {
             ViewBag.categoryId = new SelectList(db.Categories, "categoryId", "categoryName");
+            ViewBag.categories = db.Categories.ToList();
             return View();
         }
 
@@ -221,10 +223,31 @@ namespace PrintHouse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "productId,productName,productDescription,productImage1,productImage2,productImage3,productPrice,categoryId,stock")] Product product)
+        public ActionResult Create([Bind(Include = "productId,productName,productDescription,productImage1,productImage2,productImage3,productPrice,categoryId,stock")] Product product, HttpPostedFileBase productImage1, HttpPostedFileBase productImage2, HttpPostedFileBase productImage3)
         {
             if (ModelState.IsValid)
             {
+                if (productImage1 != null && productImage1.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(productImage1.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/assets/img"), fileName);
+                    productImage1.SaveAs(path);
+                    product.productImage1 = fileName;
+                }
+                if (productImage2 != null && productImage2.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(productImage2.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/assets/img"), fileName);
+                    productImage2.SaveAs(path);
+                    product.productImage2 = fileName;
+                }
+                if (productImage3 != null && productImage3.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(productImage3.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/assets/img"), fileName);
+                    productImage3.SaveAs(path);
+                    product.productImage3 = fileName;
+                }
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -137,7 +137,7 @@ namespace PrintHouse.Controllers
             Category category = db.Categories.Find(id);
             db.Categories.Remove(category);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("AdminCategories", "Categories");
         }
 
         protected override void Dispose(bool disposing)
