@@ -2,58 +2,65 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_LayoutGeneral.cshtml";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+
+@using (Html.BeginForm("Edit", "Categories", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Category</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.categoryId)
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="form-horizontal">
+                    <h4>Category</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.categoryId)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.categoryName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.categoryName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.categoryName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-floating mb-3">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.categoryDescription, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.categoryDescription, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.categoryDescription, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <input type="text" name="categoryName" class="form-control" id="categoryName" placeholder="Name"  required value="@Model.categoryName"/>
+                        @*@Html.EditorFor(model => model.categoryName, new { htmlAttributes = new { @class = "form-control", @id = "categoryName" }, placeholder = "Name" })*@
+                        <label for="categoryName">Name</label>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.categoryImage, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.categoryImage, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.categoryImage, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        @Html.ValidationMessageFor(model => model.categoryName, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        @*@Html.EditorFor(model => model.categoryDescription, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <textarea style="height:150px" type="text" multiple name="categoryDescription" class="form-control" id="categoryDescription"  placeholder="Description" cols="50" rows="200" required>@Model.categoryDescription</textarea>
+                        <label for="categoryDescription" >Description</label>
+                        @Html.ValidationMessageFor(model => model.categoryDescription, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-control mb-3">
+                        <label for="categoryImage">Image</label>
+                        <img src="~/Content/assets/img/@Model.categoryImage" alt="@Model.categoryName" style="width: 75px; height: 50px" class="mb-3"/>
+
+                        <input type="file" name="categoryImage" id="categoryImage" class="form-control" value="@Model.categoryImage" />
+
+                        @Html.ValidationMessageFor(model => model.categoryImage, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Edit" class="btn btn-warning" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.ActionLink("Back to List", "AdminCategories", "", new { @class = "btn btn-dark" })
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }

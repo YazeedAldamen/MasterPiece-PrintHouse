@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -17,6 +18,10 @@ namespace PrintHouse.Controllers
         // GET: Categories
         public ActionResult Index()
         {
+            return View(db.Categories.ToList());
+        }
+
+        public ActionResult AdminCategories(){
             return View(db.Categories.ToList());
         }
 
@@ -46,16 +51,24 @@ namespace PrintHouse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "categoryId,categoryName,categoryDescription,categoryImage")] Category category)
+        public ActionResult Create([Bind(Include = "categoryId,categoryName,categoryDescription")] Category category, HttpPostedFileBase categoryImage)
         {
             if (ModelState.IsValid)
             {
+                if (categoryImage != null && categoryImage.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(categoryImage.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/assets/img"), fileName);
+                    categoryImage.SaveAs(path);
+                    category.categoryImage = fileName;
+                }
                 db.Categories.Add(category);
+                
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AdminCategories", "Categories", category);
             }
-
-            return View(category);
+            
+            return RedirectToAction("AdminCategories", "Categories",category);
         }
 
         // GET: Categories/Edit/5
@@ -66,6 +79,7 @@ namespace PrintHouse.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Category category = db.Categories.Find(id);
+            Session["categoryImage"] = category.categoryImage;
             if (category == null)
             {
                 return HttpNotFound();
@@ -78,13 +92,24 @@ namespace PrintHouse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "categoryId,categoryName,categoryDescription,categoryImage")] Category category)
+        public ActionResult Edit([Bind(Include = "categoryId,categoryName,categoryDescription,categoryImage")] Category category, HttpPostedFileBase categoryImage)
         {
             if (ModelState.IsValid)
             {
+                if (categoryImage != null && categoryImage.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(categoryImage.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/assets/img"), fileName);
+                    categoryImage.SaveAs(path);
+                    category.categoryImage = fileName;
+                }
+                else{
+                    category.categoryImage = Session["categoryImage"].ToString();
+                }
+
                 db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AdminCategories");
             }
             return View(category);
         }

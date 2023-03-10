@@ -32,6 +32,11 @@ namespace PrintHouse.Controllers
             return View();
         }
 
+        public ActionResult AdminProducts()
+        {
+            var products = db.Products.ToList();
+            return View(products);
+        }
         public ActionResult SingleProduct(int id)
         {
             var singleProduct = db.Products.Where(x => x.productId == id).FirstOrDefault();
