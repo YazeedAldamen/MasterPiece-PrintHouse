@@ -2,50 +2,59 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_LayoutGeneral.cshtml";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
 <h2>Details</h2>
 
-<div>
-    <h4>subCategory</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.subCategoryName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.subCategoryName)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.subCategoryImage)
-        </dt>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card mx-auto">
+                <div class="card-header">
+                    <h4>Category</h4>
+                </div>
+                <div class="card-body px-md-5">
+                    <div class="form-group row mb-3 mt-3">
+                        <label for="categoryName" class="col-sm-3 col-form-label fw-bold">Name</label>
+                        <div class="col-sm-9 text-center">
+                            @Html.DisplayFor(model => model.subCategoryName)
+                            @Html.ValidationMessageFor(model => model.subCategoryName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label for="categoryName" class="col-sm-3 col-form-label fw-bold">Categpru</label>
+                        <div class="col-sm-9 text-center">
+                            @Html.DisplayFor(model => model.Category.categoryName)
+                            @Html.ValidationMessageFor(model => model.Category.categoryName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label for="subCategoryDescription" class="col-sm-3 col-form-label fw-bold">Description</label>
+                        <div class="col-sm-9 text-center">
+                            @Html.DisplayFor(model => model.subCategoryDescription)
+                            @Html.ValidationMessageFor(model => model.subCategoryDescription, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.subCategoryImage)
-        </dd>
+                    <div class="form-group row mb-3 mt-5">
+                        <label for="subCategoryImage" class="col-sm-3 col-form-label fw-bold">Image</label>
+                        <div class="col-sm-9 text-center">
+                            <img src="~/Content/assets/img/@Model.subCategoryImage" alt="@Model.subCategoryImage" style="width:50%" />
+                            @Html.ValidationMessageFor(model => model.subCategoryImage, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.subCategoryDescription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.subCategoryDescription)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Category.categoryName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category.categoryName)
-        </dd>
-
-    </dl>
+                    <div class="form-group row mb-3">
+                        <div class="col-sm-12 text-center">
+                            @Html.ActionLink("Edit", "Edit", new { id = Model.subCategoryId }, new { @class = "btn btn-secondary btn-sm" })
+                            @Html.ActionLink("Back to List", "AdminsubCategories", null, new { @class = "btn btn-dark btn-sm" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.subCategoryId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -35,10 +35,13 @@
                     <div class="form-floating mb-3">
 
                         @*<input type="number" min="1" name="stock" class="form-control" id="stock" placeholder="Units in Stock" value="" required />*@
-                        <select name="categoryId" id="categoryId" class="form-control" required>
-
+                        <select name="categoryId" id="categoryId" class="form-control"  required>
+                            <option value="@Model.categoryId">@Model.Category.categoryName</option>
                             @foreach (var item in ViewBag.categories)
                             {
+                                if(item.categoryId == Model.categoryId){
+                                    continue;
+                                }
                                 <option value="@item.categoryId">@item.categoryName</option>
                             }
 
@@ -53,9 +56,14 @@
 
                         @*<input type="number" min="1" name="stock" class="form-control" id="stock" placeholder="Units in Stock" value="" required />*@
                         <select name="subCategoryId" id="subCategoryId" class="form-control" required>
+                            <option value="@Model.subCategoryId">@Model.subCategory.subCategoryName</option>
 
                             @foreach (var item in ViewBag.subcategories)
                             {
+                                if (item.subCategoryId == Model.subCategoryId)
+                                {
+                                    continue;
+                                }
                                 <option value="@item.subCategoryId">@item.subCategoryName</option>
                             }
 

@@ -68,7 +68,7 @@ namespace PrintHouse.Controllers
                 return RedirectToAction("AdminCategories", "Categories", category);
             }
             
-            return RedirectToAction("AdminCategories", "Categories",category);
+            return View(category);
         }
 
         // GET: Categories/Edit/5

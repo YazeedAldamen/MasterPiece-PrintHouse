@@ -38,14 +38,20 @@ namespace PrintHouse.Controllers
                         db.Carts.Add(cart);
                         db.SaveChanges();
                     }
-                    
+                    idCookie.Expires = DateTime.Now.AddDays(-1);
+                    Response.Cookies.Add(idCookie);
+                    quantityCookie.Expires = DateTime.Now.AddDays(-1);
+                    Response.Cookies.Add(quantityCookie);
+                    return View();
+
                 }
-                idCookie.Expires = DateTime.Now.AddDays(-1);
-                Response.Cookies.Add(idCookie);
-                quantityCookie.Expires = DateTime.Now.AddDays(-1);
-                Response.Cookies.Add(quantityCookie);
-
-
+                else if (cartCount > 0 && idCookie != null && quantityCookie != null && !string.IsNullOrEmpty(idCookie.Value) && !string.IsNullOrEmpty(quantityCookie.Value)) {
+                    idCookie.Expires = DateTime.Now.AddDays(-1);
+                    Response.Cookies.Add(idCookie);
+                    quantityCookie.Expires = DateTime.Now.AddDays(-1);
+                    Response.Cookies.Add(quantityCookie);
+                    return View();
+                }
 
             }
             return View();

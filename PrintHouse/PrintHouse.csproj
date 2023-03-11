@@ -528,6 +528,7 @@
     <Content Include="Content\assets\img\portfolio\portfolio-details-1.jpg" />
     <Content Include="Content\assets\img\portfolio\portfolio-details-2.jpg" />
     <Content Include="Content\assets\img\portfolio\portfolio-details-3.jpg" />
+    <Content Include="Content\assets\img\preloader.gif" />
     <Content Include="Content\assets\img\print house logo.png" />
     <Content Include="Content\assets\img\Printers\Category_800x600.jpg" />
     <Content Include="Content\assets\img\Printers\FDM\FdmCategory.jpg" />
@@ -836,6 +837,7 @@
     <Content Include="Views\Shared\_LayoutDashboard.cshtml" />
     <Content Include="Views\Categories\AdminCategories.cshtml" />
     <Content Include="Views\Products\AdminProducts.cshtml" />
+    <Content Include="Views\subCategories\AdminsubCategories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

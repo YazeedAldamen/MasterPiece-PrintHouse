@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -29,6 +30,11 @@ namespace PrintHouse.Controllers
                 return View(subCategories.ToList());
             }
             return View();
+        }
+
+        public ActionResult AdminsubCategories()
+        {
+            return View(db.subCategories.ToList());
         }
 
         // GET: subCategories/Details/5
@@ -63,13 +69,20 @@ namespace PrintHouse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "subCategoryId,subCategoryName,subCategoryImage,subCategoryDescription,categoryId")] subCategory subCategory)
+        public ActionResult Create([Bind(Include = "subCategoryId,subCategoryName,subCategoryDescription,categoryId")] subCategory subCategory, HttpPostedFileBase subCategoryImage)
         {
             if (ModelState.IsValid)
             {
+                if (subCategoryImage != null && subCategoryImage.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(subCategoryImage.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/assets/img"), fileName);
+                    subCategoryImage.SaveAs(path);
+                    subCategory.subCategoryImage = fileName;
+                }
                 db.subCategories.Add(subCategory);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AdminsubCategories", "subCategories", subCategory);
             }
 
             ViewBag.categoryId = new SelectList(db.Categories, "categoryId", "categoryName", subCategory.categoryId);
@@ -84,11 +97,14 @@ namespace PrintHouse.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             subCategory subCategory = db.subCategories.Find(id);
+            Session["categoryImage"] = subCategory.subCategoryImage;
             if (subCategory == null)
             {
                 return HttpNotFound();
             }
             ViewBag.categoryId = new SelectList(db.Categories, "categoryId", "categoryName", subCategory.categoryId);
+            ViewBag.categories = db.Categories.ToList();
+
             return View(subCategory);
         }
 
@@ -97,13 +113,24 @@ namespace PrintHouse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "subCategoryId,subCategoryName,subCategoryImage,subCategoryDescription,categoryId")] subCategory subCategory)
+        public ActionResult Edit([Bind(Include = "subCategoryId,subCategoryName,subCategoryImage,subCategoryDescription,categoryId")] subCategory subCategory, HttpPostedFileBase subCategoryImage)
         {
             if (ModelState.IsValid)
             {
+                if (subCategoryImage != null && subCategoryImage.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(subCategoryImage.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/assets/img"), fileName);
+                    subCategoryImage.SaveAs(path);
+                    subCategory.subCategoryImage = fileName;
+                }
+                else
+                {
+                    subCategory.subCategoryImage = Session["categoryImage"].ToString();
+                }
                 db.Entry(subCategory).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AdminsubCategories");
             }
             ViewBag.categoryId = new SelectList(db.Categories, "categoryId", "categoryName", subCategory.categoryId);
             return View(subCategory);
@@ -132,7 +159,7 @@ namespace PrintHouse.Controllers
             subCategory subCategory = db.subCategories.Find(id);
             db.subCategories.Remove(subCategory);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("AdminsubCategories","subCategories");
         }
 
         protected override void Dispose(bool disposing)

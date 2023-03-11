@@ -2,64 +2,61 @@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_LayoutGeneral.cshtml";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
 <h2>Create</h2>
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "subCategories", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>subCategory</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.subCategoryName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.subCategoryName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.subCategoryName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="form-horizontal">
+                    <h4>Sub Category</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-floating mb-3">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.subCategoryImage, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.subCategoryImage, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.subCategoryImage, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <input type="text" name="subCategoryName" class="form-control" id="subCategoryName" placeholder="Name" value="" required />
+                        @*@Html.EditorFor(model => model.categoryName, new { htmlAttributes = new { @class = "form-control", @id = "categoryName" }, placeholder = "Name" })*@
+                        <label for="subCategoryName">Name</label>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.subCategoryDescription, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.subCategoryDescription, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.subCategoryDescription, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        @Html.ValidationMessageFor(model => model.subCategoryName, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.categoryId, "categoryId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("categoryId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.categoryId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                    <div class="form-floating mb-3">
+                        @*@Html.EditorFor(model => model.categoryDescription, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <input type="text" name="subCategoryDescription" class="form-control" id="subCategoryDescription" placeholder="Description" value="" required />
+                        <label for="subCategoryDescription">Description</label>
+                        @Html.ValidationMessageFor(model => model.subCategoryDescription, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-floating mb-3">
+                        @*@Html.EditorFor(model => model.categoryDescription, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.DropDownList("categoryId", null, htmlAttributes: new { @class = "form-control" })
+                        @*<input type="text" name="subCategoryDescription" class="form-control" id="subCategoryDescription" placeholder="Description" value="" required />*@
+                        <label for="subCategoryDescription">Description</label>
+                        @Html.ValidationMessageFor(model => model.subCategoryDescription, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-control mb-3">
+                        <label for="subCategoryImage">Image</label>
+
+                        <input type="file" name="subCategoryImage" id="subCategoryImage" class="form-control" required accept="image/*" />
+                        @Html.ValidationMessageFor(model => model.subCategoryImage, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-warning btn-sm" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.ActionLink("Back to List", "AdminsubCategories", "", new { @class = "btn btn-dark btn-sm" })
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }
