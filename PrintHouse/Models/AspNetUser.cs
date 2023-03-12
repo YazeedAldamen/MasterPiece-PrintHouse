@@ -41,6 +41,7 @@ namespace PrintHouse.Models
         public string customerFirstName { get; set; }
         public string customerLastName { get; set; }
         public string customerPhone { get; set; }
+        public string customerImage { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }

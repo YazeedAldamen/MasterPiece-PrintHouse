@@ -69,6 +69,7 @@
           <Property Name="customerFirstName" Type="varchar" MaxLength="20" />
           <Property Name="customerLastName" Type="varchar" MaxLength="20" />
           <Property Name="customerPhone" Type="varchar" MaxLength="20" />
+          <Property Name="customerImage" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Cart">
           <Key>
@@ -580,6 +581,7 @@
           <Property Name="customerFirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="customerLastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="customerPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="customerImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="PrintHouseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="PrintHouseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="AspNetUserRoles" Relationship="PrintHouseModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserRole" />
@@ -944,6 +946,7 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="PrintHouseModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="customerImage" ColumnName="customerImage" />
                 <ScalarProperty Name="customerPhone" ColumnName="customerPhone" />
                 <ScalarProperty Name="customerLastName" ColumnName="customerLastName" />
                 <ScalarProperty Name="customerFirstName" ColumnName="customerFirstName" />

@@ -6,19 +6,19 @@
     <edmx:Diagrams>
       <Diagram DiagramId="443f0ce13e6c4afa8ca866c8a745f724" Name="Diagram1" ZoomLevel="106">
         <EntityTypeShape EntityType="PrintHouseModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="PrintHouseModel.AspNetRole" Width="1.5" PointX="0.75" PointY="15.875" />
+        <EntityTypeShape EntityType="PrintHouseModel.AspNetRole" Width="1.5" PointX="0.75" PointY="0.875" />
         <EntityTypeShape EntityType="PrintHouseModel.AspNetUserClaim" Width="1.5" PointX="3" PointY="12.625" />
         <EntityTypeShape EntityType="PrintHouseModel.AspNetUserLogin" Width="1.5" PointX="3" PointY="24.375" />
         <EntityTypeShape EntityType="PrintHouseModel.AspNetUserRole" Width="1.5" PointX="3" PointY="9.75" />
-        <EntityTypeShape EntityType="PrintHouseModel.AspNetUser" Width="1.5" PointX="0.75" PointY="9.125" />
-        <EntityTypeShape EntityType="PrintHouseModel.Cart" Width="1.5" PointX="6" PointY="10.375" />
-        <EntityTypeShape EntityType="PrintHouseModel.Category" Width="1.5" PointX="1.5" PointY="18.375" />
+        <EntityTypeShape EntityType="PrintHouseModel.AspNetUser" Width="1.5" PointX="0.75" PointY="9" />
+        <EntityTypeShape EntityType="PrintHouseModel.Cart" Width="1.5" PointX="6" PointY="6.375" />
+        <EntityTypeShape EntityType="PrintHouseModel.Category" Width="1.5" PointX="1.5" PointY="3.625" />
         <EntityTypeShape EntityType="PrintHouseModel.Maintenance" Width="1.5" PointX="3" PointY="6.625" />
-        <EntityTypeShape EntityType="PrintHouseModel.OrderDetail" Width="1.5" PointX="5.25" PointY="15.25" />
-        <EntityTypeShape EntityType="PrintHouseModel.Order" Width="1.5" PointX="3" PointY="15.375" />
+        <EntityTypeShape EntityType="PrintHouseModel.OrderDetail" Width="1.5" PointX="5.25" PointY="21.375" />
+        <EntityTypeShape EntityType="PrintHouseModel.Order" Width="1.5" PointX="3" PointY="21.375" />
         <EntityTypeShape EntityType="PrintHouseModel.Product" Width="1.5" PointX="3.75" PointY="0.75" />
-        <EntityTypeShape EntityType="PrintHouseModel.Review" Width="1.5" PointX="6" PointY="6.375" />
-        <EntityTypeShape EntityType="PrintHouseModel.subCategory" Width="1.5" PointX="1.5" PointY="3" />
+        <EntityTypeShape EntityType="PrintHouseModel.Review" Width="1.5" PointX="6" PointY="10.375" />
+        <EntityTypeShape EntityType="PrintHouseModel.subCategory" Width="1.5" PointX="1.5" PointY="15.5" />
         <EntityTypeShape EntityType="PrintHouseModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" />
         <AssociationConnector Association="PrintHouseModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" />
         <AssociationConnector Association="PrintHouseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
