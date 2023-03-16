@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using PrintHouse.Models;
 
 namespace PrintHouse.Controllers
@@ -28,6 +30,7 @@ namespace PrintHouse.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             AspNetUser aspNetUser = db.AspNetUsers.Find(id);
+            Session["customerImage"] = aspNetUser.customerImage;
             if (aspNetUser == null)
             {
                 return HttpNotFound();
@@ -78,12 +81,29 @@ namespace PrintHouse.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,customerFirstName,customerLastName,customerPhone")] AspNetUser aspNetUser)
+        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,customerFirstName,customerLastName,customerPhone")] AspNetUser aspNetUser, HttpPostedFileBase customerImage)
         {
             if (ModelState.IsValid)
             {
+                if (customerImage != null && customerImage.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(customerImage.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/assets/img"), fileName);
+                    customerImage.SaveAs(path);
+                    aspNetUser.customerImage = fileName;
+                }
+                else
+                {
+                    aspNetUser.customerImage = Session["customerImage"].ToString();
+
+                }
                 db.Entry(aspNetUser).State = EntityState.Modified;
                 db.SaveChanges();
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("Details", "Profile", new { id = User.Identity.GetUserId() });
+
+                }
                 return RedirectToAction("Index");
             }
             return View(aspNetUser);

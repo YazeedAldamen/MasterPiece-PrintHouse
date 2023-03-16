@@ -80,9 +80,10 @@ namespace PrintHouse.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    if(Session["productId"] != null){
-                        return RedirectToAction("SingleProduct", "Products", new { id = int.Parse(Session["productId"].ToString()) });
-
+                    var user = await UserManager.FindByEmailAsync(model.Email);
+                    if (await UserManager.IsInRoleAsync(user.Id, "Admin"))
+                    {
+                        return RedirectToAction("AdminCategories", "Categories");
                     }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:

@@ -50,6 +50,7 @@
     <EntitySetMapping Name="AspNetUsers">
       <EntityTypeMapping TypeName="PrintHouseModel.AspNetUser">
         <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="customerImage" ColumnName="customerImage" />
           <ScalarProperty Name="customerPhone" ColumnName="customerPhone" />
           <ScalarProperty Name="customerLastName" ColumnName="customerLastName" />
           <ScalarProperty Name="customerFirstName" ColumnName="customerFirstName" />

@@ -64,6 +64,7 @@
     <Property Name="customerFirstName" Type="varchar" MaxLength="20" />
     <Property Name="customerLastName" Type="varchar" MaxLength="20" />
     <Property Name="customerPhone" Type="varchar" MaxLength="20" />
+    <Property Name="customerImage" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="Cart">
     <Key>

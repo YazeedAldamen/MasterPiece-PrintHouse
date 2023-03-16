@@ -17,7 +17,17 @@ body {
   background: #f6f9ff;
   color: #444444;
 }
+thead th:first-child {
+    border-top-left-radius: 10px;
+}
 
+thead th:last-child {
+    border-top-right-radius: 10px;
+}
+
+.table {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.9);
+}
 a {
   color: #4154f1;
   text-decoration: none;
@@ -645,13 +655,13 @@ h6 {
   background-color: #aab7cf;
 }
 
-/*@media (min-width: 1200px) {
+@media (min-width: 1200px) {
 
   #main,
   #footer {
     margin-left: 300px;
   }
-*/
+
 }
 
 @media (max-width: 1199px) {

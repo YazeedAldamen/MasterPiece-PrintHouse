@@ -228,6 +228,7 @@ namespace PrintHouse.Controllers
         {
             if (!ModelState.IsValid)
             {
+               
                 return View(model);
             }
             var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
@@ -238,6 +239,14 @@ namespace PrintHouse.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
+                if (User.IsInRole("Admin"))
+                {
+
+                    return RedirectToAction("Details", "Profile", new { id = User.Identity.GetUserId() });
+                }
+                //else if (User.IsInRole("Customer")){
+                //    return RedirectToAction()
+                //}
                 return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
             }
             AddErrors(result);

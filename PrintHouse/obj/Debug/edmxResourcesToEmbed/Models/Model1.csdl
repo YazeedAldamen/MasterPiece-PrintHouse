@@ -146,6 +146,7 @@
     <Property Name="customerFirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="customerLastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="customerPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="customerImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="AspNetUserClaims" Relationship="PrintHouseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
     <NavigationProperty Name="AspNetUserLogins" Relationship="PrintHouseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
     <NavigationProperty Name="AspNetUserRoles" Relationship="PrintHouseModel.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserRole" />
