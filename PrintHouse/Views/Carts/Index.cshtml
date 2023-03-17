@@ -1,0 +1,246 @@
+﻿@model IEnumerable<PrintHouse.Models.Cart>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutGeneral.cshtml";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/a8b56cb52b.js" crossorigin="anonymous"></script>
+@{
+    decimal count = 0;
+
+}
+
+<div class="container my-5">
+    <h1>Shopping Cart</h1>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col" class="d-none d-md-table-cell">Picture</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    @*@Html.HiddenFor(model => item.cartId)
+                        @Html.HiddenFor(model => item.userId)
+                        @Html.HiddenFor(model => item.productId)
+                        @Html.HiddenFor(model => item.price)
+                        @Html.HiddenFor(model => item.totalPrice)*@
+                    <tr>
+                        <td class="text-center align-center">@item.Product.productName</td>
+                        <td class="d-none d-md-table-cell">
+                            <img src="~/Content/assets/img/@item.Product.productImage1"
+                                 style="width: 100px; height: 50px"
+                                 alt="@item.Product.productName"
+                                 class="img-fluid" />
+                        </td>
+                        <td>@item.price JOD</td>
+                        <td>
+                            @*<input type="number"
+                                name="quantity"
+                                id="quantity-@item.cartId"
+                                class="form-control quantity-input"
+                                value="@item.quantity"
+                                min="1"
+                                max="10"
+                                data-cartid="@item.cartId" />*@
+                            @item.quantity
+                        </td>
+
+                        <td>@item.totalPrice JOD</td>
+                        <td>
+                            <button type="button" class="btn btn-secondary launch" data-toggle="modal" data-target="#staticBackdrop-@item.cartId">
+                                Edit
+                            </button>
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("Delete", "Carts", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.Hidden("id", item.cartId)
+                                <input type="submit" value="Remove" class="btn btn-danger" />
+                            }
+                        </td>
+                    </tr>
+
+                    count += Convert.ToDecimal(item.totalPrice);
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3"></td>
+                    <td> Total:</td>
+                    <td><strong> @count JOD</strong></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    @foreach (var item in Model)
+    {
+
+        <div class="modal fade" id="staticBackdrop-@item.cartId" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="text-right"><i class="fa fa-close close" data-dismiss="modal"></i></div>
+                        <div class="tabs mt-3">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+
+                                    <i class="bi bi-cart nav-link active"></i>
+                                </li>
+
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="visa" role="tabpanel" aria-labelledby="visa-tab">
+                                    <div class="mt-4 mx-4">
+                                        <div class="text-center">
+                                            <h4>Cart <i class="bi bi-cart"></i></h4>
+                                        </div>
+
+
+                                        <div class="form mt-3">
+
+
+                                            @using (Html.BeginForm("CartEdit", "Carts", FormMethod.Post))
+                                            {
+                                                @Html.AntiForgeryToken()
+
+                                                <div class="form-horizontal">
+
+                                                    <hr />
+                                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                                                    @Html.Hidden("cartId", item.cartId)
+                                                    @Html.Hidden("userId", item.userId)
+                                                    @Html.Hidden("productId", item.productId)
+                                                    @Html.Hidden("price", item.price)
+                                                    @Html.Hidden("totalPrice", item.totalPrice)
+                                                    <div class="form-group mb-2">
+
+                                                        <div class="col-md-12 d-flex justify-content-around align-items-center">
+
+                                                            @item.Product.productName
+                                                            <img src="~/Content/assets/img/@item.Product.productImage1"
+                                                                 style="width: 100px; height: 50px"
+                                                                 alt="@item.Product.productName"
+                                                                 class="img-fluid" />
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+
+                                                        <div class="col-md-12">
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Quantity: </label>
+                                                        <div class="col-md-12">
+                                                            <input type="number" name="quantity" value="@item.quantity" class="form-control" min="1" max="10" />
+
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-md-offset-2 col-md-10">
+                                                        <input type="submit" value="Save Changes" class="btn btn-success" />
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+                                                    </div>
+                                                </div>
+
+
+                                            }
+
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+
+</div>
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+@*<h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.totalPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AspNetUser.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.productName)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.totalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.productName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.cartId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.cartId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.cartId })
+            </td>
+        </tr>
+    }
+
+    </table>*@
