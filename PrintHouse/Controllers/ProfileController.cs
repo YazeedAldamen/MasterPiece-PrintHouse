@@ -38,6 +38,20 @@ namespace PrintHouse.Controllers
             return View(aspNetUser);
         }
 
+        public ActionResult CustomerProfile(string id){
+        ViewBag.id = id;
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
+            Session["customerImage"] = aspNetUser.customerImage;
+            if (aspNetUser == null)
+            {
+                return HttpNotFound();
+            }
+            return View(aspNetUser);
+        }
         // GET: Profile/Create
         public ActionResult Create()
         {
@@ -102,6 +116,10 @@ namespace PrintHouse.Controllers
                 if (User.IsInRole("Admin"))
                 {
                     return RedirectToAction("Details", "Profile", new { id = User.Identity.GetUserId() });
+
+                }
+                else if (User.IsInRole("Customer")){
+                    return RedirectToAction("CustomerProfile", "Profile", new { id = User.Identity.GetUserId() });
 
                 }
                 return RedirectToAction("Index");

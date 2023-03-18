@@ -853,6 +853,7 @@
     <Content Include="Views\Carts\Details.cshtml" />
     <Content Include="Views\Carts\Index.cshtml" />
     <Content Include="Views\Carts\Edit.cshtml" />
+    <Content Include="Views\Profile\CustomerProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

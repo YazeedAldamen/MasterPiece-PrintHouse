@@ -7,7 +7,20 @@
 
     <ul >
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @{
+
+                PrintHouse.Models.PrintHouseEntities db = new PrintHouse.Models.PrintHouseEntities();
+                var id = User.Identity.GetUserId();
+                var user = db.AspNetUsers.Where(x => x.Id == id).FirstOrDefault();
+            }
+
+            @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink("Hello" + user.customerFirstName, "CustomerProfile", "Profile")*@
+            <a class="dropdown-item d-flex align-items-center"
+               href="~/Profile/CustomerProfile/@User.Identity.GetUserId()">
+                <i class="bi bi-person-fill" style="font-size:15px"></i> @User.Identity.GetUserName()
+               
+            </a>
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>

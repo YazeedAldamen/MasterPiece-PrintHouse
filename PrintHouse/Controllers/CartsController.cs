@@ -104,6 +104,7 @@ namespace PrintHouse.Controllers
             Shipping ship = new Shipping();
             Order order = new Order();
             OrderDetail orderDetail = new OrderDetail();
+            Product product = new Product();
 
             var id = User.Identity.GetUserId();
             var shippingInfo = db.Shippings.Where(x => x.userId == id).FirstOrDefault();
@@ -152,7 +153,25 @@ namespace PrintHouse.Controllers
                 orderDetail.quantity = item.quantity;
                 orderDetail.price = item.price * item.quantity;
                 db.OrderDetails.Add(orderDetail);
+
+               
+
+
                 await db.SaveChangesAsync();
+
+                var stock = db.Products.Where(x => x.productId == item.productId).FirstOrDefault();
+
+                stock.productName = stock.productName;
+                stock.productDescription = stock.productDescription;
+                stock.productImage1 = stock.productImage1;
+                stock.productImage2 = stock.productImage2;
+                stock.productImage3 = stock.productImage3;
+                stock.productPrice = stock.productPrice;
+                stock.categoryId = stock.categoryId;
+                stock.subCategoryId = stock.subCategoryId;
+
+                stock.stock = stock.stock - item.quantity;
+                db.SaveChanges();
 
                 db.Carts.Remove(item);
             }
