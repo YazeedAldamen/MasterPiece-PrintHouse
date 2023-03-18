@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -19,6 +21,7 @@ namespace PrintHouse.Controllers
         public ActionResult Index()
         {
             var id = User.Identity.GetUserId();
+            ViewBag.userId = id;
             var carts = db.Carts.Where(x=>x.userId == id).Include(c => c.AspNetUser).Include(c => c.Product);
             return View(carts.ToList());
         }
@@ -96,13 +99,66 @@ namespace PrintHouse.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CheckOut(int quantity, int cartId, string userId, int productId, decimal price, decimal totalPrice)
+        public async Task<ActionResult> CheckOut(string Email, string customerPhone, string address, int postalCode, string city)
         {
+            Shipping ship = new Shipping();
+            Order order = new Order();
+            OrderDetail orderDetail = new OrderDetail();
 
-            
+            var id = User.Identity.GetUserId();
+            var shippingInfo = db.Shippings.Where(x => x.userId == id).FirstOrDefault();
+            var user = db.AspNetUsers.Where(x => x.Id == id).FirstOrDefault();
+            var cart = db.Carts.Where(x => x.userId == id).ToList();
+
+            decimal totalAmount = 0;
+
+            foreach (var item in cart)
+            {
+                totalAmount += Convert.ToDecimal(item.totalPrice);
+
+            }
+
+
+            ship.userId = id;
+            ship.address = address;
+            ship.postalCode = postalCode;
+            ship.email = Email;
+            ship.firstName = user.customerFirstName;
+            ship.lastName = user.customerLastName;
+            ship.city = city;
+            ship.phone = customerPhone;
+
+            if (shippingInfo == null)
+            {
+                db.Shippings.Add(ship);
+
+            }
+            await db.SaveChangesAsync();
+
+            var orderShipping = db.Shippings.Where(x => x.userId == id).FirstOrDefault();
+            order.shippingId = orderShipping.shippingId;
+            order.orderDate = DateTime.Now;
+            order.totalAmount = totalAmount;
+            order.userId = id;
+            db.Orders.Add(order);
+            await db.SaveChangesAsync();
+
+            var orderDetailOrder = db.Orders.Where(x => x.userId == id).OrderByDescending(x=>x.orderId).FirstOrDefault();
+            foreach (var item in cart)
+            {
+                
+                orderDetail.orderId = orderDetailOrder.orderId;
+                orderDetail.productId = item.productId;
+                orderDetail.quantity = item.quantity;
+                orderDetail.price = item.price;
+                db.OrderDetails.Add(orderDetail);
+            }
+            await db.SaveChangesAsync();
+
             return View("Index", "Home");
 
         }
+
 
 
         // GET: Carts/Edit/5

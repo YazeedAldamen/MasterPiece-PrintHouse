@@ -113,6 +113,7 @@
     <Property Name="orderDate" Type="datetime" />
     <Property Name="totalAmount" Type="decimal" Precision="10" Scale="2" />
     <Property Name="userId" Type="nvarchar" MaxLength="128" />
+    <Property Name="shippingId" Type="int" />
   </EntityType>
   <EntityType Name="Products">
     <Key>
@@ -139,6 +140,20 @@
     <Property Name="comment" Type="varchar(max)" />
     <Property Name="rating" Type="int" />
     <Property Name="show" Type="bit" />
+  </EntityType>
+  <EntityType Name="Shipping">
+    <Key>
+      <PropertyRef Name="shippingId" />
+    </Key>
+    <Property Name="shippingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userId" Type="nvarchar" MaxLength="128" />
+    <Property Name="address" Type="text" />
+    <Property Name="postalCode" Type="int" />
+    <Property Name="city" Type="varchar" MaxLength="20" />
+    <Property Name="firstName" Type="varchar" MaxLength="50" />
+    <Property Name="lastName" Type="varchar" MaxLength="50" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="phone" Type="varchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="subCategories">
     <Key>
@@ -221,6 +236,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Orders__shipping__71D1E811">
+    <End Role="Shipping" Type="Self.Shipping" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shipping">
+        <PropertyRef Name="shippingId" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="shippingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Orders__userId__4E88ABD4">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
     <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
@@ -277,6 +304,18 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Reviews">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Shipping__userId__70DDC3D8">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Shipping" Type="Self.Shipping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Shipping">
         <PropertyRef Name="userId" />
       </Dependent>
     </ReferentialConstraint>
@@ -363,6 +402,7 @@
     <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Shipping" EntityType="Self.Shipping" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="subCategories" EntityType="Self.subCategories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__Cart__productId__59063A47" Association="Self.FK__Cart__productId__59063A47">
@@ -385,6 +425,10 @@
       <End Role="Products" EntitySet="Products" />
       <End Role="OrderDetails" EntitySet="OrderDetails" />
     </AssociationSet>
+    <AssociationSet Name="FK__Orders__shipping__71D1E811" Association="Self.FK__Orders__shipping__71D1E811">
+      <End Role="Shipping" EntitySet="Shipping" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
     <AssociationSet Name="FK__Orders__userId__4E88ABD4" Association="Self.FK__Orders__userId__4E88ABD4">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Orders" EntitySet="Orders" />
@@ -404,6 +448,10 @@
     <AssociationSet Name="FK__Reviews__userId__5BE2A6F2" Association="Self.FK__Reviews__userId__5BE2A6F2">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Reviews" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Shipping__userId__70DDC3D8" Association="Self.FK__Shipping__userId__70DDC3D8">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Shipping" EntitySet="Shipping" />
     </AssociationSet>
     <AssociationSet Name="FK__subCatego__categ__4BAC3F29" Association="Self.FK__subCatego__categ__4BAC3F29">
       <End Role="Categories" EntitySet="Categories" />

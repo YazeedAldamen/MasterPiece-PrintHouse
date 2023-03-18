@@ -10,24 +10,24 @@
             <PropertyRef Name="MigrationId" />
             <PropertyRef Name="ContextKey" />
           </Key>
-          <Property Name="MigrationId" Nullable="false" MaxLength="150" Type="nvarchar" />
-          <Property Name="ContextKey" Nullable="false" MaxLength="300" Type="nvarchar" />
-          <Property Name="Model" Nullable="false" Type="varbinary(max)" />
-          <Property Name="ProductVersion" Nullable="false" MaxLength="32" Type="nvarchar" />
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="Name" Nullable="false" MaxLength="256" Type="nvarchar" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetUserClaims">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="UserId" Nullable="false" MaxLength="128" Type="nvarchar" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ClaimType" Type="nvarchar(max)" />
           <Property Name="ClaimValue" Type="nvarchar(max)" />
         </EntityType>
@@ -37,99 +37,100 @@
             <PropertyRef Name="ProviderKey" />
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="LoginProvider" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="ProviderKey" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="UserId" Nullable="false" MaxLength="128" Type="nvarchar" />
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetUserRoles">
           <Key>
             <PropertyRef Name="UserId" />
             <PropertyRef Name="RoleId" />
           </Key>
-          <Property Name="UserId" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="RoleId" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="Email" MaxLength="256" Type="nvarchar" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="Email" MaxLength="256" Type="nvarchar" />
-          <Property Name="EmailConfirmed" Nullable="false" Type="bit" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
           <Property Name="PasswordHash" Type="nvarchar(max)" />
           <Property Name="SecurityStamp" Type="nvarchar(max)" />
           <Property Name="PhoneNumber" Type="nvarchar(max)" />
-          <Property Name="PhoneNumberConfirmed" Nullable="false" Type="bit" />
-          <Property Name="TwoFactorEnabled" Nullable="false" Type="bit" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
           <Property Name="LockoutEndDateUtc" Type="datetime" />
-          <Property Name="LockoutEnabled" Nullable="false" Type="bit" />
-          <Property Name="AccessFailedCount" Nullable="false" Type="int" />
-          <Property Name="UserName" Nullable="false" MaxLength="256" Type="nvarchar" />
-          <Property Name="customerFirstName" MaxLength="20" Type="varchar" />
-          <Property Name="customerLastName" MaxLength="20" Type="varchar" />
-          <Property Name="customerPhone" MaxLength="20" Type="varchar" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="customerFirstName" Type="varchar" MaxLength="20" />
+          <Property Name="customerLastName" Type="varchar" MaxLength="20" />
+          <Property Name="customerPhone" Type="varchar" MaxLength="20" />
           <Property Name="customerImage" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="cartId" />
           </Key>
-          <Property Name="cartId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="userId" MaxLength="128" Type="nvarchar" />
+          <Property Name="cartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="nvarchar" MaxLength="128" />
           <Property Name="productId" Type="int" />
           <Property Name="quantity" Type="int" />
-          <Property Name="price" Precision="10" Scale="2" Type="decimal" />
-          <Property Name="totalPrice" Precision="10" Scale="2" Type="decimal" />
+          <Property Name="price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="totalPrice" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="categoryId" />
           </Key>
-          <Property Name="categoryId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="categoryName" MaxLength="50" Type="varchar" />
+          <Property Name="categoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categoryName" Type="varchar" MaxLength="50" />
           <Property Name="categoryDescription" Type="varchar(max)" />
-          <Property Name="categoryImage" MaxLength="50" Type="varchar" />
+          <Property Name="categoryImage" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Maintenances">
           <Key>
             <PropertyRef Name="maintenanceId" />
           </Key>
-          <Property Name="maintenanceId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="maintenanceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="orderDate" Type="datetime" />
-          <Property Name="userId" MaxLength="128" Type="nvarchar" />
-          <Property Name="maintencanceOrderDetails" MaxLength="255" Type="varchar" />
+          <Property Name="userId" Type="nvarchar" MaxLength="128" />
+          <Property Name="maintencanceOrderDetails" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="OrderDetails">
           <Key>
             <PropertyRef Name="orderDetailId" />
           </Key>
-          <Property Name="orderDetailId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="orderDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="orderId" Type="int" />
           <Property Name="productId" Type="int" />
           <Property Name="quantity" Type="int" />
-          <Property Name="price" Precision="10" Scale="2" Type="decimal" />
+          <Property Name="price" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
             <PropertyRef Name="orderId" />
           </Key>
-          <Property Name="orderId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="orderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="orderDate" Type="datetime" />
-          <Property Name="totalAmount" Precision="10" Scale="2" Type="decimal" />
-          <Property Name="userId" MaxLength="128" Type="nvarchar" />
+          <Property Name="totalAmount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="userId" Type="nvarchar" MaxLength="128" />
+          <Property Name="shippingId" Type="int" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="productId" />
           </Key>
-          <Property Name="productId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="productName" MaxLength="50" Type="varchar" />
+          <Property Name="productId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productName" Type="varchar" MaxLength="50" />
           <Property Name="productDescription" Type="varchar(max)" />
-          <Property Name="productImage1" MaxLength="50" Type="varchar" />
-          <Property Name="productImage2" MaxLength="50" Type="varchar" />
-          <Property Name="productImage3" MaxLength="50" Type="varchar" />
-          <Property Name="productPrice" Precision="10" Scale="2" Type="decimal" />
+          <Property Name="productImage1" Type="varchar" MaxLength="50" />
+          <Property Name="productImage2" Type="varchar" MaxLength="50" />
+          <Property Name="productImage3" Type="varchar" MaxLength="50" />
+          <Property Name="productPrice" Type="decimal" Precision="10" Scale="2" />
           <Property Name="categoryId" Type="int" />
           <Property Name="subCategoryId" Type="int" />
           <Property Name="stock" Type="int" />
@@ -138,37 +139,51 @@
           <Key>
             <PropertyRef Name="reviewId" />
           </Key>
-          <Property Name="reviewId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="userId" MaxLength="128" Type="nvarchar" />
+          <Property Name="reviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="nvarchar" MaxLength="128" />
           <Property Name="productId" Type="int" />
           <Property Name="comment" Type="varchar(max)" />
           <Property Name="rating" Type="int" />
           <Property Name="show" Type="bit" />
         </EntityType>
+        <EntityType Name="Shipping">
+          <Key>
+            <PropertyRef Name="shippingId" />
+          </Key>
+          <Property Name="shippingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="nvarchar" MaxLength="128" />
+          <Property Name="address" Type="text" />
+          <Property Name="postalCode" Type="int" />
+          <Property Name="city" Type="varchar" MaxLength="20" />
+          <Property Name="firstName" Type="varchar" MaxLength="50" />
+          <Property Name="lastName" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="phone" Type="varchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="subCategories">
           <Key>
             <PropertyRef Name="subCategoryId" />
           </Key>
-          <Property Name="subCategoryId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="subCategoryName" Nullable="false" MaxLength="50" Type="varchar" />
-          <Property Name="subCategoryImage" MaxLength="50" Type="varchar" />
+          <Property Name="subCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="subCategoryName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="subCategoryImage" Type="varchar" MaxLength="50" />
           <Property Name="subCategoryDescription" Type="varchar(max)" />
           <Property Name="categoryId" Type="int" />
-          <Property Name="filter" MaxLength="20" Type="varchar" />
+          <Property Name="filter" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="principal_id" Nullable="false" Type="int" />
-          <Property Name="diagram_id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK__Cart__productId__59063A47">
-          <End Type="Self.Products" Multiplicity="0..1" Role="Products" />
-          <End Type="Self.Cart" Multiplicity="*" Role="Cart" />
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="productId" />
@@ -179,8 +194,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Cart__userId__5812160E">
-          <End Type="Self.AspNetUsers" Multiplicity="0..1" Role="AspNetUsers" />
-          <End Type="Self.Cart" Multiplicity="*" Role="Cart" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -191,8 +206,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Maintenan__userI__5535A963">
-          <End Type="Self.AspNetUsers" Multiplicity="0..1" Role="AspNetUsers" />
-          <End Type="Self.Maintenances" Multiplicity="*" Role="Maintenances" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Maintenances" Type="Self.Maintenances" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -203,8 +218,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__OrderDeta__order__5165187F">
-          <End Type="Self.Orders" Multiplicity="0..1" Role="Orders" />
-          <End Type="Self.OrderDetails" Multiplicity="*" Role="OrderDetails" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Orders">
               <PropertyRef Name="orderId" />
@@ -215,8 +230,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__OrderDeta__produ__52593CB8">
-          <End Type="Self.Products" Multiplicity="0..1" Role="Products" />
-          <End Type="Self.OrderDetails" Multiplicity="*" Role="OrderDetails" />
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="productId" />
@@ -226,9 +241,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Orders__shipping__71D1E811">
+          <End Role="Shipping" Type="Self.Shipping" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipping">
+              <PropertyRef Name="shippingId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="shippingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Orders__userId__4E88ABD4">
-          <End Type="Self.AspNetUsers" Multiplicity="0..1" Role="AspNetUsers" />
-          <End Type="Self.Orders" Multiplicity="*" Role="Orders" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -239,8 +266,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Products__catego__48CFD27E">
-          <End Type="Self.Categories" Multiplicity="0..1" Role="Categories" />
-          <End Type="Self.Products" Multiplicity="*" Role="Products" />
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categories">
               <PropertyRef Name="categoryId" />
@@ -251,8 +278,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Products__subCat__5DCAEF64">
-          <End Type="Self.subCategories" Multiplicity="0..1" Role="subCategories" />
-          <End Type="Self.Products" Multiplicity="*" Role="Products" />
+          <End Role="subCategories" Type="Self.subCategories" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="subCategories">
               <PropertyRef Name="subCategoryId" />
@@ -263,8 +290,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Reviews__product__5CD6CB2B">
-          <End Type="Self.Products" Multiplicity="0..1" Role="Products" />
-          <End Type="Self.Reviews" Multiplicity="*" Role="Reviews" />
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="productId" />
@@ -275,8 +302,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Reviews__userId__5BE2A6F2">
-          <End Type="Self.AspNetUsers" Multiplicity="0..1" Role="AspNetUsers" />
-          <End Type="Self.Reviews" Multiplicity="*" Role="Reviews" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -286,9 +313,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Shipping__userId__70DDC3D8">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Shipping" Type="Self.Shipping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shipping">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__subCatego__categ__4BAC3F29">
-          <End Type="Self.Categories" Multiplicity="0..1" Role="Categories" />
-          <End Type="Self.subCategories" Multiplicity="*" Role="subCategories" />
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="subCategories" Type="Self.subCategories" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Categories">
               <PropertyRef Name="categoryId" />
@@ -299,10 +338,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Type="Self.AspNetUsers" Multiplicity="1" Role="AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="Self.AspNetUserClaims" Multiplicity="*" Role="AspNetUserClaims" />
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -313,10 +352,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Type="Self.AspNetUsers" Multiplicity="1" Role="AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="Self.AspNetUserLogins" Multiplicity="*" Role="AspNetUserLogins" />
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -327,10 +366,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-          <End Type="Self.AspNetRoles" Multiplicity="1" Role="AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="Self.AspNetUserRoles" Multiplicity="*" Role="AspNetUserRoles" />
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetRoles">
               <PropertyRef Name="Id" />
@@ -341,10 +380,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-          <End Type="Self.AspNetUsers" Multiplicity="1" Role="AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="Self.AspNetUserRoles" Multiplicity="*" Role="AspNetUserRoles" />
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -368,67 +407,76 @@
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shipping" EntityType="Self.Shipping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="subCategories" EntityType="Self.subCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Cart__productId__59063A47" Association="Self.FK__Cart__productId__59063A47">
-            <End EntitySet="Products" Role="Products" />
-            <End EntitySet="Cart" Role="Cart" />
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
           <AssociationSet Name="FK__Cart__userId__5812160E" Association="Self.FK__Cart__userId__5812160E">
-            <End EntitySet="AspNetUsers" Role="AspNetUsers" />
-            <End EntitySet="Cart" Role="Cart" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
           <AssociationSet Name="FK__Maintenan__userI__5535A963" Association="Self.FK__Maintenan__userI__5535A963">
-            <End EntitySet="AspNetUsers" Role="AspNetUsers" />
-            <End EntitySet="Maintenances" Role="Maintenances" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Maintenances" EntitySet="Maintenances" />
           </AssociationSet>
           <AssociationSet Name="FK__OrderDeta__order__5165187F" Association="Self.FK__OrderDeta__order__5165187F">
-            <End EntitySet="Orders" Role="Orders" />
-            <End EntitySet="OrderDetails" Role="OrderDetails" />
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
           </AssociationSet>
           <AssociationSet Name="FK__OrderDeta__produ__52593CB8" Association="Self.FK__OrderDeta__produ__52593CB8">
-            <End EntitySet="Products" Role="Products" />
-            <End EntitySet="OrderDetails" Role="OrderDetails" />
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__shipping__71D1E811" Association="Self.FK__Orders__shipping__71D1E811">
+            <End Role="Shipping" EntitySet="Shipping" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK__Orders__userId__4E88ABD4" Association="Self.FK__Orders__userId__4E88ABD4">
-            <End EntitySet="AspNetUsers" Role="AspNetUsers" />
-            <End EntitySet="Orders" Role="Orders" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="FK__Products__catego__48CFD27E" Association="Self.FK__Products__catego__48CFD27E">
-            <End EntitySet="Categories" Role="Categories" />
-            <End EntitySet="Products" Role="Products" />
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK__Products__subCat__5DCAEF64" Association="Self.FK__Products__subCat__5DCAEF64">
-            <End EntitySet="subCategories" Role="subCategories" />
-            <End EntitySet="Products" Role="Products" />
+            <End Role="subCategories" EntitySet="subCategories" />
+            <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK__Reviews__product__5CD6CB2B" Association="Self.FK__Reviews__product__5CD6CB2B">
-            <End EntitySet="Products" Role="Products" />
-            <End EntitySet="Reviews" Role="Reviews" />
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Reviews" EntitySet="Reviews" />
           </AssociationSet>
           <AssociationSet Name="FK__Reviews__userId__5BE2A6F2" Association="Self.FK__Reviews__userId__5BE2A6F2">
-            <End EntitySet="AspNetUsers" Role="AspNetUsers" />
-            <End EntitySet="Reviews" Role="Reviews" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shipping__userId__70DDC3D8" Association="Self.FK__Shipping__userId__70DDC3D8">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Shipping" EntitySet="Shipping" />
           </AssociationSet>
           <AssociationSet Name="FK__subCatego__categ__4BAC3F29" Association="Self.FK__subCatego__categ__4BAC3F29">
-            <End EntitySet="Categories" Role="Categories" />
-            <End EntitySet="subCategories" Role="subCategories" />
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="subCategories" EntitySet="subCategories" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End EntitySet="AspNetUsers" Role="AspNetUsers" />
-            <End EntitySet="AspNetUserClaims" Role="AspNetUserClaims" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End EntitySet="AspNetUsers" Role="AspNetUsers" />
-            <End EntitySet="AspNetUserLogins" Role="AspNetUserLogins" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-            <End EntitySet="AspNetRoles" Role="AspNetRoles" />
-            <End EntitySet="AspNetUserRoles" Role="AspNetUserRoles" />
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-            <End EntitySet="AspNetUsers" Role="AspNetUsers" />
-            <End EntitySet="AspNetUserRoles" Role="AspNetUserRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -511,6 +559,15 @@
             <End EntitySet="Products" Role="Product" />
             <End EntitySet="Reviews" Role="Review" />
           </AssociationSet>
+          <EntitySet Name="Shippings" EntityType="PrintHouseModel.Shipping" />
+          <AssociationSet Name="FK__Shipping__userId__70DDC3D8" Association="PrintHouseModel.FK__Shipping__userId__70DDC3D8">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Shipping" EntitySet="Shippings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__shipping__71D1E811" Association="PrintHouseModel.FK__Orders__shipping__71D1E811">
+            <End Role="Shipping" EntitySet="Shippings" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -589,6 +646,7 @@
           <NavigationProperty Name="Maintenances" Relationship="PrintHouseModel.FK__Maintenan__userI__5535A963" FromRole="AspNetUser" ToRole="Maintenance" />
           <NavigationProperty Name="Orders" Relationship="PrintHouseModel.FK__Orders__userId__4E88ABD4" FromRole="AspNetUser" ToRole="Order" />
           <NavigationProperty Name="Reviews" Relationship="PrintHouseModel.FK__Reviews__userId__5BE2A6F2" FromRole="AspNetUser" ToRole="Review" />
+          <NavigationProperty Name="Shippings" Relationship="PrintHouseModel.FK__Shipping__userId__70DDC3D8" FromRole="AspNetUser" ToRole="Shipping" />
         </EntityType>
         <EntityType Name="Cart">
           <Key>
@@ -646,6 +704,8 @@
           <Property Name="userId" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
           <NavigationProperty Name="AspNetUser" Relationship="PrintHouseModel.FK__Orders__userId__4E88ABD4" FromRole="Order" ToRole="AspNetUser" />
           <NavigationProperty Name="OrderDetails" Relationship="PrintHouseModel.FK__OrderDeta__order__5165187F" FromRole="Order" ToRole="OrderDetail" />
+          <Property Name="shippingId" Type="Int32" />
+          <NavigationProperty Name="Shipping" Relationship="PrintHouseModel.FK__Orders__shipping__71D1E811" FromRole="Order" ToRole="Shipping" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -891,6 +951,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Shipping">
+          <Key>
+            <PropertyRef Name="shippingId" />
+          </Key>
+          <Property Name="shippingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="postalCode" Type="Int32" />
+          <Property Name="city" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="PrintHouseModel.FK__Shipping__userId__70DDC3D8" FromRole="Shipping" ToRole="AspNetUser" />
+          <NavigationProperty Name="Orders" Relationship="PrintHouseModel.FK__Orders__shipping__71D1E811" FromRole="Shipping" ToRole="Order" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__Shipping__userId__70DDC3D8">
+          <End Type="PrintHouseModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="PrintHouseModel.Shipping" Role="Shipping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shipping">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__shipping__71D1E811">
+          <End Type="PrintHouseModel.Shipping" Role="Shipping" Multiplicity="0..1" />
+          <End Type="PrintHouseModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shipping">
+              <PropertyRef Name="shippingId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="shippingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1011,6 +1111,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="PrintHouseModel.Order">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="shippingId" ColumnName="shippingId" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
                 <ScalarProperty Name="orderDate" ColumnName="orderDate" />
@@ -1066,6 +1167,21 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shippings">
+            <EntityTypeMapping TypeName="PrintHouseModel.Shipping">
+              <MappingFragment StoreEntitySet="Shipping">
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="shippingId" ColumnName="shippingId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -24,6 +24,7 @@ namespace PrintHouse.Models
             this.Maintenances = new HashSet<Maintenance>();
             this.Orders = new HashSet<Order>();
             this.Reviews = new HashSet<Review>();
+            this.Shippings = new HashSet<Shipping>();
         }
     
         public string Id { get; set; }
@@ -57,5 +58,7 @@ namespace PrintHouse.Models
         public virtual ICollection<Order> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Review> Reviews { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Shipping> Shippings { get; set; }
     }
 }

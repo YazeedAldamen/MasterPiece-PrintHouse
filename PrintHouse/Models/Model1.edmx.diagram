@@ -5,21 +5,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="443f0ce13e6c4afa8ca866c8a745f724" Name="Diagram1" ZoomLevel="106">
-        <EntityTypeShape EntityType="PrintHouseModel.C__MigrationHistory" PointX="5.75" PointY="5" Width="1.5" />
-        <EntityTypeShape EntityType="PrintHouseModel.AspNetRole" PointX="0.75" PointY="17.125" Width="1.5" />
-        <EntityTypeShape EntityType="PrintHouseModel.AspNetUserClaim" PointX="3" PointY="19.875" Width="1.5" />
-        <EntityTypeShape EntityType="PrintHouseModel.AspNetUserLogin" PointX="3" PointY="25.5" Width="1.5" />
-        <EntityTypeShape EntityType="PrintHouseModel.AspNetUserRole" PointX="3" PointY="14.875" Width="1.5" />
-        <EntityTypeShape EntityType="PrintHouseModel.AspNetUser" PointX="0.75" PointY="10.125" Width="1.5" />
-        <EntityTypeShape EntityType="PrintHouseModel.Cart" PointX="3" PointY="11.625" Width="1.5" />
-        <EntityTypeShape EntityType="PrintHouseModel.Category" PointX="1.5" PointY="4.875" Width="1.5" />
-        <EntityTypeShape EntityType="PrintHouseModel.Maintenance" PointX="3" PointY="7.875" Width="1.5" />
-        <EntityTypeShape EntityType="PrintHouseModel.OrderDetail" PointX="5.25" PointY="22.5" Width="1.5" />
-        <EntityTypeShape EntityType="PrintHouseModel.Order" PointX="3" PointY="22.625" Width="1.5" />
-        <EntityTypeShape EntityType="PrintHouseModel.Product" PointX="3.75" PointY="2" Width="1.5" />
-        <EntityTypeShape EntityType="PrintHouseModel.Review" PointX="6" PointY="11.625" Width="1.5" />
+        <EntityTypeShape EntityType="PrintHouseModel.C__MigrationHistory" PointX="4.75" PointY="2.625" Width="1.5" />
+        <EntityTypeShape EntityType="PrintHouseModel.AspNetRole" PointX="0.75" PointY="17.75" Width="1.5" />
+        <EntityTypeShape EntityType="PrintHouseModel.AspNetUserClaim" PointX="3" PointY="20.5" Width="1.5" />
+        <EntityTypeShape EntityType="PrintHouseModel.AspNetUserLogin" PointX="3" PointY="26.125" Width="1.5" />
+        <EntityTypeShape EntityType="PrintHouseModel.AspNetUserRole" PointX="3" PointY="15.5" Width="1.5" />
+        <EntityTypeShape EntityType="PrintHouseModel.AspNetUser" PointX="0.75" PointY="10.75" Width="1.5" />
+        <EntityTypeShape EntityType="PrintHouseModel.Cart" PointX="3" PointY="12.25" Width="1.5" />
+        <EntityTypeShape EntityType="PrintHouseModel.Category" PointX="1.5" PointY="29" Width="1.5" />
+        <EntityTypeShape EntityType="PrintHouseModel.Maintenance" PointX="3" PointY="8.375" Width="1.5" />
+        <EntityTypeShape EntityType="PrintHouseModel.OrderDetail" PointX="5.25" PointY="23.125" Width="1.5" />
+        <EntityTypeShape EntityType="PrintHouseModel.Order" PointX="3" PointY="23.25" Width="1.5" />
+        <EntityTypeShape EntityType="PrintHouseModel.Product" PointX="0.75" PointY="4.5" Width="1.5" />
+        <EntityTypeShape EntityType="PrintHouseModel.Review" PointX="6" PointY="12.25" Width="1.5" />
         <EntityTypeShape EntityType="PrintHouseModel.subCategory" PointX="1.5" PointY="0.75" Width="1.5" />
-        <EntityTypeShape EntityType="PrintHouseModel.sysdiagram" PointX="5.75" PointY="2" Width="1.5" />
+        <EntityTypeShape EntityType="PrintHouseModel.sysdiagram" PointX="2.75" PointY="4.625" Width="1.5" />
         <AssociationConnector Association="PrintHouseModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" />
         <AssociationConnector Association="PrintHouseModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="PrintHouseModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
@@ -35,6 +35,9 @@
         <AssociationConnector Association="PrintHouseModel.FK__OrderDeta__produ__52593CB8" />
         <AssociationConnector Association="PrintHouseModel.FK__Products__subCat__5DCAEF64" />
         <AssociationConnector Association="PrintHouseModel.FK__Reviews__product__5CD6CB2B" />
+        <EntityTypeShape EntityType="PrintHouseModel.Shipping" Width="1.5" PointX="3" PointY="32.125" />
+        <AssociationConnector Association="PrintHouseModel.FK__Shipping__userId__70DDC3D8" />
+        <AssociationConnector Association="PrintHouseModel.FK__Orders__shipping__71D1E811" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -238,6 +238,37 @@
                             </a>
                         </li>
                     </ul>
+                    @{ 
+                        PrintHouse.Models.PrintHouseEntities db = new PrintHouse.Models.PrintHouseEntities();
+
+                        string id = ViewBag.userId;
+                        string first = "";
+                        string last = "";
+                        string email = "";
+                        string phone = "";
+                        string address = "";
+                        string postalCode ="" ;
+                        string city;
+                        var shippingInfo = db.Shippings.Where(x => x.userId == id).FirstOrDefault();
+                        if (shippingInfo == null)
+                        {
+                            var user = db.AspNetUsers.Where(x => x.Id == id).FirstOrDefault();
+                            first = user.customerFirstName;
+                            last = user.customerLastName;
+                            email = user.Email;
+                            phone = user.customerPhone;
+
+                        }
+                        else{
+                            first = shippingInfo.firstName;
+                            last = shippingInfo.lastName;
+                            email = shippingInfo.email;
+                            phone = shippingInfo.phone;
+                            address = shippingInfo.address;
+                            postalCode = shippingInfo.postalCode.ToString();
+                            city = shippingInfo.city;
+                        }
+                    }
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="visa" role="tabpanel" aria-labelledby="visa-tab">
                             @using (Html.BeginForm("Checkout", "Carts", FormMethod.Post))
@@ -251,27 +282,31 @@
                                         <div class="inputbox">
                                             <span>First Name</span>
                                             <label></label>
-                                            <input type="text" name="customerFirstName" class="form-control" required="required">
+                                            <input type="text" name="customerFirstName" class="form-control" required="required" value="@first">
                                         </div>
                                         <div class="inputbox">
                                             <span>Last Name</span>
-                                            <input type="text" name="customerLastName" class="form-control" required="required">
+                                            <input type="text" name="customerLastName" class="form-control" required="required" value="@last">
                                         </div>
                                         <div class="inputbox">
                                             <span>Email</span>
-                                            <input type="text" name="Email" class="form-control" required="required">
+                                            <input type="text" name="Email" class="form-control" required="required" value="@email">
+                                        </div>
+                                        <div class="inputbox">
+                                            <span>Phone</span>
+                                            <input type="text" name="customerPhone" class="form-control" required="required" value="@phone">
                                         </div>
                                         <div class="inputbox">
                                             <span>Shipping Address</span>
-                                            <input type="text" name="address" class="form-control" required="required">
+                                            <input type="text" name="address" class="form-control" required="required" value="@address">
                                         </div>
                                         <div class="inputbox">
                                             <span>Postal Code</span>
-                                            <input type="text" name="postalCode" class="form-control" required="required">
+                                            <input type="text" name="postalCode" class="form-control" required="required" value="@postalCode">
                                         </div>
                                         <div class="inputbox">
                                             <span>City</span>
-                                            <select class="list-group">
+                                            <select class="list-group" name="city">
                                                 <option value="Irbid">Irbid</option>
                                                 <option value="Amman">Amman</option>
                                                 <option value="Aqaba">Aqaba</option>

@@ -24,9 +24,11 @@ namespace PrintHouse.Models
         public Nullable<System.DateTime> orderDate { get; set; }
         public Nullable<decimal> totalAmount { get; set; }
         public string userId { get; set; }
+        public Nullable<int> shippingId { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual Shipping Shipping { get; set; }
     }
 }
