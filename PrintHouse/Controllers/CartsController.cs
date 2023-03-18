@@ -23,8 +23,43 @@ namespace PrintHouse.Controllers
             var id = User.Identity.GetUserId();
             ViewBag.userId = id;
             var carts = db.Carts.Where(x=>x.userId == id).Include(c => c.AspNetUser).Include(c => c.Product);
+
+            List<int> productIds = GetProductIdsFromCookie();
+            List<int> quantities = GetProductQuantityFromCookie();
+            if(productIds.Count > 0){ 
+            ViewBag.ProductIds = productIds;
+            ViewBag.ProductQuantity = quantities;
+            }
             return View(carts.ToList());
         }
+
+
+        private List<int> GetProductIdsFromCookie()
+        {
+            List<int> productIds = new List<int>();
+
+            HttpCookie cookie = Request.Cookies["ProductIds"];
+
+            if (cookie != null && !string.IsNullOrEmpty(cookie.Value))
+            {
+                productIds = cookie.Value.Split(',').Select(int.Parse).ToList();
+            }
+
+            return productIds;
+        }
+
+        private List<int> GetProductQuantityFromCookie()
+        {
+
+            List<int> quantity = new List<int>();
+            HttpCookie cookie = Request.Cookies["ProductQuantity"];
+            if (cookie != null && !string.IsNullOrEmpty(cookie.Value))
+            {
+                quantity = cookie.Value.Split(',').Select(int.Parse).ToList();
+            }
+            return quantity;
+        }
+
 
         // GET: Carts/Details/5
         public ActionResult Details(int? id)
@@ -97,10 +132,18 @@ namespace PrintHouse.Controllers
             return View("Index","Carts");
         }
 
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CheckOut(string Email, string customerPhone, string address, int postalCode, string city)
         {
+            if(User.Identity.IsAuthenticated != true){
+                //TempData["SweetAlertMessage"] = "You need to log in before you can add this product to your cart.";
+                //TempData["SweetAlertType"] = "warning";
+                TempData["SweetAlertMessage"] = "Item have been added to cart";
+                TempData["SweetAlertType"] = "warning";
+            }
             Shipping ship = new Shipping();
             Order order = new Order();
             OrderDetail orderDetail = new OrderDetail();
@@ -110,6 +153,7 @@ namespace PrintHouse.Controllers
             var shippingInfo = db.Shippings.Where(x => x.userId == id).FirstOrDefault();
             var user = db.AspNetUsers.Where(x => x.Id == id).FirstOrDefault();
             var cart = db.Carts.Where(x => x.userId == id).ToList();
+
 
             decimal totalAmount = 0;
 
@@ -128,6 +172,7 @@ namespace PrintHouse.Controllers
             ship.lastName = user.customerLastName;
             ship.city = city;
             ship.phone = customerPhone;
+
 
             if (shippingInfo == null)
             {
@@ -171,13 +216,16 @@ namespace PrintHouse.Controllers
                 stock.subCategoryId = stock.subCategoryId;
 
                 stock.stock = stock.stock - item.quantity;
-                db.SaveChanges();
 
+                db.SaveChanges();
                 db.Carts.Remove(item);
             }
             await db.SaveChangesAsync();
 
-            return RedirectToAction("Index","Home");
+            TempData["SweetAlertMessage"] = "Item have been added to cart";
+            TempData["SweetAlertType"] = "warning";
+
+            return RedirectToAction("singleProduct","Product");
 
         }
 

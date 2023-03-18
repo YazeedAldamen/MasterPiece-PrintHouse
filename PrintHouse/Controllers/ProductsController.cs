@@ -51,6 +51,7 @@ namespace PrintHouse.Controllers
 
             if (User.Identity.IsAuthenticated )
             {
+                
                 Cart cart = new Cart();
                 cart.productId = id;
                 cart.userId = User.Identity.GetUserId();

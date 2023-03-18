@@ -117,7 +117,6 @@
                 <p>@id</p>
             }
         }*@
-
                             @{ try
                                 {
                                     foreach (var id in ViewBag.ProductIds)
@@ -131,16 +130,17 @@
 
                                 }
 
-                                }
-                            @{ 
+                            }
+                            @{
                                 try
                                 {
                                     foreach (var quantity in ViewBag.ProductQuantity)
                                     {
-                                <p>@quantity</p>
+                                        <p>@quantity</p>
                                     }
                                 }
-                                catch(Exception){
+                                catch (Exception)
+                                {
 
                                 }
                             }
