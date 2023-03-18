@@ -150,12 +150,15 @@ namespace PrintHouse.Controllers
                 orderDetail.orderId = orderDetailOrder.orderId;
                 orderDetail.productId = item.productId;
                 orderDetail.quantity = item.quantity;
-                orderDetail.price = item.price;
+                orderDetail.price = item.price * item.quantity;
                 db.OrderDetails.Add(orderDetail);
+                await db.SaveChangesAsync();
+
+                db.Carts.Remove(item);
             }
             await db.SaveChangesAsync();
 
-            return View("Index", "Home");
+            return RedirectToAction("Index","Home");
 
         }
 
