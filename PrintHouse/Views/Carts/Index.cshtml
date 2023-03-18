@@ -240,64 +240,65 @@
                     </ul>
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="visa" role="tabpanel" aria-labelledby="visa-tab">
+                            @using (Html.BeginForm("Checkout", "Carts", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="mt-4 mx-4">
+                                    <div class="text-center">
+                                        <h5>Shipping Information</h5>
+                                    </div>
+                                    <div class="form mt-3">
+                                        <div class="inputbox">
+                                            <span>First Name</span>
+                                            <label></label>
+                                            <input type="text" name="customerFirstName" class="form-control" required="required">
+                                        </div>
+                                        <div class="inputbox">
+                                            <span>Last Name</span>
+                                            <input type="text" name="customerLastName" class="form-control" required="required">
+                                        </div>
+                                        <div class="inputbox">
+                                            <span>Email</span>
+                                            <input type="text" name="Email" class="form-control" required="required">
+                                        </div>
+                                        <div class="inputbox">
+                                            <span>Shipping Address</span>
+                                            <input type="text" name="address" class="form-control" required="required">
+                                        </div>
+                                        <div class="inputbox">
+                                            <span>Postal Code</span>
+                                            <input type="text" name="postalCode" class="form-control" required="required">
+                                        </div>
+                                        <div class="inputbox">
+                                            <span>City</span>
+                                            <select class="list-group">
+                                                <option value="Irbid">Irbid</option>
+                                                <option value="Amman">Amman</option>
+                                                <option value="Aqaba">Aqaba</option>
+                                                <option value="Ajloun">Ajloun</option>
+                                                <option value="Jarash">Jarash</option>
+                                                <option value="Mafraq">Mafraq</option>
+                                                <option value="Zarqa">Zarqa</option>
+                                                <option value="Madaba">Madaba</option>
+                                                <option value="Balqa">Balqa</option>
+                                                <option value="Karak">Karak</option>
+                                                <option value="Maan">Maan</option>
+                                                <option value="Tafeleh">Tafeleh</option>
 
-                            <div class="mt-4 mx-4">
-                                <div class="text-center">
-                                    <h5>Shipping Information</h5>
+                                            </select>
+                                            @*<input type="text" name="address" class="form-control" required="required">*@
+                                        </div>
+
+                                    </div>
                                 </div>
-                                <div class="form mt-3">
-                                    <div class="inputbox">
-                                        <span>First Name</span>
-                                        <input type="text" name="customerFirstName" class="form-control" required="required">
+                                <div class="mt-4 mx-4">
+                                    <div class="text-center">
+                                        <h5>Credit card</h5>
                                     </div>
-                                    <div class="inputbox">
-                                        <span>Last Name</span>
-                                        <input type="text" name="customerLastName" class="form-control" required="required">
-                                    </div>
-                                    <div class="inputbox">
-                                        <span>Email</span>
-                                        <input type="text" name="Email" class="form-control" required="required">
-                                    </div>
-                                    <div class="inputbox">
-                                        <span>Shipping Address</span>
-                                        <input type="text" name="address" class="form-control" required="required">
-                                    </div>
-                                    <div class="inputbox">
-                                        <span>Postal Code</span>
-                                        <input type="text" name="postalCode" class="form-control" required="required">
-                                    </div>
-                                    <div class="inputbox">
-                                        <span>City</span>
-                                        <select class="list-group">
-                                            <option value="Irbid">Irbid</option>
-                                            <option value="Amman">Amman</option>
-                                            <option value="Aqaba">Aqaba</option>
-                                            <option value="Ajloun">Ajloun</option>
-                                            <option value="Jarash">Jarash</option>
-                                            <option value="Mafraq">Mafraq</option>
-                                            <option value="Zarqa">Zarqa</option>
-                                            <option value="Madaba">Madaba</option>
-                                            <option value="Balqa">Balqa</option>
-                                            <option value="Karak">Karak</option>
-                                            <option value="Maan">Maan</option>
-                                            <option value="Tafeleh">Tafeleh</option>
-
-                                        </select>
-                                        @*<input type="text" name="address" class="form-control" required="required">*@
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="mt-4 mx-4">
-                                <div class="text-center">
-                                    <h5>Credit card</h5>
-                                </div>
-                                <div class="form mt-3">
+                                    <div class="form mt-3">
 
 
-                                    @using (Html.BeginForm("Checkout", "Carts", FormMethod.Post))
-                                    {
-                                        @Html.AntiForgeryToken()
+
 
                                         <div class="form mt-3">
 
@@ -355,22 +356,22 @@
 
                                         </div>
 
-                                    }
+                                       
+                                    </div>
+
                                 </div>
-
+                            }
                             </div>
-
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 
 
 
-
-   
 
 
 

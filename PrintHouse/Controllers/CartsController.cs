@@ -93,8 +93,16 @@ namespace PrintHouse.Controllers
             ViewBag.productId = new SelectList(db.Products, "productId", "productName", cart.productId);
             return View("Index","Carts");
         }
-    
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CheckOut(int quantity, int cartId, string userId, int productId, decimal price, decimal totalPrice)
+        {
+
+            
+            return View("Index", "Home");
+
+        }
 
 
         // GET: Carts/Edit/5
