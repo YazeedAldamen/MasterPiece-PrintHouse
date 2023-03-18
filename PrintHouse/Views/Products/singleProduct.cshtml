@@ -4,7 +4,7 @@
     ViewBag.Title = "singleProduct";
     Layout = "~/Views/Shared/_LayoutGeneral.cshtml";
 }
-@*<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>*@
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 @*@{
     if (Session["productId"] != null)
@@ -13,17 +13,17 @@
     }
 }*@
 
-@if (Request.Cookies["ProductIds"] != null && Request.Cookies["ProductQuantity"] != null) {
+@*@if (Request.Cookies["ProductIds"] != null && Request.Cookies["ProductQuantity"] != null) {
 
     <script>
         
         alert("yes");
     </script>
-}
+}*@
 @if (TempData["SweetAlertMessage"] != null && TempData["SweetAlertType"] != null)
 {
     <script>
-      
+
         Swal.fire({
   title: '@TempData["SweetAlertMessage"]',
   icon: '@TempData["SweetAlertType"]',
@@ -89,7 +89,7 @@
                             <form method="post">
                                 <ul>
                                     <li><strong>Category</strong>: @Model.Category.categoryName</li>
-
+                                    <li><input type="num" name="id" value="@Model.productId" hidden /></li>
                                     <li><strong>Maker</strong>: MakerBot</li>
                                     <li><strong>Price</strong>: @Model.productPrice JOD</li>
                                     <li><strong>Quantity</strong> <input type="number" name="quantity" value="1" min="1"/></li>
@@ -165,7 +165,7 @@
                         {
                             <div class="col-lg-8 entries">
                                 <div class="blog-author d-flex align-items-center">
-                                    <img src="~/Content/assets/img/blog/blog-author.jpg"
+                                    <img src="~/Content/assets/img/@item.AspNetUser.customerImage"
                                          class="rounded-circle float-left"
                                          alt="" />
                                     <div>

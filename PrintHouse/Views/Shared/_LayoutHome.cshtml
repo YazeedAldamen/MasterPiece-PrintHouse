@@ -18,7 +18,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap"
           rel="stylesheet" />
-
+    
 
     @Styles.Render("~/Main/css")
 </head>
@@ -43,10 +43,15 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Categories","Index","Categories")</li>
+                    <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
                     <li><a href="~/Carts/Index"><i class="bi bi-cart-check-fill" style="color: white; font-size:18px"></i></a></li>
-                    @*<li>@Html.ActionLink("Register", "Register", "Account")</li>
-                    <li>@Html.ActionLink("Log In", "Login", "Account")</li>*@
+
+                    @if(User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Dashboard", "AdminCategories", "Categories")</li>
+
+                    }
+
                     <li> @Html.Partial("_LoginPartial")</li>
 
                 </ul>
@@ -192,16 +197,29 @@
                  date-aos-delay="200">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6 video-box">
+                    @*<div class="col-lg-6 video-box">
+            <img src="~/Content/assets/img/3dprintingasharkyusstock.png"
+                 class="img-fluid"
+                 alt="" />
+            <a href="https://www.youtube.com/watch?v=aVmJShnA8jE"
+               class="venobox play-btn mb-4 glightbox play-btn"
+               data-vbtype="video"
+               data-autoplay="true"
+               target="_blank"></a>
+        </div>*@
+                    <div class="col-lg-6 mt-3">
+                        <div style="position:relative; padding-bottom:56.25%; height:0;">
+                            <iframe src="https://www.youtube.com/embed/aVmJShnA8jE"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen
+                                    style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe>
+                        </div>
                         <img src="~/Content/assets/img/3dprintingasharkyusstock.png"
                              class="img-fluid"
                              alt="" />
-                        <a href="https://www.youtube.com/watch?v=aVmJShnA8jE"
-                           class="venobox play-btn mb-4 glightbox play-btn"
-                           data-vbtype="video"
-                           data-autoplay="true"
-                           target="_blank"></a>
                     </div>
+
 
                     <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
                         <div class="icon-box">

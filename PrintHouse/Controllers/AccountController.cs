@@ -83,7 +83,7 @@ namespace PrintHouse.Controllers
                     var user = await UserManager.FindByEmailAsync(model.Email);
                     if (await UserManager.IsInRoleAsync(user.Id, "Admin"))
                     {
-                        return RedirectToAction("AdminCategories", "Categories");
+                        return RedirectToAction("Statistics", "Home");
                     }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:

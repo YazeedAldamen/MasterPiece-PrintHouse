@@ -31,13 +31,15 @@ namespace PrintHouse.Controllers
             }
             return View();
         }
-
+        [Authorize(Roles = "Admin")]
         public ActionResult AdminsubCategories()
         {
             return View(db.subCategories.ToList());
         }
 
         // GET: subCategories/Details/5
+        [Authorize(Roles = "Admin")]
+
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -53,11 +55,13 @@ namespace PrintHouse.Controllers
             return View(subCategory);
         }
 
-       
 
-       
+
+
 
         // GET: subCategories/Create
+        [Authorize(Roles = "Admin")]
+
         public ActionResult Create()
         {
             ViewBag.categoryId = new SelectList(db.Categories, "categoryId", "categoryName");
@@ -90,6 +94,8 @@ namespace PrintHouse.Controllers
         }
 
         // GET: subCategories/Edit/5
+        [Authorize(Roles = "Admin")]
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -111,6 +117,8 @@ namespace PrintHouse.Controllers
         // POST: subCategories/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "subCategoryId,subCategoryName,subCategoryImage,subCategoryDescription,categoryId")] subCategory subCategory, HttpPostedFileBase subCategoryImage)
@@ -137,6 +145,8 @@ namespace PrintHouse.Controllers
         }
 
         // GET: subCategories/Delete/5
+        [Authorize(Roles = "Admin")]
+
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -152,6 +162,8 @@ namespace PrintHouse.Controllers
         }
 
         // POST: subCategories/Delete/5
+        [Authorize(Roles = "Admin")]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

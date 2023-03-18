@@ -23,6 +23,8 @@ namespace PrintHouse.Controllers
         }
 
         // GET: Profile/Details/5
+        [Authorize(Roles = "Admin")]
+
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -37,12 +39,15 @@ namespace PrintHouse.Controllers
             }
             return View(aspNetUser);
         }
-
+        [Authorize(Roles = "Customer")]
         public ActionResult CustomerProfile(string id){
         ViewBag.id = id;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if(User.Identity.GetUserId() != id){
+                return RedirectToAction("Index", "Home");
             }
             AspNetUser aspNetUser = db.AspNetUsers.Find(id);
             Session["customerImage"] = aspNetUser.customerImage;
@@ -53,6 +58,7 @@ namespace PrintHouse.Controllers
             return View(aspNetUser);
         }
         // GET: Profile/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -61,6 +67,8 @@ namespace PrintHouse.Controllers
         // POST: Profile/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,customerFirstName,customerLastName,customerPhone")] AspNetUser aspNetUser)
@@ -76,6 +84,7 @@ namespace PrintHouse.Controllers
         }
 
         // GET: Profile/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -93,6 +102,8 @@ namespace PrintHouse.Controllers
         // POST: Profile/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,customerFirstName,customerLastName,customerPhone")] AspNetUser aspNetUser, HttpPostedFileBase customerImage)
@@ -128,6 +139,8 @@ namespace PrintHouse.Controllers
         }
 
         // GET: Profile/Delete/5
+        [Authorize(Roles = "Admin")]
+
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -143,6 +156,8 @@ namespace PrintHouse.Controllers
         }
 
         // POST: Profile/Delete/5
+        [Authorize(Roles = "Admin")]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)

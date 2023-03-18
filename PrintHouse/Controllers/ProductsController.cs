@@ -38,8 +38,12 @@ namespace PrintHouse.Controllers
             var products = db.Products.ToList();
             return View(products);
         }
-        public ActionResult SingleProduct(int id)
+        public ActionResult SingleProduct(int? id)
         {
+            if (id == null)
+            {
+                return RedirectToAction("Index", "Products");
+            }
             var singleProduct = db.Products.Where(x => x.productId == id).FirstOrDefault();
             return View(singleProduct);
         }
@@ -47,11 +51,11 @@ namespace PrintHouse.Controllers
         public ActionResult SingleProduct(int id, int quantity)
         {
             var userId = User.Identity.GetUserId();
-            int cartCount = db.Carts.Where(x=>x.userId == userId).Count();
+            int cartCount = db.Carts.Where(x => x.userId == userId).Count();
 
-            if (User.Identity.IsAuthenticated )
+            if (User.Identity.IsAuthenticated)
             {
-                
+                // Add the product to the cart
                 Cart cart = new Cart();
                 cart.productId = id;
                 cart.userId = User.Identity.GetUserId();
@@ -60,11 +64,14 @@ namespace PrintHouse.Controllers
                 cart.totalPrice = db.Products.Find(id).productPrice * quantity;
                 db.Carts.Add(cart);
                 db.SaveChanges();
-                return RedirectToAction("SingleProduct", "Products", new { id = id });
+
+                // Show a success message using SweetAlert
+                TempData["SweetAlertMessage"] = "Item has been added to cart";
+                TempData["SweetAlertType"] = "success";
             }
             else
             {
-
+                // Add the product to the cookie
                 List<int> productIds = GetProductIdsFromCookie();
                 List<int> quantities = GetProductQuantityFromCookie();
                 productIds.Add(id);
@@ -72,30 +79,15 @@ namespace PrintHouse.Controllers
                 SetProductIdsInCookie(productIds);
                 SetProductQuantityCookie(quantities);
 
-                //List<int> productIds = GetProductIdsFromSession();
-                //productIds.Add(id);
-                //Session["ProductIds"] = productIds;
-
-                //Session["productId"] = id;
-                //Session["quantity"] = quantity;
-                ////TempData["SweetAlertMessage"] = "You need to log in before you can add this product to your cart.";
-                ////TempData["SweetAlertType"] = "warning";
-                //TempData["SweetAlertMessage"] = "Item have been added to cart";
-                //TempData["SweetAlertType"] = "warning";
-
-
-                ViewBag.ProductIds = productIds;
-                ViewBag.ProductQuantity = quantities;
-
-                var singleProduct = db.Products.Where(x => x.productId == id).FirstOrDefault();
-                return View(singleProduct);
-
-
-
+                // Show a warning message using SweetAlert
+               
             }
-
-
+            TempData["SweetAlertMessage"] = "You need to log in before you can add this product to your cart.";
+            TempData["SweetAlertType"] = "warning";
+            var singleProduct = db.Products.Where(x => x.productId == id).FirstOrDefault();
+            return RedirectToAction("SingleProduct", "Products", new { id = id });
         }
+
         private List<int> GetProductIdsFromCookie()
         {
             List<int> productIds = new List<int>();
@@ -195,6 +187,7 @@ namespace PrintHouse.Controllers
         //    return View();
         //}
 
+        [Authorize(Roles = "Admin")]
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)
@@ -212,6 +205,8 @@ namespace PrintHouse.Controllers
         }
 
         // GET: Products/Create
+        [Authorize(Roles = "Admin")]
+
         public ActionResult Create()
         {
             ViewBag.categoryId = new SelectList(db.Categories, "categoryId", "categoryName");
@@ -223,6 +218,8 @@ namespace PrintHouse.Controllers
         // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "productId,productName,productDescription,productImage1,productImage2,productImage3,productPrice,categoryId,stock")] Product product,int subCategoryId ,HttpPostedFileBase productImage1, HttpPostedFileBase productImage2, HttpPostedFileBase productImage3)
@@ -261,6 +258,8 @@ namespace PrintHouse.Controllers
         }
 
         // GET: Products/Edit/5
+        [Authorize(Roles = "Admin")]
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -287,6 +286,8 @@ namespace PrintHouse.Controllers
         // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "productId,productName,productDescription,productImage1,productImage2,productImage3,productPrice,categoryId,stock")] Product product, int subCategoryId, HttpPostedFileBase productImage1, HttpPostedFileBase productImage2, HttpPostedFileBase productImage3)
@@ -337,6 +338,8 @@ namespace PrintHouse.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize(Roles = "Admin")]
+
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -352,6 +355,8 @@ namespace PrintHouse.Controllers
         }
 
         // POST: Products/Delete/5
+        [Authorize(Roles = "Admin")]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

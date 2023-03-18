@@ -21,9 +21,12 @@ namespace PrintHouse.Controllers
             return View(db.Categories.ToList());
         }
 
+        [Authorize(Roles = "Admin")]
+
         public ActionResult AdminCategories(){
             return View(db.Categories.ToList());
         }
+        [Authorize(Roles = "Admin")]
 
         // GET: Categories/Details/5
         public ActionResult Details(int? id)
@@ -39,6 +42,7 @@ namespace PrintHouse.Controllers
             }
             return View(category);
         }
+        [Authorize(Roles = "Admin")]
 
         // GET: Categories/Create
         public ActionResult Create()
@@ -49,6 +53,8 @@ namespace PrintHouse.Controllers
         // POST: Categories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "categoryId,categoryName,categoryDescription")] Category category, HttpPostedFileBase categoryImage)
@@ -72,6 +78,8 @@ namespace PrintHouse.Controllers
         }
 
         // GET: Categories/Edit/5
+        [Authorize(Roles = "Admin")]
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,6 +98,8 @@ namespace PrintHouse.Controllers
         // POST: Categories/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "categoryId,categoryName,categoryDescription,categoryImage")] Category category, HttpPostedFileBase categoryImage)
@@ -115,6 +125,8 @@ namespace PrintHouse.Controllers
         }
 
         // GET: Categories/Delete/5
+        [Authorize(Roles = "Admin")]
+
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -130,6 +142,8 @@ namespace PrintHouse.Controllers
         }
 
         // POST: Categories/Delete/5
+        [Authorize(Roles = "Admin")]
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

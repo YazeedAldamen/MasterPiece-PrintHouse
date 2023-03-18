@@ -7,10 +7,35 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/a8b56cb52b.js" crossorigin="anonymous"></script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 @{
     decimal count = 0;
 
 }
+
+
+@if (TempData["SweetAlertMessage"] != null && TempData["SweetAlertType"] != null)
+{
+    <script>
+
+        Swal.fire({
+  title: '@TempData["SweetAlertMessage"]',
+  icon: '@TempData["SweetAlertType"]',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Proceed'
+}).then((result) => {
+    if (result.isConfirmed) {
+        @Session["productId"]= 
+    window.location.href = "@Url.Action("Login", "Account")";
+    }
+    })
+    </script>
+}
+
 
 <div class="container my-5">
     <h1>Shopping Cart</h1>
@@ -47,39 +72,40 @@
                             productid = productIds[i];
                             var guestProduct = db.Products.Where(x => x.productId == productid).FirstOrDefault();
 
-                        @*<p>@guestProduct.productName</p>
-                            <p>@guestProduct.productImage1</p>
-                            <p>@guestProduct.productPrice</p>
+                            @*<p>@guestProduct.productName</p>
+                                <p>@guestProduct.productImage1</p>
+                                <p>@guestProduct.productPrice</p>
 
-                            <p>@quantities[i]</p>
+                                <p>@quantities[i]</p>
+                                var sum = guestProduct.productPrice * quantities[i];
+                                <p>@sum</p>
+
+                                <p>Product ID: @productIds[i]</p>
+                                <p>Quantity: @quantities[i]</p>
+                                <p></p>*@
                             var sum = guestProduct.productPrice * quantities[i];
-                            <p>@sum</p>
-
-                            <p>Product ID: @productIds[i]</p>
-                            <p>Quantity: @quantities[i]</p>
-                            <p></p>*@
-                var sum = guestProduct.productPrice * quantities[i];
-                totalSum += Convert.ToDecimal(sum);
-                        <tr>
-                            <td class="text-center align-center">@guestProduct.productName</td>
-                            <td class="d-none d-md-table-cell">
-                                <img src="~/Content/assets/img/@guestProduct.productImage1"
-                                     style="width: 100px; height: 50px"
-                                     alt="@guestProduct.productName"
-                                     class="img-fluid" />
-                            </td>
-                            <td>@guestProduct.productPrice JOD</td>
-                            <td>@quantities[i]</td>
-                            <td>@sum</td>
-                        </tr>
+                            totalSum += Convert.ToDecimal(sum);
+                            <tr>
+                                <td class="text-center align-center">@guestProduct.productName</td>
+                                <td class="d-none d-md-table-cell">
+                                    <img src="~/Content/assets/img/@guestProduct.productImage1"
+                                         style="width: 100px; height: 50px"
+                                         alt="@guestProduct.productName"
+                                         class="img-fluid" />
+                                </td>
+                                <td>@guestProduct.productPrice JOD</td>
+                                <td>@quantities[i]</td>
+                                <td>@sum</td>
+                            </tr>
                             ViewBag.totalSum = totalSum;
 
                         }
                     }
-                    catch(Exception){
-                        
+                    catch (Exception)
+                    {
+
                     }
-                    }
+                }
 
                 @if (User.Identity.IsAuthenticated)
                 {
@@ -216,11 +242,13 @@
                 }
             </tfoot>
         </table>
-        @if(User.Identity.IsAuthenticated){
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkout">Check Out</button>
+        @if (User.Identity.IsAuthenticated && count>0)
+        {
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkout">Check Out</button>
         }
-        else{
-            
+        else
+        {
+
         }
     </div>
     @foreach (var item in Model)

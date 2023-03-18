@@ -57,6 +57,10 @@ namespace PrintHouse.Controllers
             return View();
         }
 
+        public ActionResult Statistics(){
+        var stats = db.OrderDetails.ToList();
+        return View(stats);
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

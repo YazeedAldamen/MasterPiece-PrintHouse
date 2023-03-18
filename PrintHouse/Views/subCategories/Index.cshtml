@@ -86,80 +86,107 @@
                  data-aos-duration="500">
                 @foreach (var item in Model)
                 {
-                    <a href="~/Products/Index/@item.subCategoryId">
-                        <div class="col-lg-4 col-md-6 portfolio-wrap filter-@item.filter">
-                            <div class="portfolio-item">
-                                <img src="~/Content/assets/img/@item.subCategoryImage"
-                                     class="img-fluid"
-                                     style="height: max-content"
-                                     alt="" />
-                                <div class="portfolio-info">
-                                    <h3>@item.subCategoryName</h3>
-                                    <div>
-                                        <a href="~/Content/assets/img/@item.subCategoryImage"
-                                           data-gallery="portfolioGallery"
-                                           class="portfolio-lightbox"
-                                           title="@item.subCategoryDescription">
-                                            <i class="bx bx-plus"></i>
-                                        </a>
-                                        <a href="~/Products/Index/@item.subCategoryId" title="Details">
-                                            <i class="bx bx-link"></i>
-                                        </a>
-                                    </div>
-                                </div>
+                    @*<a href="~/Products/Index/@item.subCategoryId">
+                <div class="col-lg-4 col-md-6 portfolio-wrap filter-@item.filter">
+                    <div class="portfolio-item">
+                        <img src="~/Content/assets/img/@item.subCategoryImage"
+                             class="img-fluid"
+                             style="height: max-content"
+                             alt="" />
+                        <div class="portfolio-info">
+                            <h3>@item.subCategoryName</h3>
+                            <div>
+                                <a href="~/Content/assets/img/@item.subCategoryImage"
+                                   data-gallery="portfolioGallery"
+                                   class="portfolio-lightbox"
+                                   title="@item.subCategoryDescription">
+                                    <i class="bx bx-plus"></i>
+                                </a>
+                                <a href="~/Products/Index/@item.subCategoryId" title="Details">
+                                    <i class="bx bx-link"></i>
+                                </a>
                             </div>
                         </div>
-                    </a>
-                }
-                    @*<a href="Products.html">
-                        <div class="col-lg-4 col-md-6 portfolio-wrap filter-web">
-                            <div class="portfolio-item">
-                                <img src="assets/img/Printers/SLS/SLSCategory_800x600.jpg"
-                                     class="img-fluid"
-                                     alt="" />
-                                <div class="portfolio-info">
-                                    <h3>SLS</h3>
-
-                                    <div>
-                                        <a href="assets/img/Printers/SLS/SLSCategory_800x600.jpg"
-                                           data-gallery="portfolioGallery"
-                                           class="portfolio-lightbox"
-                                           title="Selective Laser Sintering">
-                                            <i class="bx bx-plus"></i>
-                                        </a>
-                                        <a href="portfolio-details.html" title="Portfolio Details">
-                                            <i class="bx bx-link"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="Products.html">
-                        <div class="col-lg-4 col-md-6 portfolio-wrap filter-card">
-                            <div class="portfolio-item">
-                                <img src="assets/img/Printers/SLA/SLACategory.png"
-                                     class="img-fluid"
-                                     alt="" />
-                                <div class="portfolio-info">
-                                    <h3>ٍٍSLA</h3>
-
-                                    <div>
-                                        <a href="assets/img/portfolio/portfolio-3.jpg"
-                                           data-gallery="portfolioGallery"
-                                           class="portfolio-lightbox"
-                                           title="App 2">
-                                            <i class="bx bx-plus"></i>
-                                        </a>
-                                        <a href="portfolio-details.html" title="Portfolio Details">
-                                            <i class="bx bx-link"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>*@
+                    </div>
                 </div>
+            </a>*@
+                    <div class="col-lg-4 col-md-6 portfolio-wrap filter-@item.filter">
+                        <div class="card h-100">
+                            <a href="~/Products/Index/@item.subCategoryId">
+                                <img src="~/Content/assets/img/@item.subCategoryImage"
+                                     class="card-img-top img-fluid"
+                                     style="height: 200px; object-fit: cover;"
+                                     alt="" />
+                            </a>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">@item.subCategoryName</h5>
+                                <p class="card-text" style="height: 100px; overflow: hidden;">@item.subCategoryDescription</p>
+                                <div class="portfolio-info mt-auto">
+                                    <a href="~/Content/assets/img/@item.subCategoryImage"
+                                       data-gallery="portfolioGallery"
+                                       class="portfolio-lightbox"
+                                       title="@item.subCategoryDescription">
+                                        <i class="bx bx-plus"></i>
+                                    </a>
+                                    <a href="~/Products/Index/@item.subCategoryId" class="btn btn-primary">See More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                }
+                @*<a href="Products.html">
+            <div class="col-lg-4 col-md-6 portfolio-wrap filter-web">
+                <div class="portfolio-item">
+                    <img src="assets/img/Printers/SLS/SLSCategory_800x600.jpg"
+                         class="img-fluid"
+                         alt="" />
+                    <div class="portfolio-info">
+                        <h3>SLS</h3>
+
+                        <div>
+                            <a href="assets/img/Printers/SLS/SLSCategory_800x600.jpg"
+                               data-gallery="portfolioGallery"
+                               class="portfolio-lightbox"
+                               title="Selective Laser Sintering">
+                                <i class="bx bx-plus"></i>
+                            </a>
+                            <a href="portfolio-details.html" title="Portfolio Details">
+                                <i class="bx bx-link"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="Products.html">
+            <div class="col-lg-4 col-md-6 portfolio-wrap filter-card">
+                <div class="portfolio-item">
+                    <img src="assets/img/Printers/SLA/SLACategory.png"
+                         class="img-fluid"
+                         alt="" />
+                    <div class="portfolio-info">
+                        <h3>ٍٍSLA</h3>
+
+                        <div>
+                            <a href="assets/img/portfolio/portfolio-3.jpg"
+                               data-gallery="portfolioGallery"
+                               class="portfolio-lightbox"
+                               title="App 2">
+                                <i class="bx bx-plus"></i>
+                            </a>
+                            <a href="portfolio-details.html" title="Portfolio Details">
+                                <i class="bx bx-link"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>*@
+            </div>
         </div>
     </section>
     <!-- End Portfolio Section -->
