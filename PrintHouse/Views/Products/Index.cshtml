@@ -41,7 +41,7 @@
                  data-aos-duration="500">
                 @foreach (var item in Model)
                 {
-                    <div class="col-lg-4 col-md-6 portfolio-wrap filter-app">
+                    @*<div class="col-lg-4 col-md-6 portfolio-wrap filter-app">
                         <a href="~/Products/SingleProduct/@item.productId">
                             <div class="portfolio-item">
                                 <img src="~/Content/assets/img/@item.Category.categoryName/@item.productImage1"
@@ -63,6 +63,30 @@
                                 </div>
                             </div>
                         </a>
+                    </div>*@
+
+                    <div class="col-lg-4 col-md-6 portfolio-wrap">
+                        <div class="card h-100">
+                            <a href="~/Products/SingleProduct/@item.productId">
+                                <img src="~/Content/assets/img/@item.productImage1"
+                                     class="card-img-top img-fluid"
+                                     style="height: 200px; object-fit: cover;"
+                                     alt="" />
+                            </a>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">@item.productName</h5>
+                                <p class="card-text" style="height: 100px; overflow: hidden;">@item.productDescription</p>
+                                <div class="portfolio-info mt-auto">
+                                    <a href="~/Content/assets/img/@item.productImage1"
+                                       data-gallery="portfolioGallery"
+                                       class="portfolio-lightbox"
+                                       title="@item.productDescription">
+                                        <i class="bx bx-plus"></i>
+                                    </a>
+                                    <a href="~/Products/SingleProduct/@item.productId" class="btn btn-primary">See More</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 }
 
