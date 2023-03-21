@@ -26,7 +26,7 @@ namespace PrintHouse.Controllers
 
             List<int> productIds = GetProductIdsFromCookie();
             List<int> quantities = GetProductQuantityFromCookie();
-            if(productIds.Count > 0){ 
+            if(productIds.Count >= 0){ 
             ViewBag.ProductIds = productIds;
             ViewBag.ProductQuantity = quantities;
             }
@@ -223,11 +223,10 @@ namespace PrintHouse.Controllers
             }
             await db.SaveChangesAsync();
 
-            TempData["SweetAlertMessage"] = "Item have been added to cart";
-            TempData["SweetAlertType"] = "warning";
+            TempData["SweetAlertMessage"] = "Your Items will be on their Way Soon";
+            TempData["SweetAlertType"] = "success";
 
-            return RedirectToAction("Index","Home");
-
+            return RedirectToAction("Index", "Carts");
         }
 
 
@@ -290,6 +289,8 @@ namespace PrintHouse.Controllers
             Cart cart = db.Carts.Find(id);
             db.Carts.Remove(cart);
             db.SaveChanges();
+            TempData["SweetAlertMessageRemove"] = "Items have been removed from your cart";
+            TempData["SweetAlertTypeRemove"] = "success";
             return RedirectToAction("Index");
         }
 

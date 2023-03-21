@@ -1,0 +1,59 @@
+﻿@model IEnumerable<PrintHouse.Models.AspNetUser>
+
+@{
+    ViewBag.Title = "AdminUsers";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h2>Users</h2>
+
+
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">
+                    Name
+                </th>
+                <th class="text-center">
+                    Email
+                </th>
+                <th class="text-center">
+                    Phone Number
+
+                </th>
+                <th class="text-center"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int count = 1;
+            }
+            @foreach (var item in Model)
+            {
+                if(User.Identity.Name == item.Email){
+                    continue;
+                }
+                <tr>
+                    <td class="text-center">
+                        @count
+                        @{ count++;}
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.customerFirstName)   @Html.DisplayFor(modelItem => item.customerLastName)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td class="text-center ">
+                        @Html.DisplayFor(modelItem => item.customerPhone)
+
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

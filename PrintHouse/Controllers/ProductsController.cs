@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using PrintHouse.Models;
+using WebGrease.Css.Ast;
 
 namespace PrintHouse.Controllers
 {
@@ -44,6 +45,7 @@ namespace PrintHouse.Controllers
             {
                 return RedirectToAction("Index", "Products");
             }
+
             var singleProduct = db.Products.Where(x => x.productId == id).FirstOrDefault();
             return View(singleProduct);
         }
@@ -52,38 +54,84 @@ namespace PrintHouse.Controllers
         {
             var userId = User.Identity.GetUserId();
             int cartCount = db.Carts.Where(x => x.userId == userId).Count();
+            Cart cart = new Cart();
 
             if (User.Identity.IsAuthenticated)
             {
                 // Add the product to the cart
-                Cart cart = new Cart();
-                cart.productId = id;
-                cart.userId = User.Identity.GetUserId();
-                cart.quantity = quantity;
-                cart.price = db.Products.Find(id).productPrice;
-                cart.totalPrice = db.Products.Find(id).productPrice * quantity;
-                db.Carts.Add(cart);
-                db.SaveChanges();
+                var cartDetails = db.Carts.Where(x => x.userId == userId).ToList();
+                bool there = false;
+                foreach (var item in cartDetails)
+                {
+                    if (item.productId == id)
+                    {
+                        there = true;
+                    }
+                }
+                if (there)
+                {
+                    var updatedQuantity = cartDetails.Where(x => x.productId == id).FirstOrDefault();
+                    updatedQuantity.productId = id;
+                    updatedQuantity.userId = User.Identity.GetUserId();
+                    updatedQuantity.quantity += quantity;
+                    updatedQuantity.price = db.Products.Find(id).productPrice;
+                    updatedQuantity.totalPrice =  db.Products.Find(id).productPrice * (updatedQuantity.quantity);
+                    db.SaveChanges();
+                }
+                else if (!there){
+                    cart.productId = id;
+                    cart.userId = User.Identity.GetUserId();
+                    cart.quantity = quantity;
+                    cart.price = db.Products.Find(id).productPrice;
+                    cart.totalPrice = db.Products.Find(id).productPrice * quantity;
+                    db.Carts.Add(cart);
+                    db.SaveChanges();
+                }
+               
 
                 // Show a success message using SweetAlert
-                TempData["SweetAlertMessage"] = "Item has been added to cart";
-                TempData["SweetAlertType"] = "success";
+                
             }
             else
             {
                 // Add the product to the cookie
                 List<int> productIds = GetProductIdsFromCookie();
                 List<int> quantities = GetProductQuantityFromCookie();
-                productIds.Add(id);
-                quantities.Add(quantity);
+                if (productIds.Count == 0)
+                {
+
+
+                    productIds.Add(id);
+                    quantities.Add(quantity);
+
+
+                }
+                else{
+                    for (int i = 0; i < productIds.Count; i++)
+                    {
+                        if (productIds[i] == id)
+                        {
+                            int qun = Convert.ToInt32(quantities[i]);
+                            quantities[i] = qun + quantity;
+                        }
+                        else
+                        {
+                            productIds.Add(id);
+                            quantities.Add(quantity);
+                        }
+                    }
+                }
+                
+               
                 SetProductIdsInCookie(productIds);
                 SetProductQuantityCookie(quantities);
 
                 // Show a warning message using SweetAlert
                
             }
-            TempData["SweetAlertMessage"] = "You need to log in before you can add this product to your cart.";
-            TempData["SweetAlertType"] = "warning";
+            TempData["SweetAlertMessage"] = "Item has been added to cart";
+            TempData["SweetAlertType"] = "success";
+            TempData["page"] = "singleProduct";
             var singleProduct = db.Products.Where(x => x.productId == id).FirstOrDefault();
             return RedirectToAction("SingleProduct", "Products", new { id = id });
         }

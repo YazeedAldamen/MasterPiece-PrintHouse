@@ -37,8 +37,8 @@
                         @*@Html.EditorFor(model => model.categoryDescription, new { htmlAttributes = new { @class = "form-control" } })*@
                         @Html.DropDownList("categoryId", null, htmlAttributes: new { @class = "form-control" })
                         @*<input type="text" name="subCategoryDescription" class="form-control" id="subCategoryDescription" placeholder="Description" value="" required />*@
-                        <label for="subCategoryDescription">Description</label>
-                        @Html.ValidationMessageFor(model => model.subCategoryDescription, "", new { @class = "text-danger" })
+                        <label for="subCategoryDescription">Category</label>
+                        @Html.ValidationMessageFor(model => model.categoryId, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-control mb-3">
                         <label for="subCategoryImage">Image</label>

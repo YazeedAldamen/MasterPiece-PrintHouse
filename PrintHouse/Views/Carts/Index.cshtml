@@ -23,19 +23,23 @@
         Swal.fire({
   title: '@TempData["SweetAlertMessage"]',
   icon: '@TempData["SweetAlertType"]',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Proceed'
-}).then((result) => {
-    if (result.isConfirmed) {
-        @Session["productId"]= 
-    window.location.href = "@Url.Action("Login", "Account")";
-    }
-    })
+  showCancelButton: false,
+
+})
     </script>
 }
+@if (TempData["SweetAlertMessageRemove"] != null && TempData["SweetAlertTypeRemove"] != null)
+{
+    <script>
 
+        Swal.fire({
+  title: '@TempData["SweetAlertMessageRemove"]',
+  icon: '@TempData["SweetAlertTypeRemove"]',
+  showCancelButton: false,
+
+})
+    </script>
+}
 
 <div class="container my-5">
     <h1>Shopping Cart</h1>
@@ -242,7 +246,7 @@
                 }
             </tfoot>
         </table>
-        @if (User.Identity.IsAuthenticated && count>0)
+        @if (User.Identity.IsAuthenticated && count > 0)
         {
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkout">Check Out</button>
         }

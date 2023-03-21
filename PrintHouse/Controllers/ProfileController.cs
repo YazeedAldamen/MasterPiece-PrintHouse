@@ -39,6 +39,7 @@ namespace PrintHouse.Controllers
             }
             return View(aspNetUser);
         }
+
         [Authorize(Roles = "Customer")]
         public ActionResult CustomerProfile(string id){
         ViewBag.id = id;
@@ -57,6 +58,18 @@ namespace PrintHouse.Controllers
             }
             return View(aspNetUser);
         }
+        [Authorize(Roles ="Admin")]
+        public ActionResult AdminUsers(){
+
+            var adminUsers = db.AspNetUsers.ToList();
+
+            return View(adminUsers);
+        }
+
+
+
+
+
         // GET: Profile/Create
         [Authorize(Roles = "Admin")]
         public ActionResult Create()

@@ -41,53 +41,34 @@
                  data-aos-duration="500">
                 @foreach (var item in Model)
                 {
-                    @*<div class="col-lg-4 col-md-6 portfolio-wrap filter-app">
-                        <a href="~/Products/SingleProduct/@item.productId">
-                            <div class="portfolio-item">
-                                <img src="~/Content/assets/img/@item.Category.categoryName/@item.productImage1"
-                                     class="img-fluid"
-                                     style="height: fit-content"
-                                     alt="" />
-                                <div class="portfolio-info">
-                                    <h3>@item.productName</h3>
-                                    <div>
-                                        <a href="~/Content/assets/img/@item.Category.categoryName/@item.productImage1"
-                                           data-gallery="portfolioGallery"
-                                           class="portfolio-lightbox">
-                                            <i class="bx bx-plus"></i>
-                                        </a>
-                                        <a href="~/Products/SingleProduct/@item.productId" title="Portfolio Details">
-                                            <i class="bx bx-link"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>*@
+
 
                     <div class="col-lg-4 col-md-6 portfolio-wrap">
-                        <div class="card h-100">
-                            <a href="~/Products/SingleProduct/@item.productId">
-                                <img src="~/Content/assets/img/@item.productImage1"
-                                     class="card-img-top img-fluid"
-                                     style="height: 200px; object-fit: cover;"
-                                     alt="" />
+                <div class="card h-100">
+                    <a href="~/Products/SingleProduct/@item.productId">
+                        <img src="~/Content/assets/img/@item.productImage1"
+                             class="card-img-top img-fluid"
+                             style="height: 200px; object-fit: cover;"
+                             alt="" />
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">@item.productName</h5>
+                        <p class="card-text" style="height: 100px; overflow: hidden;">@item.productDescription</p>
+                        <div class="portfolio-info mt-auto">
+                            <p>@item.productPrice JOD</p>
+
+                            <a href="~/Content/assets/img/@item.productImage1"
+                               data-gallery="portfolioGallery"
+                               class="portfolio-lightbox"
+                               title="@item.productDescription">
+                                <i class="bx bx-plus"></i>
                             </a>
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">@item.productName</h5>
-                                <p class="card-text" style="height: 100px; overflow: hidden;">@item.productDescription</p>
-                                <div class="portfolio-info mt-auto">
-                                    <a href="~/Content/assets/img/@item.productImage1"
-                                       data-gallery="portfolioGallery"
-                                       class="portfolio-lightbox"
-                                       title="@item.productDescription">
-                                        <i class="bx bx-plus"></i>
-                                    </a>
-                                    <a href="~/Products/SingleProduct/@item.productId" class="btn btn-primary">See More</a>
-                                </div>
-                            </div>
+                            <a href="~/Products/SingleProduct/@item.productId" class="btn btn-primary">See More</a>
                         </div>
                     </div>
+                </div>
+            </div>
+                   
                 }
 
             </div>
@@ -96,75 +77,3 @@
     <!-- End Portfolio Section -->
 </main>
 
-
-
-@*<h2>Index</h2>
-
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.productName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.productDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.productImage1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.productImage2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.productImage3)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.productPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.stock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category.categoryName)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.productName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.productDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.productImage1)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.productImage2)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.productImage3)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.productPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.stock)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category.categoryName)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.productId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.productId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.productId })
-                </td>
-            </tr>
-        }
-
-    </table>*@
