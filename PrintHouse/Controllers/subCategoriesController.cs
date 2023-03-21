@@ -168,10 +168,38 @@ namespace PrintHouse.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            subCategory subCategory = db.subCategories.Find(id);
-            db.subCategories.Remove(subCategory);
-            db.SaveChanges();
-            return RedirectToAction("AdminsubCategories","subCategories");
+           
+
+            var subCategoryInCarts = db.Carts.Where(x => x.Product.subCategoryId == id).ToList();
+            var subCategoryInOrders = db.OrderDetails.Where(x => x.Product.subCategoryId == id).ToList();
+            if (subCategoryInCarts.Count == 0 && subCategoryInOrders.Count == 0)
+            {
+                subCategory subCategory = db.subCategories.Find(id);
+                db.subCategories.Remove(subCategory);
+
+                var product = db.Products.Where(x => x.subCategoryId == id).ToList();
+                foreach (var item in product)
+                {
+                    db.Products.Remove(item);
+                }
+                db.SaveChanges();
+
+            }
+            else
+            {
+                Session["SweetAlertMessage"] = "This subcategory cannot be deleted as it's products is in the process of being fulfilled for customer orders.";
+                Session["SweetAlertType"] = "success";
+                Session["fromDelete"] = "true";
+                return RedirectToAction("AdminsubCategories", "subCategories");
+            }
+            Session["SweetAlertMessage"] = "Sub Category Have been deleted successfully";
+            Session["SweetAlertType"] = "success";
+            Session["fromDelete"] = "true";
+
+
+
+          
+            return RedirectToAction("AdminsubCategories", "subCategories");
         }
 
         protected override void Dispose(bool disposing)

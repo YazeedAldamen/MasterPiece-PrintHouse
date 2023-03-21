@@ -223,7 +223,7 @@ namespace PrintHouse.Controllers
             }
             await db.SaveChangesAsync();
 
-            TempData["SweetAlertMessage"] = "Your Items will be on their Way Soon";
+            TempData["SweetAlertMessage"] = "Thank you for your order! We have received your payment and will begin processing your order shortly";
             TempData["SweetAlertType"] = "success";
 
             return RedirectToAction("Index", "Carts");

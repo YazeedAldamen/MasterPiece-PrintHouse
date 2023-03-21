@@ -4,7 +4,21 @@
     ViewBag.Title = "AdminsubCategories";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
+@if (Session["SweetAlertMessage"] != null && Session["SweetAlertType"] != null)
+{
+    <script>
+        Swal.fire({
+  title: '@Session["SweetAlertMessage"].ToString()',
+  icon: '@Session["SweetAlertType"].ToString()',
+  showCancelButton: false,
+})
+    </script>
+    Session.Remove("SweetAlertMessage");
+    Session.Remove("SweetAlertType");
+    Session.Remove("fromDelete");
 
+
+}
 <h2>Sub Categories</h2>
 
 <p class="d-flex justify-content-end">
@@ -33,38 +47,38 @@
                 </th>
                 <th class="text-center"></th>
             </tr>
-            </thead>
-            @{
-                int count = 1;
-            }
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td class="text-center">
-                        @count
-                        @{ count++;}
-                    </td>
-                    <td class="text-center">
-                        @Html.DisplayFor(modelItem => item.subCategoryName)
-                    </td>
-                    <td class="text-center" style="max-width: 100px;overflow:hidden; text-overflow: ellipsis; white-space: nowrap;">
-                        @Html.DisplayFor(modelItem => item.subCategoryDescription)
-                    </td>
-                    <td class="text-center" style="max-width: 150px;overflow:hidden; text-overflow: ellipsis; white-space: nowrap;">
-                        @Html.DisplayFor(modelItem => item.Category.categoryName)
+        </thead>
+        @{
+            int count = 1;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    @count
+                    @{ count++;}
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.subCategoryName)
+                </td>
+                <td class="text-center" style="max-width: 100px;overflow:hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    @Html.DisplayFor(modelItem => item.subCategoryDescription)
+                </td>
+                <td class="text-center" style="max-width: 150px;overflow:hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    @Html.DisplayFor(modelItem => item.Category.categoryName)
 
-                    </td>
-                    <td class="text-center ">
-                        <img src="~/Content/assets/img/@item.subCategoryImage" alt="@item.subCategoryName" style="width: 75px; height: 50px" />
-                        @*@Html.DisplayFor(modelItem => item.categoryImage)*@
-                    </td>
-                    <td class="text-center align-middle">
-                        @Html.ActionLink("Edit", "Edit", new { id = item.subCategoryId }, new { @class = "btn btn-secondary btn-sm" })
-                        @Html.ActionLink("Details", "Details", new { id = item.subCategoryId }, new { @class = "btn btn-primary btn-sm" })
-                        @Html.ActionLink("Delete", "Delete", new { id = item.subCategoryId }, new { @class = "btn btn-danger btn-sm" })
-                    </td>
-                </tr>
-            }
+                </td>
+                <td class="text-center ">
+                    <img src="~/Content/assets/img/@item.subCategoryImage" alt="@item.subCategoryName" style="width: 75px; height: 50px" />
+                    @*@Html.DisplayFor(modelItem => item.categoryImage)*@
+                </td>
+                <td class="text-center align-middle">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.subCategoryId }, new { @class = "btn btn-secondary btn-sm" })
+                    @Html.ActionLink("Details", "Details", new { id = item.subCategoryId }, new { @class = "btn btn-primary btn-sm" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.subCategoryId }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
 
     </table>
 </div>

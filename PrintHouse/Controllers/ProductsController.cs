@@ -399,6 +399,21 @@ namespace PrintHouse.Controllers
             {
                 return HttpNotFound();
             }
+            //try
+            //{
+            //    if (Session["fromDelete"].ToString() != null)
+            //    {
+            //        Session["SweetAlertMessage"] = "You can't delete a product that's in a customer's cart";
+            //        Session["SweetAlertType"] = "success";
+            //    }
+
+            //}
+            //catch(Exception){
+
+            //}
+
+
+
             return View(product);
         }
 
@@ -409,9 +424,26 @@ namespace PrintHouse.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
-            db.SaveChanges();
+            var productInCarts = db.Carts.Where(x => x.productId == id).ToList();
+            var productInOrders = db.OrderDetails.Where(x => x.productId == id).ToList();
+            if (productInCarts.Count == 0 && productInOrders.Count == 0)
+            {
+                Product product = db.Products.Find(id);
+                db.Products.Remove(product);
+                db.SaveChanges();
+               
+            }
+            else
+            {
+                Session["SweetAlertMessage"] = "This product cannot be deleted as it is in the process of being fulfilled for customer orders.";
+                Session["SweetAlertType"] = "success";
+                Session["fromDelete"] = "true";
+                return RedirectToAction("AdminProducts");
+            }
+            Session["SweetAlertMessage"] = "Product Have been deleted successfully";
+            Session["SweetAlertType"] = "success";
+            Session["fromDelete"] = "true";
+
             return RedirectToAction("AdminProducts");
         }
 

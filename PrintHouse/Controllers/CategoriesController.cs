@@ -148,9 +148,40 @@ namespace PrintHouse.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
-            db.SaveChanges();
+           
+
+            var categoryInCarts = db.Carts.Where(x => x.Product.categoryId == id).ToList();
+            var categoryInOrders = db.OrderDetails.Where(x => x.Product.categoryId == id).ToList();
+            if (categoryInCarts.Count == 0 && categoryInOrders.Count == 0)
+            {
+                Category category = db.Categories.Find(id);
+                db.Categories.Remove(category);
+                var subCategory = db.subCategories.Where(x => x.categoryId == id).ToList();
+                foreach (var item in subCategory)
+                {
+                    db.subCategories.Remove(item);
+                }
+                var product = db.Products.Where(x => x.categoryId == id).ToList();
+                foreach (var item in product)
+                {
+                    db.Products.Remove(item);
+                }
+                db.SaveChanges();
+
+            }
+            else
+            {
+                Session["SweetAlertMessage"] = "This category cannot be deleted as it's products is in the process of being fulfilled for customer orders.";
+                Session["SweetAlertType"] = "success";
+                Session["fromDelete"] = "true";
+                return RedirectToAction("AdminCategories");
+            }
+            Session["SweetAlertMessage"] = "Category Have been deleted successfully";
+            Session["SweetAlertType"] = "success";
+            Session["fromDelete"] = "true";
+
+           
+            
             return RedirectToAction("AdminCategories", "Categories");
         }
 

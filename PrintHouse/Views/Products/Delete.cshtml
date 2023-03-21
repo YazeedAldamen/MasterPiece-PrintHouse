@@ -5,6 +5,25 @@
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+@*@if (Session["SweetAlertMessage"] != null && Session["SweetAlertType"] != null)
+{
+    <script>
+        Swal.fire({
+  title: '@Session["SweetAlertMessage"].ToString()',
+  icon: '@Session["SweetAlertType"].ToString()',
+  showCancelButton: false,
+})
+    </script>
+    Session.Remove("SweetAlertMessage");
+    Session.Remove("SweetAlertType");
+    Session.Remove("fromDelete");
+
+
+}*@
+
 <h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
@@ -77,18 +96,18 @@
                         </div>
                     </div>
                     <div class="form-group row mb-3">
-                     
+
                         @using (Html.BeginForm())
                         {
                             @Html.AntiForgeryToken()
 
-                        <div class="col-sm-12 text-center">
-                            <input type="submit" value="Delete" class="btn btn-danger btn-sm" /> |
-                            @Html.ActionLink("Back to List", "AdminProducts",null,new {@class= "btn btn-dark btn-sm" })
-                        </div>
+                            <div class="col-sm-12 text-center">
+                                <input type="submit" value="Delete" class="btn btn-danger btn-sm" /> |
+                                @Html.ActionLink("Back to List", "AdminProducts", null, new { @class = "btn btn-dark btn-sm" })
+                            </div>
                         }
                     </div>
-                  
+
                 </div>
             </div>
         </div>
