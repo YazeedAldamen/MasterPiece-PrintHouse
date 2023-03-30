@@ -16,6 +16,7 @@ namespace PrintHouse.Controllers
         public decimal TotalPrice { get; set; }
         public string CategoryName { get; set; }
     }
+
     public class HomeController : Controller
     {
         PrintHouseEntities db = new PrintHouseEntities();
@@ -32,6 +33,7 @@ namespace PrintHouse.Controllers
                     quantity = quantityCookie.Value.Split(',').Select(int.Parse).ToList();
                     List<int> productIds = new List<int>();
                     productIds = idCookie.Value.Split(',').Select(int.Parse).ToList();
+
                     for (int i = 0; i < quantity.Count; i++)
                     {
                         Cart cart = new Cart();
@@ -45,6 +47,7 @@ namespace PrintHouse.Controllers
                         db.Carts.Add(cart);
                         db.SaveChanges();
                     }
+
                     idCookie.Expires = DateTime.Now.AddDays(-1);
                     Response.Cookies.Add(idCookie);
                     quantityCookie.Expires = DateTime.Now.AddDays(-1);
