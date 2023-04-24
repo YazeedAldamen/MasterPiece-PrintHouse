@@ -18,21 +18,51 @@ namespace PrintHouse.Controllers
         private PrintHouseEntities db = new PrintHouseEntities();
 
         // GET: Products
-        public ActionResult Index(int? id)
+        public ActionResult Index(int? id, decimal? minPrice, decimal? maxPrice, string priceFilter)
         {
+            var products = db.Products.Include(p => p.Category);
+            var subCategoryProducts = db.Products.Where(x => x.subCategoryId == id).Include(p => p.Category);
+
             if (id == null)
             {
-                var products = db.Products.Include(p => p.Category);
-                return View(products.ToList());
+                if (minPrice != null && maxPrice != null)
+                {
+                    products = products.Where(p => p.productPrice >= minPrice && p.productPrice <= maxPrice);
+                }
+                else if (minPrice != null)
+                {
+                    products = products.Where(p => p.productPrice >= minPrice);
+                }
+                else if (maxPrice != null)
+                {
+                    products = products.Where(p => p.productPrice <= maxPrice);
+                }
+               
 
             }
             else if (id != null)
             {
-                var products = db.Products.Where(x => x.subCategoryId == id).Include(p => p.Category);
-                return View(products.ToList());
+                if (minPrice != null && maxPrice != null)
+                {
+                    subCategoryProducts = subCategoryProducts.Where(p => p.productPrice >= minPrice && p.productPrice <= maxPrice);
+                }
+                else if (minPrice != null)
+                {
+                    subCategoryProducts = subCategoryProducts.Where(p => p.productPrice >= minPrice);
+                }
+                else if (maxPrice != null)
+                {
+                    subCategoryProducts = subCategoryProducts.Where(p => p.productPrice <= maxPrice);
+                }
+               
+                    return View(subCategoryProducts.ToList());
+                
+
             }
-            return View();
+            return View(products.ToList());
         }
+
+       
 
         public ActionResult AdminProducts()
         {
@@ -55,7 +85,19 @@ namespace PrintHouse.Controllers
             var userId = User.Identity.GetUserId();
             int cartCount = db.Carts.Where(x => x.userId == userId).Count();
             Cart cart = new Cart();
+            var stock = db.Products.Where(y => y.productId == id).FirstOrDefault().stock;
 
+            if(stock ==0){
+                TempData["SweetAlertMessage"] = "Product currently out of stock.";
+                TempData["SweetAlertType"] = "warning";
+                TempData["page"] = "singleProduct";
+                return RedirectToAction("SingleProduct", "Products", new { id = id });
+            }
+
+
+            if (quantity > stock){
+                quantity = Convert.ToInt32(stock);
+            }
             if (User.Identity.IsAuthenticated)
             {
                 // Add the product to the cart

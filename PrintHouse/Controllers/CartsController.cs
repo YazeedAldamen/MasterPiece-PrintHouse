@@ -61,29 +61,7 @@ namespace PrintHouse.Controllers
         }
 
 
-        // GET: Carts/Details/5
-
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Cart cart = db.Carts.Find(id);
-        //    if (cart == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(cart);
-        //}
-
-        // GET: Carts/Create
-        //public ActionResult Create()
-        //{
-        //    ViewBag.userId = new SelectList(db.AspNetUsers, "Id", "Email");
-        //    ViewBag.productId = new SelectList(db.Products, "productId", "productName");
-        //    return View();
-        //}
+       
 
         // POST: Carts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -109,12 +87,16 @@ namespace PrintHouse.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CartEdit( int quantity, int cartId, string userId, int productId, decimal price, decimal totalPrice)
         {
-            //cartId = Convert.ToInt32(cartId);
-            // quantity = int.Parse(Request.Form["quantity_" + cartId]);
-            // userId = Request.Form["userId_" + cartId];
-            //quantity = int.Parse(Request.Form["productId_" + cartId]);
-            // price = decimal.Parse(Request.Form["price_" + cartId]);
-            // totalPrice = decimal.Parse(Request.Form["totalPrice_" + cartId]);
+      
+
+            var stock = db.Products.Where(x => x.productId == productId).FirstOrDefault().stock;
+
+            if(quantity > stock ){
+                TempData["SweetAlertMessageRemove"] = $"There's only {stock} items in stock ";
+                TempData["SweetAlertTypeRemove"] = "warning";
+                return RedirectToAction("Index");
+            }
+
             var cart = db.Carts.Where(x => x.cartId == cartId).FirstOrDefault();
             if (ModelState.IsValid)
             {
@@ -231,55 +213,7 @@ namespace PrintHouse.Controllers
 
 
 
-        // GET: Carts/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Cart cart = db.Carts.Find(id);
-        //    if (cart == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    ViewBag.userId = new SelectList(db.AspNetUsers, "Id", "Email", cart.userId);
-        //    ViewBag.productId = new SelectList(db.Products, "productId", "productName", cart.productId);
-        //    return View(cart);
-        //}
-
-        //// POST: Carts/Edit/5
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "cartId,userId,productId,quantity,price,totalPrice")] Cart cart)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(cart).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.userId = new SelectList(db.AspNetUsers, "Id", "Email", cart.userId);
-        //    ViewBag.productId = new SelectList(db.Products, "productId", "productName", cart.productId);
-        //    return View(cart);
-        //}
-
-        // GET: Carts/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Cart cart = db.Carts.Find(id);
-        //    if (cart == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(cart);
-        //}
+       
 
         // POST: Carts/Delete/5
         [HttpPost, ActionName("Delete")]
