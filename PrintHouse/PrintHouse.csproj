@@ -187,9 +187,11 @@
     <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MaintenancesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Controllers\subCategoriesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -854,6 +856,19 @@
     <Content Include="Views\Profile\CustomerProfile.cshtml" />
     <Content Include="Views\Home\Statistics.cshtml" />
     <Content Include="Views\Profile\AdminUsers.cshtml" />
+    <Content Include="Views\Reviews\Create.cshtml" />
+    <Content Include="Views\Reviews\Delete.cshtml" />
+    <Content Include="Views\Reviews\Details.cshtml" />
+    <Content Include="Views\Reviews\Edit.cshtml" />
+    <Content Include="Views\Reviews\Index.cshtml" />
+    <Content Include="Views\Reviews\AdminReviews.cshtml" />
+    <Content Include="Views\Maintenances\Create.cshtml" />
+    <Content Include="Views\Maintenances\Delete.cshtml" />
+    <Content Include="Views\Maintenances\Edit.cshtml" />
+    <Content Include="Views\Maintenances\Index.cshtml" />
+    <Content Include="Views\Maintenances\DoneMaintenances.cshtml" />
+    <Content Include="Views\Maintenances\MaintenancesRequests.cshtml" />
+    <Content Include="Views\Maintenances\ReopenRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<PrintHouse.Models.Maintenance>
+
+@{
+    ViewBag.Title = "DoneMaintenances";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h2>DoneMaintenances</h2>
+
+
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">
+                    User
+                </th>
+                <th class="text-center">
+                    Booking Date
+                </th>
+                <th class="text-center">
+                    Product
+                </th>
+                <th class="text-center">
+                    Comments
+                </th>
+
+
+                <th class="text-center"></th>
+            </tr>
+        </thead>
+        @{
+            int count = 1;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    @count
+                    @{ count++;}
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.AspNetUser.customerFirstName) @Html.DisplayFor(modelItem => item.AspNetUser.customerLastName)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.orderDate).ToString().Split()[0]
+
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Product.productName)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.maintencanceOrderDetails)
+                </td>
+                <td class="text-center align-middle">
+
+                    @Html.ActionLink("Reopen", "ReopenRequest", new { id = item.maintenanceId }, new { @class = "btn btn-warning btn-sm" })
+
+                    @Html.ActionLink("Delete", "Delete", new { id = item.maintenanceId }, new { @class = "btn btn-danger btn-sm" })
+
+
+
+
+
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

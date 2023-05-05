@@ -18,7 +18,10 @@ namespace PrintHouse.Models
         public Nullable<System.DateTime> orderDate { get; set; }
         public string userId { get; set; }
         public string maintencanceOrderDetails { get; set; }
+        public Nullable<int> productId { get; set; }
+        public Nullable<bool> done { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

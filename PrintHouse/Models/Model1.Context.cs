@@ -38,8 +38,8 @@ namespace PrintHouse.Models
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
+        public virtual DbSet<Shipping> Shippings { get; set; }
         public virtual DbSet<subCategory> subCategories { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Shipping> Shippings { get; set; }
     }
 }

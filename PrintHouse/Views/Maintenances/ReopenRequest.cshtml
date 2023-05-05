@@ -1,0 +1,71 @@
+﻿@model PrintHouse.Models.Maintenance
+
+@{
+    ViewBag.Title = "ReopenRequest";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h2>ReopenRequest</h2>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card mx-auto">
+                <div class="card-header">
+                    <h4>Done Maintenance</h4>
+                </div>
+                <div class="card-body px-md-5">
+                    <div class="form-group row mb-3 mt-3">
+                        <label for="categoryName" class="col-sm-3 col-form-label fw-bold">Name</label>
+                        <div class="col-sm-9">
+                            @Html.DisplayFor(model => model.AspNetUser.customerFirstName) @Html.DisplayFor(model => model.AspNetUser.customerLastName)
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-3">
+                        <label for="categoryDescription" class="col-sm-3 col-form-label fw-bold">Date</label>
+                        <div class="col-sm-9">
+                            @Html.DisplayFor(model => model.orderDate).ToString().Substring(0, 10)
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label for="categoryDescription" class="col-sm-3 col-form-label fw-bold">Product</label>
+                        <div class="col-sm-9">
+                            @Html.DisplayFor(model => model.Product.productName)
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label for="categoryDescription" class="col-sm-3 col-form-label fw-bold">Details</label>
+                        <div class="col-sm-9">
+                            @Html.DisplayFor(model => model.maintencanceOrderDetails)
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            //Html.HiddenFor(model => model.maintenanceId);
+                            Html.HiddenFor(model => model.orderDate);
+                            Html.HiddenFor(model => model.maintencanceOrderDetails);
+                            Html.HiddenFor(model => model.productId);
+                            Html.HiddenFor(model => model.userId);
+                            Html.HiddenFor(model => model.done);
+                            <input name="maintenanceId" value="@Model.maintenanceId" hidden />
+                            <input name="orderDate" value="@Model.orderDate" hidden />
+                            <input name="maintencanceOrderDetails" value="@Model.maintencanceOrderDetails" hidden />
+                            <input name="productId" value="@Model.productId" hidden />
+                            <input name="userId" value="@Model.userId" hidden />
+                            <input name="done" value="@Model.done" hidden />
+                            <div class="col-sm-12 text-center">
+                                <input type="submit" value="ReopenRequest" class="btn btn-warning btn-sm" /> |
+                                @Html.ActionLink("Back to List", "DoneMaintenances", null, new { @class = "btn btn-dark btn-sm" })
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

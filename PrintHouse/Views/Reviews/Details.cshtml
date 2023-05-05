@@ -1,0 +1,59 @@
+﻿@model PrintHouse.Models.Review
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Review</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.show)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.show)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.productName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.productName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.reviewId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

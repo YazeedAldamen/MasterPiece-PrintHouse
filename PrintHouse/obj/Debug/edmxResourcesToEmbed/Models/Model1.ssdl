@@ -94,6 +94,8 @@
     <Property Name="orderDate" Type="datetime" />
     <Property Name="userId" Type="nvarchar" MaxLength="128" />
     <Property Name="maintencanceOrderDetails" Type="varchar" MaxLength="255" />
+    <Property Name="productId" Type="int" />
+    <Property Name="done" Type="bit" />
   </EntityType>
   <EntityType Name="OrderDetails">
     <Key>
@@ -388,6 +390,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Maintenances_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+    <End Role="Maintenances" Type="Self.Maintenances" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="productId" />
+      </Principal>
+      <Dependent Role="Maintenances">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="PrintHouseModelStoreContainer">
     <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -472,6 +486,10 @@
     <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Maintenances_Products" Association="Self.FK_Maintenances_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Maintenances" EntitySet="Maintenances" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

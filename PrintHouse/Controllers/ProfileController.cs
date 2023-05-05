@@ -58,6 +58,8 @@ namespace PrintHouse.Controllers
             }
             return View(aspNetUser);
         }
+
+
         [Authorize(Roles ="Admin")]
         public ActionResult AdminUsers(){
 
@@ -65,9 +67,6 @@ namespace PrintHouse.Controllers
 
             return View(adminUsers);
         }
-
-      
-
 
 
         // GET: Profile/Create
@@ -139,10 +138,16 @@ namespace PrintHouse.Controllers
                 db.SaveChanges();
                 if (User.IsInRole("Admin"))
                 {
+                    Session["SweetAlertMessage"] = "Your information has been changed";
+                    Session["SweetAlertType"] = "success";
+                    Session["fromDelete"] = "true";
                     return RedirectToAction("Details", "Profile", new { id = User.Identity.GetUserId() });
 
                 }
                 else if (User.IsInRole("Customer")){
+                    Session["SweetAlertMessage"] = "Your information has been changed";
+                    Session["SweetAlertType"] = "success";
+                    Session["fromDelete"] = "true";
                     return RedirectToAction("CustomerProfile", "Profile", new { id = User.Identity.GetUserId() });
 
                 }

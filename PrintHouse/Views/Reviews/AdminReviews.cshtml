@@ -1,0 +1,84 @@
+﻿
+@model IEnumerable<PrintHouse.Models.Review>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h2>Reviews</h2>
+
+
+
+
+
+
+@if (Session["SweetAlertMessage"] != null && Session["SweetAlertType"] != null)
+{
+    <script>
+        Swal.fire({
+  title: '@Session["SweetAlertMessage"].ToString()',
+  icon: '@Session["SweetAlertType"].ToString()',
+  showCancelButton: false,
+})
+    </script>
+    Session.Remove("SweetAlertMessage");
+    Session.Remove("SweetAlertType");
+    Session.Remove("fromDelete");
+
+
+}
+
+
+
+
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">
+                    @*@Html.DisplayNameFor(model => model.categoryName)*@
+                    Product
+                </th>
+                <th class="text-center">
+                    User
+                </th>
+                <th class="text-center">
+                    Review
+                </th>
+
+
+                <th class="text-center"></th>
+            </tr>
+        </thead>
+        @{
+            int count = 1;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    @count
+                    @{ count++;}
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Product.productName)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.AspNetUser.customerFirstName)  @Html.DisplayFor(modelItem => item.AspNetUser.customerLastName)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.comment)
+                </td>
+
+
+                <td class="text-center align-middle">
+                    @Html.ActionLink("Delete", "Delete", new { id = item.reviewId }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

@@ -62,8 +62,8 @@ namespace PrintHouse.Controllers
             return View(products.ToList());
         }
 
-       
 
+        [Authorize(Roles = "Admin")]
         public ActionResult AdminProducts()
         {
             var products = db.Products.ToList();

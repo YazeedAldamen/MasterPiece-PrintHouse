@@ -1,0 +1,52 @@
+﻿@model IEnumerable<PrintHouse.Models.Maintenance>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutGeneral.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.orderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.maintencanceOrderDetails)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.productName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.orderDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.maintencanceOrderDetails)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.productName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.maintenanceId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.maintenanceId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.maintenanceId })
+        </td>
+    </tr>
+}
+
+</table>

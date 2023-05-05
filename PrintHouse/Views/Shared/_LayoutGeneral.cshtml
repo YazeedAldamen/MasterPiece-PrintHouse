@@ -42,29 +42,51 @@
         <div class="container d-flex justify-content-between align-items-center">
             <div class="logo">
                 <h1 class="text-light">
-                    <a href="index.html">
+                    <a href="~/Home/Index">
                         <img src="~/Content/assets/img/print house logo.png" alt="" />
                     </a>
                 </h1>
                 <!-- Uncomment below if you prefer to use an image logo -->
                 <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
             </div>
-
+            @{
+                PrintHouse.Models.PrintHouseEntities db = new PrintHouse.Models.PrintHouseEntities();
+                List<PrintHouse.Models.Category> categories = db.Categories.ToList();
+            }
             <nav id="navbar" class="navbar">
                 <ul>
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
+                    @*<li>@Html.ActionLink("Categories", "Index", "Categories")</li>*@
+                    <li>
+                        <div class="dropdown">
+                            <a href="@Url.Action("Index","Categories")" class="dropdown-toggle" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
+                            <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                                @foreach (var category in categories)
+                                {
+                                    if (category.categoryName == "Maintenance")
+                                    {
+                                        <li>@Html.ActionLink(category.categoryName, "Create", "Maintenances", new { id = category.categoryId }, null)</li>
+                                    }
+                                    else
+                                    {
+                                        <li>@Html.ActionLink(category.categoryName, "Index", "subCategories", new { id = category.categoryId }, null)</li>
 
-                    @if(User.IsInRole("Admin")){
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </li>
+                    @if (User.IsInRole("Admin"))
+                    {
                         <li>@Html.ActionLink("Dashboard", "AdminCategories", "Categories")</li>
 
                     }
 
                     <li><a href="~/Carts/Index"><i class="bi bi-cart-check-fill" style="color: white; font-size:18px"></i></a></li>
                     @*<li>@Html.ActionLink("Register", "Register", "Account")</li>
-        <li>@Html.ActionLink("Log In", "Login", "Account")</li>*@
+                <li>@Html.ActionLink("Log In", "Login", "Account")</li>*@
                     <li>    @Html.Partial("_LoginPartial")</li>
 
                 </ul>
@@ -82,7 +104,7 @@
             data-aos="fade-up"
             data-aos-easing="ease-in-out"
             data-aos-duration="500">
-        <div class="footer-newsletter">
+        @*<div class="footer-newsletter">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
@@ -97,7 +119,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
 
         <div class="footer-top">
             <div class="container">

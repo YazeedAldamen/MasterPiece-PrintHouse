@@ -228,8 +228,20 @@ namespace PrintHouse.Controllers
         {
             if (!ModelState.IsValid)
             {
-               
-                return View(model);
+                if (User.IsInRole("Admin"))
+                {
+                    Session["SweetAlertMessage"] = "Incorrect Password";
+                    Session["SweetAlertType"] = "warning";
+                    Session["fromDelete"] = "true";
+                    return RedirectToAction("Details", "Profile", new { id = User.Identity.GetUserId() });
+                }
+                else if (User.IsInRole("Customer")){
+                    Session["SweetAlertMessage"] = "Incorrect Password";
+                    Session["SweetAlertType"] = "warning";
+                    Session["fromDelete"] = "true";
+                    return RedirectToAction("CustomerProfile", "Profile", new { id = User.Identity.GetUserId() });
+
+                }
             }
             var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
             if (result.Succeeded)
@@ -241,16 +253,38 @@ namespace PrintHouse.Controllers
                 }
                 if (User.IsInRole("Admin"))
                 {
-
+                    Session["SweetAlertMessage"] = "Your Password Has been Changed Successfully";
+                    Session["SweetAlertType"] = "success";
+                    Session["fromDelete"] = "true";
                     return RedirectToAction("Details", "Profile", new { id = User.Identity.GetUserId() });
                 }
-                //else if (User.IsInRole("Customer")){
-                //    return RedirectToAction()
-                //}
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                else if (User.IsInRole("Customer"))
+                {
+                    Session["SweetAlertMessage"] = "Your Password Has been Changed Successfully";
+                    Session["SweetAlertType"] = "success";
+                    Session["fromDelete"] = "true";
+                    return RedirectToAction("CustomerProfile", "Profile", new { id = User.Identity.GetUserId() });
+
+                }
+            }
+            if (User.IsInRole("Admin"))
+            {
+                Session["SweetAlertMessage"] = "Incorrect Password";
+                Session["SweetAlertType"] = "warning";
+                Session["fromDelete"] = "true";
+                return RedirectToAction("Details", "Profile", new { id = User.Identity.GetUserId() });
+            }
+            else if (User.IsInRole("Customer"))
+            {
+                Session["SweetAlertMessage"] = "Incorrect Password";
+                Session["SweetAlertType"] = "warning";
+                Session["fromDelete"] = "true";
+                return RedirectToAction("CustomerProfile", "Profile", new { id = User.Identity.GetUserId() });
+
             }
             AddErrors(result);
-            return View(model);
+
+            return View();
         }
 
         //

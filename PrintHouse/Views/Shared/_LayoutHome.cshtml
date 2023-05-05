@@ -30,7 +30,7 @@
         <div class="container d-flex justify-content-between align-items-center">
             <div class="logo">
                 <h1 class="text-light">
-                    <a href="index.html">
+                    <a href="~/Home/Index">
                         <img src="../../Content/assets\img\print house logo.png" alt="" class="img-fluid" />
                     </a>
                 </h1>
@@ -53,7 +53,15 @@
                             <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
                                 @foreach (var category in categories)
                                 {
-                                    <li>@Html.ActionLink(category.categoryName, "Index", "subCategories", new { id = category.categoryId }, null)</li>
+                                    if (category.categoryName == "Maintenance")
+                                    {
+                                        <li>@Html.ActionLink(category.categoryName, "Create", "Maintenances", new { id = category.categoryId }, null)</li>
+                                    }
+                                    else
+                                    {
+                                        <li>@Html.ActionLink(category.categoryName, "Index", "subCategories", new { id = category.categoryId }, null)</li>
+
+                                    }
                                 }
                             </ul>
                         </div>
@@ -277,7 +285,7 @@
             data-aos="fade-up"
             data-aos-easing="ease-in-out"
             data-aos-duration="500">
-        <div class="footer-newsletter">
+        @*<div class="footer-newsletter">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
@@ -292,7 +300,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
 
         <div class="footer-top">
             <div class="container">

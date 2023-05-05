@@ -1,0 +1,114 @@
+﻿@model IEnumerable<PrintHouse.Models.Maintenance>
+
+@{
+    ViewBag.Title = "AdminMaintenances";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h2>AdminMaintenances</h2>
+
+
+
+
+@if (Session["SweetAlertMessage"] != null && Session["SweetAlertType"] != null)
+{
+    <script>
+        Swal.fire({
+  title: '@Session["SweetAlertMessage"].ToString()',
+  icon: '@Session["SweetAlertType"].ToString()',
+  showCancelButton: false,
+})
+    </script>
+    Session.Remove("SweetAlertMessage");
+    Session.Remove("SweetAlertType");
+    Session.Remove("fromDelete");
+
+
+}
+
+
+
+
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">
+                    User
+                </th>
+                <th class="text-center">
+                    Phone
+                </th>
+                <th class="text-center">
+                    Booking Date
+                </th>
+                <th class="text-center">
+                    Product
+                </th>
+                <th class="text-center">
+                    Comments
+                </th>
+
+
+                <th class="text-center"></th>
+            </tr>
+        </thead>
+        @{
+            int count = 1;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    @count
+                    @{ count++;}
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.AspNetUser.customerFirstName) @Html.DisplayFor(modelItem => item.AspNetUser.customerLastName)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.AspNetUser.customerPhone) 
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.orderDate).ToString().Split()[0]
+                </td>
+
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Product.productName)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.maintencanceOrderDetails)
+                </td>
+                <td class="text-center align-middle">
+
+                    @using (Html.BeginForm("Edit", "Maintenances", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @*@Html.HiddenFor(modelItem => item.maintenanceId)*@
+                        <input type="number" value="@item.maintenanceId" name="maintenanceId" hidden />
+                        <input type="datetime" value="@item.orderDate" name="orderDate" hidden />
+                        <input type="text" value="@item.userId" name="userId" hidden />
+                        <input type="text" value="@item.maintencanceOrderDetails" name="maintencanceOrderDetails" hidden />
+                        <input type="number" value="@item.productId" name="productId" hidden />
+                        <input type="text" value="true" name="done" hidden />
+                        <button type="submit" class="btn btn-warning">
+                            Finish
+                        </button>
+                    }
+
+
+
+
+
+
+                    @*@Html.ActionLink("Finish", "Edit", new { id = item.maintenanceId }, new { @class = "btn btn-warning btn-sm" })*@
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
