@@ -9,6 +9,7 @@
     <EntitySet Name="AspNetUsers" EntityType="PrintHouseModel.AspNetUser" />
     <EntitySet Name="Carts" EntityType="PrintHouseModel.Cart" />
     <EntitySet Name="Categories" EntityType="PrintHouseModel.Category" />
+    <EntitySet Name="Contacts" EntityType="PrintHouseModel.Contact" />
     <EntitySet Name="Maintenances" EntityType="PrintHouseModel.Maintenance" />
     <EntitySet Name="OrderDetails" EntityType="PrintHouseModel.OrderDetail" />
     <EntitySet Name="Orders" EntityType="PrintHouseModel.Order" />
@@ -192,6 +193,16 @@
     <Property Name="categoryImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Products" Relationship="PrintHouseModel.FK__Products__catego__48CFD27E" FromRole="Category" ToRole="Product" />
     <NavigationProperty Name="subCategories" Relationship="PrintHouseModel.FK__subCatego__categ__4BAC3F29" FromRole="Category" ToRole="subCategory" />
+  </EntityType>
+  <EntityType Name="Contact">
+    <Key>
+      <PropertyRef Name="contact_Id" />
+    </Key>
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="contact_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
   <EntityType Name="Maintenance">
     <Key>

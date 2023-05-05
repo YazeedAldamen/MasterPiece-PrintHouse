@@ -124,6 +124,9 @@ namespace PrintHouse.Controllers
 
                 db.Entry(maintenance).State = EntityState.Modified;
                 db.SaveChanges();
+                Session["SweetAlertMessage"] = "The request status has been changed to finished";
+                Session["SweetAlertType"] = "success";
+                Session["fromDelete"] = "true";
             }
             return RedirectToAction("MaintenancesRequests");
 

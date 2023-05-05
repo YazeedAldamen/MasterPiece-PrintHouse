@@ -2,7 +2,21 @@
     ViewBag.Title = "Contact";
     Layout = "~/Views/Shared/_LayoutGeneral.cshtml";
 }
+@if (Session["SweetAlertMessage"] != null && Session["SweetAlertType"] != null)
+{
+    <script>
+        Swal.fire({
+  title: '@Session["SweetAlertMessage"].ToString()',
+  icon: '@Session["SweetAlertType"].ToString()',
+  showCancelButton: false,
+})
+    </script>
+    Session.Remove("SweetAlertMessage");
+    Session.Remove("SweetAlertType");
+    Session.Remove("fromDelete");
 
+
+}
 
 <main id="main">
     <!-- ======= Contact Section ======= -->
@@ -52,14 +66,15 @@
                 </div>
 
                 <div class="col-lg-6">
-                    <form action="forms/contact.php"
+                    <form action="~/Contacts/Create"
                           method="post"
                           role="form"
                           class="php-email-form">
+                        @Html.AntiForgeryToken()
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <input type="text"
-                                       name="name"
+                                       name="Name"
                                        class="form-control"
                                        id="name"
                                        placeholder="Your Name"
@@ -68,7 +83,7 @@
                             <div class="col-md-6 form-group mt-3 mt-md-0">
                                 <input type="email"
                                        class="form-control"
-                                       name="email"
+                                       name="Email"
                                        id="email"
                                        placeholder="Your Email"
                                        required />
@@ -106,8 +121,7 @@
     </section>
     <!-- End Contact Section -->
     <!-- ======= Map Section ======= -->
-    <section class="map mt-2"
-             class="contact"
+    <section class="map mt-2 contact"
              data-aos="fade-up"
              data-aos-easing="ease-in-out"
              data-aos-duration="500">

@@ -91,6 +91,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Contacts">
+      <EntityTypeMapping TypeName="PrintHouseModel.Contact">
+        <MappingFragment StoreEntitySet="Contact">
+          <ScalarProperty Name="contact_Id" ColumnName="contact_Id" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="subject" ColumnName="subject" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Maintenances">
       <EntityTypeMapping TypeName="PrintHouseModel.Maintenance">
         <MappingFragment StoreEntitySet="Maintenances">

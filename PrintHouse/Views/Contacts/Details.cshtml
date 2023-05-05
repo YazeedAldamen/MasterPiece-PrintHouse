@@ -1,0 +1,67 @@
+﻿@model PrintHouse.Models.Contact
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card mx-auto">
+                <div class="card-header">
+                    <h4>Category</h4>
+                </div>
+                <div class="card-body px-md-5">
+                    <div class="form-group row mb-3 mt-3">
+                        <label for="categoryName" class="col-sm-3 col-form-label fw-bold">Name</label>
+                        <div class="col-sm-9">
+                            @Html.DisplayFor(model => model.Name)
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-3">
+                        <label for="categoryDescription" class="col-sm-3 col-form-label fw-bold">Email</label>
+                        <div class="col-sm-9">
+                            @Html.DisplayFor(model => model.Email)
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-3">
+                        <label for="categoryDescription" class="col-sm-3 col-form-label fw-bold">Subject</label>
+                        <div class="col-sm-9">
+                            @Html.DisplayFor(model => model.subject)
+                            @Html.ValidationMessageFor(model => model.subject, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-3">
+                        <label for="categoryDescription" class="col-sm-3 col-form-label fw-bold">Message</label>
+                        <div class="col-sm-9">
+                            @Html.DisplayFor(model => model.message)
+                            @Html.ValidationMessageFor(model => model.message, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+
+                        @using (Html.BeginForm("Delete", "Contacts", new { id = Model.contact_Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="col-sm-12 text-center">
+                                <input type="submit" value="Delete" class="btn btn-danger btn-sm" /> |
+                                @Html.ActionLink("Back to List", "AdminMessages", null, new { @class = "btn btn-dark btn-sm" })
+                            </div>
+                        }
+                        
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

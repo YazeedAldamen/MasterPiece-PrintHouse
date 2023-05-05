@@ -1,0 +1,78 @@
+﻿@model IEnumerable<PrintHouse.Models.Contact>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+
+@if (Session["SweetAlertMessage"] != null && Session["SweetAlertType"] != null)
+{
+    <script>
+        Swal.fire({
+  title: '@Session["SweetAlertMessage"].ToString()',
+  icon: '@Session["SweetAlertType"].ToString()',
+  showCancelButton: false,
+})
+    </script>
+    Session.Remove("SweetAlertMessage");
+    Session.Remove("SweetAlertType");
+    Session.Remove("fromDelete");
+
+
+}
+
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">
+                    @*@Html.DisplayNameFor(model => model.categoryName)*@
+                    Name
+                </th>
+                <th class="text-center">
+                    Email
+                </th>
+                <th class="text-center">
+                    Subject
+                </th>
+                <th class="text-center">
+                    Message
+                </th>
+
+                <th class="text-center"></th>
+            </tr>
+        </thead>
+        @{
+            int count = 1;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    @count
+                    @{ count++;}
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.subject)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.message)
+                </td>
+
+                <td class="text-center align-middle">
+                    @Html.ActionLink("Delete", "Delete", new { id = item.contact_Id }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
