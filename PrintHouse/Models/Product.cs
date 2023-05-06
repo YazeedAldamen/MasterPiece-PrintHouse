@@ -18,6 +18,7 @@ namespace PrintHouse.Models
         public Product()
         {
             this.Carts = new HashSet<Cart>();
+            this.Featureds = new HashSet<Featured>();
             this.Maintenances = new HashSet<Maintenance>();
             this.OrderDetails = new HashSet<OrderDetail>();
             this.Reviews = new HashSet<Review>();
@@ -37,6 +38,8 @@ namespace PrintHouse.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }
         public virtual Category Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Featured> Featureds { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Maintenance> Maintenances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -7,15 +7,18 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
-@if (TempData["SweetAlertMessage"] != null && TempData["SweetAlertType"] != null)
+@if (Session["SweetAlertMessage"] != null && Session["SweetAlertType"] != null)
 {
     <script>
         Swal.fire({
-  title: '@TempData["SweetAlertMessage"]',
-  icon: '@TempData["SweetAlertType"]',
+  title: '@Session["SweetAlertMessage"]',
+  icon: '@Session["SweetAlertType"]',
   showCancelButton: false,
 })
     </script>
+    Session.Remove("SweetAlertMessage");
+    Session.Remove("SweetAlertType");
+    Session.Remove("page");
 
 }
 

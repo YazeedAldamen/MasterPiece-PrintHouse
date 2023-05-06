@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<PrintHouse.Models.Featured>
+@{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
@@ -12,59 +13,54 @@
                 Professional and Industrial Use.
             </p>
         </div>
+        @{
+            int count = 1;
+        }
+        @foreach (var item in Model)
+        {
+            if (count % 2 != 0)
+            {
+                <div class="row" data-aos="fade-up">
+                    <div class="col-md-5">
+                        <img src="~/Content/assets/img/@item.Product.productImage1"
+                             class="img-fluid"
+                             alt="" />
+                    </div>
+                    <div class="col-md-7 pt-4">
+                        <h3>@item.Product.productName</h3>
+                        <p class="fst-italic">
+                           @item.Product.productDescription;
+                        </p>
+                        <p>
+                            <a href="~/Products/SingleProduct/@item.productId" class="btn btn-primary">See More</a>
+                        </p>
+                    </div>
+                </div>
+            }
+            else if (count % 2 == 0)
+            {
+                <div class="row" data-aos="fade-up">
+                    <div class="col-md-5 order-1 order-md-2">
+                        <img src="~/Content/assets/img/@item.Product.productImage1" class="img-fluid" alt="" />
+                    </div>
+                    <div class="col-md-7 pt-5 order-2 order-md-1">
+                        <h3>@item.Product.productName</h3>
+                        <p class="fst-italic">
+                            @item.Product.productDescription
+                        </p>
+                        <p>
+                            <a href="~/Products/SingleProduct/@item.productId" class="btn btn-primary">See More</a>
+                        </p>
+                    </div>
+                </div>
+            }
+            count++;
+        }
 
-        <div class="row" data-aos="fade-up">
-            <div class="col-md-5">
-                <img src="~/Content/assets/img/makerbotreplicatormini.jpg"
-                     class="img-fluid"
-                     alt="" />
-            </div>
-            <div class="col-md-7 pt-4">
-                <h3>The MakerBot Replicator Mini</h3>
-                <p class="fst-italic">
-                    The MakerBot Replicator Mini is a compact and easy-to-use 3D
-                    printer, perfect for home and office use. It offers a smaller
-                    build volume than other models, but its streamlined design and
-                    simple operation make it ideal for small projects and models.
-                    The Replicator Mini is capable of producing high-quality prints
-                    with MakerBot's proprietary PLA filament, resulting in stunning
-                    and detailed models. <br />
-                    The included MakerBot Desktop software makes it easy to prepare,
-                    upload, and start printing your models. With its compact design,
-                    easy operation, and impressive print quality, the MakerBot
-                    Replicator Mini is a great choice for those looking for a
-                    reliable and affordable 3D printer for their home or office.
-                </p>
-            </div>
-        </div>
 
-        <div class="row" data-aos="fade-up">
-            <div class="col-md-5 order-1 order-md-2">
-                <img src="~/Content/assets/img/zortraxM200.png" class="img-fluid" alt="" />
-            </div>
-            <div class="col-md-7 pt-5 order-2 order-md-1">
-                <h3>Zortrax M200</h3>
-                <p class="fst-italic">
-                    The Zortrax M200 is a top-of-the-line 3D printer designed for
-                    professional use. It offers a large build volume, precision
-                    printing capabilities, and a range of advanced features to help
-                    you create complex models with ease. The M200 uses Zortrax's
-                    proprietary Z-ULTRAT material to produce high-quality prints
-                    with stunning detail and accuracy. Its sturdy and reliable
-                    design ensures that your projects are completed with consistency
-                    and precision, every time.
-                </p>
-                <p>
-                    The intuitive and user-friendly software makes it easy to set up
-                    and start printing, even for beginners. Whether you're a
-                    professional designer, an engineer, or an artist, the Zortrax
-                    M200 is an excellent choice for bringing your 3D printing
-                    visions to life
-                </p>
-            </div>
-        </div>
 
-        <div class="row" data-aos="fade-up">
+
+        @*<div class="row" data-aos="fade-up">
             <div class="col-md-5">
                 <img src="~/Content/assets/img/Flashforge-Creator-3-Pro-IDEX-3D-Printer-3-Quarter-View.jpg"
                      class="img-fluid"
@@ -93,7 +89,7 @@
 
         <div class="row" data-aos="fade-up">
             <div class="col-md-5 order-1 order-md-2">
-                <img src="~/Content/assets/img/ultimaker-3d-printing-filament-printer-png-favpng-znAgKHgpYXPLqNE7cR4J35GJS.png"
+                <img src="~/Content/assets/img/ultimaker-3d.png"
                      class="img-fluid"
                      alt="" />
             </div>
@@ -119,9 +115,10 @@
                     3D printing visions to life.
                 </p>
             </div>
-        </div>
+        </div>*@
     </div>
 </section>
+
 <!-- End Features Section -->
 <section id="faq" class="faq">
     <div class="container" data-aos="fade-up">
@@ -134,130 +131,36 @@
              data-aos-delay="200">
             <div class="col-lg-10">
                 <div class="accordion accordion-flush" id="faqlist">
-                    <div class="accordion-item">
-                        <h3 class="accordion-header">
-                            <button class="accordion-button collapsed"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#faq-content-1">
-                                <i class="bi bi-question-circle question-icon"></i>
-                                Non consectetur a erat nam at lectus urna duis?
-                            </button>
-                        </h3>
-                        <div id="faq-content-1"
-                             class="accordion-collapse collapse"
-                             data-bs-parent="#faqlist">
-                            <div class="accordion-body">
-                                Feugiat pretium nibh ipsum consequat. Tempus iaculis urna
-                                id volutpat lacus laoreet non curabitur gravida. Venenatis
-                                lectus magna fringilla urna porttitor rhoncus dolor purus
-                                non.
+                    @{
+                        PrintHouse.Models.PrintHouseEntities db = new PrintHouse.Models.PrintHouseEntities();
+                        var faq = db.FAQs.ToList();
+                        int count2 = 1;
+                    }
+                    @foreach (var item in faq)
+                    {
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#faq-content-@count2">
+                                    <i class="bi bi-question-circle question-icon"></i>
+                                    @item.question
+                                </button>
+                            </h3>
+                            <div id="faq-content-@count2"
+                                 class="accordion-collapse collapse"
+                                 data-bs-parent="#faqlist">
+                                <div class="accordion-body">
+                                    @item.answer
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        count2++;
+                    }
                     <!-- # Faq item-->
 
-                    <div class="accordion-item">
-                        <h3 class="accordion-header">
-                            <button class="accordion-button collapsed"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#faq-content-2">
-                                <i class="bi bi-question-circle question-icon"></i>
-                                Feugiat scelerisque varius morbi enim nunc faucibus a
-                                pellentesque?
-                            </button>
-                        </h3>
-                        <div id="faq-content-2"
-                             class="accordion-collapse collapse"
-                             data-bs-parent="#faqlist">
-                            <div class="accordion-body">
-                                Dolor sit amet consectetur adipiscing elit pellentesque
-                                habitant morbi. Id interdum velit laoreet id donec
-                                ultrices. Fringilla phasellus faucibus scelerisque
-                                eleifend donec pretium. Est pellentesque elit ullamcorper
-                                dignissim. Mauris ultrices eros in cursus turpis massa
-                                tincidunt dui.
-                            </div>
-                        </div>
-                    </div>
-                    <!-- # Faq item-->
-
-                    <div class="accordion-item">
-                        <h3 class="accordion-header">
-                            <button class="accordion-button collapsed"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#faq-content-3">
-                                <i class="bi bi-question-circle question-icon"></i>
-                                Dolor sit amet consectetur adipiscing elit pellentesque
-                                habitant morbi?
-                            </button>
-                        </h3>
-                        <div id="faq-content-3"
-                             class="accordion-collapse collapse"
-                             data-bs-parent="#faqlist">
-                            <div class="accordion-body">
-                                Eleifend mi in nulla posuere sollicitudin aliquam ultrices
-                                sagittis orci. Faucibus pulvinar elementum integer enim.
-                                Sem nulla pharetra diam sit amet nisl suscipit. Rutrum
-                                tellus pellentesque eu tincidunt. Lectus urna duis
-                                convallis convallis tellus. Urna molestie at elementum eu
-                                facilisis sed odio morbi quis
-                            </div>
-                        </div>
-                    </div>
-                    <!-- # Faq item-->
-
-                    <div class="accordion-item">
-                        <h3 class="accordion-header">
-                            <button class="accordion-button collapsed"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#faq-content-4">
-                                <i class="bi bi-question-circle question-icon"></i>
-                                Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?
-                            </button>
-                        </h3>
-                        <div id="faq-content-4"
-                             class="accordion-collapse collapse"
-                             data-bs-parent="#faqlist">
-                            <div class="accordion-body">
-                                <i class="bi bi-question-circle question-icon"></i>
-                                Dolor sit amet consectetur adipiscing elit pellentesque
-                                habitant morbi. Id interdum velit laoreet id donec
-                                ultrices. Fringilla phasellus faucibus scelerisque
-                                eleifend donec pretium. Est pellentesque elit ullamcorper
-                                dignissim. Mauris ultrices eros in cursus turpis massa
-                                tincidunt dui.
-                            </div>
-                        </div>
-                    </div>
-                    <!-- # Faq item-->
-
-                    <div class="accordion-item">
-                        <h3 class="accordion-header">
-                            <button class="accordion-button collapsed"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#faq-content-5">
-                                <i class="bi bi-question-circle question-icon"></i>
-                                Tempus quam pellentesque nec nam aliquam sem et tortor
-                                consequat?
-                            </button>
-                        </h3>
-                        <div id="faq-content-5"
-                             class="accordion-collapse collapse"
-                             data-bs-parent="#faqlist">
-                            <div class="accordion-body">
-                                Molestie a iaculis at erat pellentesque adipiscing
-                                commodo. Dignissim suspendisse in est ante in. Nunc vel
-                                risus commodo viverra maecenas accumsan. Sit amet nisl
-                                suscipit adipiscing bibendum est. Purus gravida quis
-                                blandit turpis cursus in
-                            </div>
-                        </div>
-                    </div>
+                  
                     <!-- # Faq item-->
                 </div>
             </div>

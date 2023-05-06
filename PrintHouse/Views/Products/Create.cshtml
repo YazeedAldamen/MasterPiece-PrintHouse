@@ -82,6 +82,9 @@
 
                             @foreach (var item in ViewBag.categories)
                             {
+                                if(item.categoryName == "Maintenance"){
+                                    continue;
+                                }
                                 <option value="@item.categoryId">@item.categoryName</option>
                             }
 

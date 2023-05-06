@@ -22,11 +22,14 @@ namespace PrintHouse.Controllers
         PrintHouseEntities db = new PrintHouseEntities();
         public ActionResult Index()
         {
-            if(User.Identity.IsAuthenticated) { 
-            var userId = User.Identity.GetUserId();
-            var cartCount = db.Carts.Where(x => x.userId == userId).Count();
-            var idCookie = Request.Cookies["ProductIds"];
-            var quantityCookie = Request.Cookies["ProductQuantity"];
+            var featured = db.Featureds.ToList();
+
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = User.Identity.GetUserId();
+                var cartCount = db.Carts.Where(x => x.userId == userId).Count();
+                var idCookie = Request.Cookies["ProductIds"];
+                var quantityCookie = Request.Cookies["ProductQuantity"];
                 if (cartCount == 0 && idCookie != null && quantityCookie != null && !string.IsNullOrEmpty(idCookie.Value) && !string.IsNullOrEmpty(quantityCookie.Value))
                 {
                     List<int> quantity = new List<int>();
@@ -52,19 +55,21 @@ namespace PrintHouse.Controllers
                     Response.Cookies.Add(idCookie);
                     quantityCookie.Expires = DateTime.Now.AddDays(-1);
                     Response.Cookies.Add(quantityCookie);
-                    return View();
+                    return View(featured);
 
                 }
-                else if (cartCount > 0 && idCookie != null && quantityCookie != null && !string.IsNullOrEmpty(idCookie.Value) && !string.IsNullOrEmpty(quantityCookie.Value)) {
+                else if (cartCount > 0 && idCookie != null && quantityCookie != null && !string.IsNullOrEmpty(idCookie.Value) && !string.IsNullOrEmpty(quantityCookie.Value))
+                {
                     idCookie.Expires = DateTime.Now.AddDays(-1);
                     Response.Cookies.Add(idCookie);
                     quantityCookie.Expires = DateTime.Now.AddDays(-1);
                     Response.Cookies.Add(quantityCookie);
-                    return View();
+                    return View(featured);
                 }
 
             }
-            return View();
+
+            return View(featured);
         }
 
 

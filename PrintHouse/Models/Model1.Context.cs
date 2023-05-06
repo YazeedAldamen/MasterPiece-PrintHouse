@@ -34,6 +34,8 @@ namespace PrintHouse.Models
         public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Contact> Contacts { get; set; }
+        public virtual DbSet<FAQ> FAQs { get; set; }
+        public virtual DbSet<Featured> Featureds { get; set; }
         public virtual DbSet<Maintenance> Maintenances { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }

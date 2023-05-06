@@ -101,6 +101,21 @@
           <Property Name="message" Type="varchar(max)" />
           <Property Name="contact_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="FAQ">
+          <Key>
+            <PropertyRef Name="faqId" />
+          </Key>
+          <Property Name="faqId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="question" Type="text" />
+          <Property Name="answer" Type="text" />
+        </EntityType>
+        <EntityType Name="Featured">
+          <Key>
+            <PropertyRef Name="featuredId" />
+          </Key>
+          <Property Name="featuredId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productId" Type="int" />
+        </EntityType>
         <EntityType Name="Maintenances">
           <Key>
             <PropertyRef Name="maintenanceId" />
@@ -405,6 +420,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Featured_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Featured" Type="Self.Featured" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="productId" />
+            </Principal>
+            <Dependent Role="Featured">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Maintenances_Products">
           <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
           <End Role="Maintenances" Type="Self.Maintenances" Multiplicity="*" />
@@ -427,6 +454,8 @@
           <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FAQ" EntityType="Self.FAQ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Featured" EntityType="Self.Featured" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Maintenances" EntityType="Self.Maintenances" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
@@ -503,6 +532,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Featured_Products" Association="Self.FK_Featured_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Featured" EntitySet="Featured" />
+          </AssociationSet>
           <AssociationSet Name="FK_Maintenances_Products" Association="Self.FK_Maintenances_Products">
             <End Role="Products" EntitySet="Products" />
             <End Role="Maintenances" EntitySet="Maintenances" />
@@ -522,6 +555,8 @@
           <EntitySet Name="Carts" EntityType="PrintHouseModel.Cart" />
           <EntitySet Name="Categories" EntityType="PrintHouseModel.Category" />
           <EntitySet Name="Contacts" EntityType="PrintHouseModel.Contact" />
+          <EntitySet Name="FAQs" EntityType="PrintHouseModel.FAQ" />
+          <EntitySet Name="Featureds" EntityType="PrintHouseModel.Featured" />
           <EntitySet Name="Maintenances" EntityType="PrintHouseModel.Maintenance" />
           <EntitySet Name="OrderDetails" EntityType="PrintHouseModel.OrderDetail" />
           <EntitySet Name="Orders" EntityType="PrintHouseModel.Order" />
@@ -577,6 +612,10 @@
           <AssociationSet Name="FK__subCatego__categ__4BAC3F29" Association="PrintHouseModel.FK__subCatego__categ__4BAC3F29">
             <End Role="Category" EntitySet="Categories" />
             <End Role="subCategory" EntitySet="subCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Featured_Products" Association="PrintHouseModel.FK_Featured_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Featured" EntitySet="Featureds" />
           </AssociationSet>
           <AssociationSet Name="FK_Maintenances_Products" Association="PrintHouseModel.FK_Maintenances_Products">
             <End Role="Product" EntitySet="Products" />
@@ -716,6 +755,22 @@
           <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="contact_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
+        <EntityType Name="FAQ">
+          <Key>
+            <PropertyRef Name="faqId" />
+          </Key>
+          <Property Name="faqId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="question" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Featured">
+          <Key>
+            <PropertyRef Name="featuredId" />
+          </Key>
+          <Property Name="featuredId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productId" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="PrintHouseModel.FK_Featured_Products" FromRole="Featured" ToRole="Product" />
+        </EntityType>
         <EntityType Name="Maintenance">
           <Key>
             <PropertyRef Name="maintenanceId" />
@@ -770,6 +825,7 @@
           <Property Name="stock" Type="Int32" />
           <NavigationProperty Name="Carts" Relationship="PrintHouseModel.FK__Cart__productId__59063A47" FromRole="Product" ToRole="Cart" />
           <NavigationProperty Name="Category" Relationship="PrintHouseModel.FK__Products__catego__48CFD27E" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Featureds" Relationship="PrintHouseModel.FK_Featured_Products" FromRole="Product" ToRole="Featured" />
           <NavigationProperty Name="Maintenances" Relationship="PrintHouseModel.FK_Maintenances_Products" FromRole="Product" ToRole="Maintenance" />
           <NavigationProperty Name="OrderDetails" Relationship="PrintHouseModel.FK__OrderDeta__produ__52593CB8" FromRole="Product" ToRole="OrderDetail" />
           <NavigationProperty Name="subCategory" Relationship="PrintHouseModel.FK__Products__subCat__5DCAEF64" FromRole="Product" ToRole="subCategory" />
@@ -979,6 +1035,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Featured_Products">
+          <End Type="PrintHouseModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="PrintHouseModel.Featured" Role="Featured" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="productId" />
+            </Principal>
+            <Dependent Role="Featured">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Maintenances_Products">
           <End Type="PrintHouseModel.Product" Role="Product" Multiplicity="0..1" />
           <End Type="PrintHouseModel.Maintenance" Role="Maintenance" Multiplicity="*" />
@@ -1155,6 +1223,23 @@
                 <ScalarProperty Name="subject" ColumnName="subject" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FAQs">
+            <EntityTypeMapping TypeName="PrintHouseModel.FAQ">
+              <MappingFragment StoreEntitySet="FAQ">
+                <ScalarProperty Name="answer" ColumnName="answer" />
+                <ScalarProperty Name="question" ColumnName="question" />
+                <ScalarProperty Name="faqId" ColumnName="faqId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Featureds">
+            <EntityTypeMapping TypeName="PrintHouseModel.Featured">
+              <MappingFragment StoreEntitySet="Featured">
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="featuredId" ColumnName="featuredId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

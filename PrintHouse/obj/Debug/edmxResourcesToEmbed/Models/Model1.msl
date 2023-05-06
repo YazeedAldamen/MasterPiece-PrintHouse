@@ -102,6 +102,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="FAQs">
+      <EntityTypeMapping TypeName="PrintHouseModel.FAQ">
+        <MappingFragment StoreEntitySet="FAQ">
+          <ScalarProperty Name="answer" ColumnName="answer" />
+          <ScalarProperty Name="question" ColumnName="question" />
+          <ScalarProperty Name="faqId" ColumnName="faqId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Featureds">
+      <EntityTypeMapping TypeName="PrintHouseModel.Featured">
+        <MappingFragment StoreEntitySet="Featured">
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="featuredId" ColumnName="featuredId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Maintenances">
       <EntityTypeMapping TypeName="PrintHouseModel.Maintenance">
         <MappingFragment StoreEntitySet="Maintenances">

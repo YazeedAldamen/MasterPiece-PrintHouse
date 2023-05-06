@@ -187,6 +187,8 @@
     <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
+    <Compile Include="Controllers\FAQsController.cs" />
+    <Compile Include="Controllers\FeaturedsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaintenancesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -223,6 +225,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FAQ.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Featured.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -877,6 +885,17 @@
     <Content Include="Views\Contacts\Details.cshtml" />
     <Content Include="Views\Contacts\Index.cshtml" />
     <Content Include="Views\Contacts\AdminMessages.cshtml" />
+    <Content Include="Views\FAQs\Create.cshtml" />
+    <Content Include="Views\FAQs\Delete.cshtml" />
+    <Content Include="Views\FAQs\Details.cshtml" />
+    <Content Include="Views\FAQs\Edit.cshtml" />
+    <Content Include="Views\FAQs\AdminFaqs.cshtml" />
+    <Content Include="Views\Featureds\Create.cshtml" />
+    <Content Include="Views\Featureds\Delete.cshtml" />
+    <Content Include="Views\Featureds\Details.cshtml" />
+    <Content Include="Views\Featureds\Edit.cshtml" />
+    <Content Include="Views\Featureds\Index.cshtml" />
+    <Content Include="Views\Featureds\AdminFeatured.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

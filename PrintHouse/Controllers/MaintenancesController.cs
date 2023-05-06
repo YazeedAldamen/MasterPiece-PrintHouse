@@ -164,6 +164,9 @@ namespace PrintHouse.Controllers
 
                 db.Entry(maintenance).State = EntityState.Modified;
                 db.SaveChanges();
+                Session["SweetAlertMessage"] = "Request was Reopend Successfully";
+                Session["SweetAlertType"] = "success";
+                Session["fromDelete"] = "true";
             }
             return RedirectToAction("MaintenancesRequests");
 

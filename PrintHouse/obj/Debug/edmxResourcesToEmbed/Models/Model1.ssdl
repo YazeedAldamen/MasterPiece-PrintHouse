@@ -96,6 +96,21 @@
     <Property Name="message" Type="varchar(max)" />
     <Property Name="contact_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
+  <EntityType Name="FAQ">
+    <Key>
+      <PropertyRef Name="faqId" />
+    </Key>
+    <Property Name="faqId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="question" Type="text" />
+    <Property Name="answer" Type="text" />
+  </EntityType>
+  <EntityType Name="Featured">
+    <Key>
+      <PropertyRef Name="featuredId" />
+    </Key>
+    <Property Name="featuredId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="productId" Type="int" />
+  </EntityType>
   <EntityType Name="Maintenances">
     <Key>
       <PropertyRef Name="maintenanceId" />
@@ -400,6 +415,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Featured_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+    <End Role="Featured" Type="Self.Featured" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="productId" />
+      </Principal>
+      <Dependent Role="Featured">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Maintenances_Products">
     <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
     <End Role="Maintenances" Type="Self.Maintenances" Multiplicity="*" />
@@ -422,6 +449,8 @@
     <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Contact" EntityType="Self.Contact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FAQ" EntityType="Self.FAQ" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Featured" EntityType="Self.Featured" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Maintenances" EntityType="Self.Maintenances" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
@@ -497,6 +526,10 @@
     <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Featured_Products" Association="Self.FK_Featured_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Featured" EntitySet="Featured" />
     </AssociationSet>
     <AssociationSet Name="FK_Maintenances_Products" Association="Self.FK_Maintenances_Products">
       <End Role="Products" EntitySet="Products" />

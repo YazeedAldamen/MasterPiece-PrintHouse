@@ -86,6 +86,9 @@ namespace PrintHouse.Controllers
                 }
                 db.subCategories.Add(subCategory);
                 db.SaveChanges();
+                Session["SweetAlertMessage"] = "Subcategory was Added Successfully";
+                Session["SweetAlertType"] = "success";
+                Session["fromDelete"] = "true";
                 return RedirectToAction("AdminsubCategories", "subCategories", subCategory);
             }
 
@@ -137,6 +140,9 @@ namespace PrintHouse.Controllers
                     subCategory.subCategoryImage = Session["categoryImage"].ToString();
                 }
                 db.Entry(subCategory).State = EntityState.Modified;
+                Session["SweetAlertMessage"] = "Subcategory was Edited Successfully";
+                Session["SweetAlertType"] = "success";
+                Session["fromDelete"] = "true";
                 db.SaveChanges();
                 return RedirectToAction("AdminsubCategories");
             }
@@ -188,7 +194,7 @@ namespace PrintHouse.Controllers
             else
             {
                 Session["SweetAlertMessage"] = "This subcategory cannot be deleted as it's products is in the process of being fulfilled for customer orders.";
-                Session["SweetAlertType"] = "success";
+                Session["SweetAlertType"] = "warning";
                 Session["fromDelete"] = "true";
                 return RedirectToAction("AdminsubCategories", "subCategories");
             }

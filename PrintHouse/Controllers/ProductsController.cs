@@ -88,9 +88,9 @@ namespace PrintHouse.Controllers
             var stock = db.Products.Where(y => y.productId == id).FirstOrDefault().stock;
 
             if(stock ==0){
-                TempData["SweetAlertMessage"] = "Product currently out of stock.";
-                TempData["SweetAlertType"] = "warning";
-                TempData["page"] = "singleProduct";
+                Session["SweetAlertMessage"] = "Product currently out of stock.";
+                Session["SweetAlertType"] = "warning";
+                Session["page"] = "singleProduct";
                 return RedirectToAction("SingleProduct", "Products", new { id = id });
             }
 
@@ -171,9 +171,9 @@ namespace PrintHouse.Controllers
                 // Show a warning message using SweetAlert
                
             }
-            TempData["SweetAlertMessage"] = "Item has been added to cart";
-            TempData["SweetAlertType"] = "success";
-            TempData["page"] = "singleProduct";
+            Session["SweetAlertMessage"] = "Item has been added to cart";
+            Session["SweetAlertType"] = "success";
+            Session["page"] = "singleProduct";
             var singleProduct = db.Products.Where(x => x.productId == id).FirstOrDefault();
             return RedirectToAction("SingleProduct", "Products", new { id = id });
         }
@@ -340,6 +340,9 @@ namespace PrintHouse.Controllers
                 product.subCategoryId = subCategoryId;
                 db.Products.Add(product);
                 db.SaveChanges();
+                Session["SweetAlertMessage"] = "Product was Added Successfully";
+                Session["SweetAlertType"] = "success";
+                Session["fromDelete"] = "true";
                 return RedirectToAction("AdminProducts");
             }
 
@@ -421,6 +424,9 @@ namespace PrintHouse.Controllers
                 product.subCategoryId = subCategoryId;
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
+                Session["SweetAlertMessage"] = "Product was Edited Successfully";
+                Session["SweetAlertType"] = "success";
+                Session["fromDelete"] = "true";
                 return RedirectToAction("AdminProducts");
             }
             ViewBag.categoryId = new SelectList(db.Categories, "categoryId", "categoryName", product.categoryId);
@@ -478,7 +484,7 @@ namespace PrintHouse.Controllers
             else
             {
                 Session["SweetAlertMessage"] = "This product cannot be deleted as it is in the process of being fulfilled for customer orders.";
-                Session["SweetAlertType"] = "success";
+                Session["SweetAlertType"] = "warning";
                 Session["fromDelete"] = "true";
                 return RedirectToAction("AdminProducts");
             }

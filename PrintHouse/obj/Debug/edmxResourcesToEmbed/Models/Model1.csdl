@@ -10,6 +10,8 @@
     <EntitySet Name="Carts" EntityType="PrintHouseModel.Cart" />
     <EntitySet Name="Categories" EntityType="PrintHouseModel.Category" />
     <EntitySet Name="Contacts" EntityType="PrintHouseModel.Contact" />
+    <EntitySet Name="FAQs" EntityType="PrintHouseModel.FAQ" />
+    <EntitySet Name="Featureds" EntityType="PrintHouseModel.Featured" />
     <EntitySet Name="Maintenances" EntityType="PrintHouseModel.Maintenance" />
     <EntitySet Name="OrderDetails" EntityType="PrintHouseModel.OrderDetail" />
     <EntitySet Name="Orders" EntityType="PrintHouseModel.Order" />
@@ -65,6 +67,10 @@
     <AssociationSet Name="FK__subCatego__categ__4BAC3F29" Association="PrintHouseModel.FK__subCatego__categ__4BAC3F29">
       <End Role="Category" EntitySet="Categories" />
       <End Role="subCategory" EntitySet="subCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Featured_Products" Association="PrintHouseModel.FK_Featured_Products">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Featured" EntitySet="Featureds" />
     </AssociationSet>
     <AssociationSet Name="FK_Maintenances_Products" Association="PrintHouseModel.FK_Maintenances_Products">
       <End Role="Product" EntitySet="Products" />
@@ -204,6 +210,22 @@
     <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="contact_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
+  <EntityType Name="FAQ">
+    <Key>
+      <PropertyRef Name="faqId" />
+    </Key>
+    <Property Name="faqId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="question" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Featured">
+    <Key>
+      <PropertyRef Name="featuredId" />
+    </Key>
+    <Property Name="featuredId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="productId" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="PrintHouseModel.FK_Featured_Products" FromRole="Featured" ToRole="Product" />
+  </EntityType>
   <EntityType Name="Maintenance">
     <Key>
       <PropertyRef Name="maintenanceId" />
@@ -258,6 +280,7 @@
     <Property Name="stock" Type="Int32" />
     <NavigationProperty Name="Carts" Relationship="PrintHouseModel.FK__Cart__productId__59063A47" FromRole="Product" ToRole="Cart" />
     <NavigationProperty Name="Category" Relationship="PrintHouseModel.FK__Products__catego__48CFD27E" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="Featureds" Relationship="PrintHouseModel.FK_Featured_Products" FromRole="Product" ToRole="Featured" />
     <NavigationProperty Name="Maintenances" Relationship="PrintHouseModel.FK_Maintenances_Products" FromRole="Product" ToRole="Maintenance" />
     <NavigationProperty Name="OrderDetails" Relationship="PrintHouseModel.FK__OrderDeta__produ__52593CB8" FromRole="Product" ToRole="OrderDetail" />
     <NavigationProperty Name="subCategory" Relationship="PrintHouseModel.FK__Products__subCat__5DCAEF64" FromRole="Product" ToRole="subCategory" />
@@ -464,6 +487,18 @@
       </Principal>
       <Dependent Role="subCategory">
         <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Featured_Products">
+    <End Type="PrintHouseModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="PrintHouseModel.Featured" Role="Featured" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="productId" />
+      </Principal>
+      <Dependent Role="Featured">
+        <PropertyRef Name="productId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -90,7 +90,40 @@
                                     <div class="col-12">
                                         <label>Phone</label>
                                         <input type="text" name="customerPhone" id="customerPhone" value="" class="form-control" required />
+                                        <label id="numberInputError" style="color:red; font-size:12px"></label>
+                                        <script>
+                                                function validateNumberInput() {
+                                                    var input = document.getElementById("customerPhone").value;
+                                                    var numbers = /^[0-9]+$/;
 
+                                                    // If the input contains non-numeric characters, remove them
+                                                    if (!input.match(numbers)) {
+                                                        document.getElementById("customerPhone").value = input.replace(/[^0-9]/g, '');
+                                                        input = document.getElementById("customerPhone").value;
+                                                    }
+
+                                                    // If the input is longer than 10 characters, prevent further input
+                                                    if (input.length > 10 || input.length < 10) {
+                                                        event.preventDefault();
+                                                        document.getElementById("numberInputError").innerHTML = "The phone number should be a Jordanian number";
+
+                                                        return false;
+                                                    }
+                                                    else {
+                                                        document.getElementById("numberInputError").innerHTML = "";
+
+                                                    }
+
+                                                    // If the input does not start with 077, 078, or 079, clear the input field
+                                                    if (!input.startsWith('077') && !input.startsWith('078') && !input.startsWith('079')) {
+                                                        document.getElementById("customerPhone").value = '';
+                                                        event.preventDefault();
+                                                        return false;
+                                                    }
+                                                }
+
+
+                                        </script>
 
 
                                         <div class="invalid-feedback">
@@ -98,7 +131,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <input type="submit" class="btn btn-dark w-100" value="Register" />
+                                        <input type="submit" class="btn btn-dark w-100" value="Register" onclick="validateNumberInput()"/>
 
                                     </div>
                                     <div class="col-12">

@@ -69,8 +69,11 @@ namespace PrintHouse.Controllers
                     category.categoryImage = fileName;
                 }
                 db.Categories.Add(category);
-                
+
                 db.SaveChanges();
+                Session["SweetAlertMessage"] = "Category was Added Successfully";
+                Session["SweetAlertType"] = "success";
+                Session["fromDelete"] = "true";
                 return RedirectToAction("AdminCategories", "Categories", category);
             }
             
@@ -119,6 +122,9 @@ namespace PrintHouse.Controllers
 
                 db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
+                Session["SweetAlertMessage"] = "Category was Edited Successfully";
+                Session["SweetAlertType"] = "success";
+                Session["fromDelete"] = "true";
                 return RedirectToAction("AdminCategories");
             }
             return View(category);
@@ -172,7 +178,7 @@ namespace PrintHouse.Controllers
             else
             {
                 Session["SweetAlertMessage"] = "This category cannot be deleted as it's products is in the process of being fulfilled for customer orders.";
-                Session["SweetAlertType"] = "success";
+                Session["SweetAlertType"] = "warning";
                 Session["fromDelete"] = "true";
                 return RedirectToAction("AdminCategories");
             }
