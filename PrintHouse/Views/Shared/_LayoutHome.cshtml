@@ -49,8 +49,9 @@
 
                     <li >
                         <div class="dropdown">
-                            <a href="@Url.Action("Index","Categories")" class="dropdown-toggle" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
+                            <a href="@Url.Action("Index","Categories")" class="dropdown-toggle" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                             <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                                <li><a href="@Url.Action("Index","Categories")"> Categories</a></li>
                                 @foreach (var category in categories)
                                 {
                                     if (category.categoryName == "Maintenance")
@@ -102,7 +103,7 @@
                         Revolutionize Your Printing Experience with Our High-Quality 3D
                         Printers
                     </p>
-                    <a href="Categories.html"
+                    <a href="~/Categories/Index"
                        class="btn-get-started animate__animated animate__fadeInUp">Shop Now</a>
                 </div>
             </div>
@@ -117,7 +118,7 @@
                         Print Precise and Detailed Objects with Our State-of-the-Art 3D
                         Printers
                     </p>
-                    <a href="Categories.html"
+                    <a href="~/Categories/Index"
                        class="btn-get-started animate__animated animate__fadeInUp">Shop Now</a>
                 </div>
             </div>
@@ -131,7 +132,7 @@
                         Reality -->
                         Your One-Stop-Shop For All Your 3D Printing Needs
                     </p>
-                    <a href="Categories.html"
+                    <a href="~/Categories/Index"
                        class="btn-get-started animate__animated animate__fadeInUp">Shop Now</a>
                 </div>
             </div>
@@ -221,16 +222,7 @@
                  date-aos-delay="200">
             <div class="container">
                 <div class="row">
-                    @*<div class="col-lg-6 video-box">
-            <img src="~/Content/assets/img/3dprintingasharkyusstock.png"
-                 class="img-fluid"
-                 alt="" />
-            <a href="https://www.youtube.com/watch?v=aVmJShnA8jE"
-               class="venobox play-btn mb-4 glightbox play-btn"
-               data-vbtype="video"
-               data-autoplay="true"
-               target="_blank"></a>
-        </div>*@
+
                     <div class="col-lg-6 mt-3">
                         <div style="position:relative; padding-bottom:56.25%; height:0;">
                             <iframe src="https://www.youtube.com/embed/aVmJShnA8jE"
@@ -248,9 +240,9 @@
                     <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
                         <div class="icon-box">
                             <div class="icon"><i class="fa-solid fa-video"></i></div>
-                            <h4 class="title">
-                                <a href="">Discover the Power of 3D Printing: Watch Our Demo Video</a>
-                            </h4>
+                            <h2 class="title">
+                                Discover the Power of 3D Printing: Watch Our Demo Video
+                            </h2>
                             <p class="description">
                                 From complex designs to simple objects, our demo videos
                                 provide a glimpse into the endless possibilities of 3D
@@ -260,9 +252,9 @@
 
                         <div class="icon-box">
                             <div class="icon"><i class="bx bx-fingerprint"></i></div>
-                            <h4 class="title">
-                                <a href="">Experience the Capabilities of Our 3D Printers</a>
-                            </h4>
+                            <h2 class="title">
+                                Experience the Capabilities of Our 3D Printers
+                            </h2>
                             <p class="description">
                                 Get a firsthand look at the power and versatility of our 3D
                                 printers

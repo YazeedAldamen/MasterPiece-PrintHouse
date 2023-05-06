@@ -59,25 +59,26 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @*<li>@Html.ActionLink("Categories", "Index", "Categories")</li>*@
-                    <li>
-                        <div class="dropdown">
-                            <a href="@Url.Action("Index","Categories")" class="dropdown-toggle" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
-                            <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-                                @foreach (var category in categories)
+                <li>
+                    <div class="dropdown">
+                        <a href="@Url.Action("Index","Categories")" class="dropdown-toggle" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                        <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                            <li><a href="@Url.Action("Index","Categories")"> Categories</a></li>
+                            @foreach (var category in categories)
+                            {
+                                if (category.categoryName == "Maintenance")
                                 {
-                                    if (category.categoryName == "Maintenance")
-                                    {
-                                        <li>@Html.ActionLink(category.categoryName, "Create", "Maintenances", new { id = category.categoryId }, null)</li>
-                                    }
-                                    else
-                                    {
-                                        <li>@Html.ActionLink(category.categoryName, "Index", "subCategories", new { id = category.categoryId }, null)</li>
-
-                                    }
+                                    <li>@Html.ActionLink(category.categoryName, "Create", "Maintenances", new { id = category.categoryId }, null)</li>
                                 }
-                            </ul>
-                        </div>
-                    </li>
+                                else
+                                {
+                                    <li>@Html.ActionLink(category.categoryName, "Index", "subCategories", new { id = category.categoryId }, null)</li>
+
+                                }
+                            }
+                        </ul>
+                    </div>
+                </li>
                     @if (User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Dashboard", "AdminCategories", "Categories")</li>

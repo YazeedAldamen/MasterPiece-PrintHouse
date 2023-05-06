@@ -29,19 +29,46 @@
                 {<div class="col-md-6 d-flex align-items-stretch" data-aos="fade-up">
                         <div class="card">
                             <div class="card-img">
-                                <a href="~/subCategories/Index/@item.categoryId">
-                                    <img src="~/Content/assets/img/@item.categoryImage" alt="..." style="max-height:350px; width:100%" />
-                                </a>
+                                @if (item.categoryName == "Maintenance")
+                                {<a href="~/Maintenances/Create/@item.categoryId">
+                                        <img src="~/Content/assets/img/@item.categoryImage" alt="..." style="max-height:350px; width:100%" />
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="~/subCategories/Index/@item.categoryId">
+                                        <img src="~/Content/assets/img/@item.categoryImage" alt="..." style="max-height:350px; width:100%" />
+                                    </a>
+                                }
+
+
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">
+                                    @if (item.categoryName == "Maintenance")
+                                    {<a href="~/Maintenances/Create/@item.categoryId">@item.categoryName</a>
+
+                                }
+                                else
+                                {
                                     <a href="~/subCategories/Index/@item.categoryId">@item.categoryName</a>
+
+                                }
                                 </h5>
                                 <p class="card-text">
                                     @item.categoryDescription
                                 </p>
                                 <div class="read-more">
-                                    <a href="~/subCategories/Index/@item.categoryId"><i class="bi bi-arrow-right"></i> Shop</a>
+                                    @if (item.categoryName == "Maintenance")
+                                    {
+                                        <a href="~/Maintenances/Create/@item.categoryId"><i class="bi bi-arrow-right"></i> Shop</a>
+
+                                    }
+                                    else
+                                    {
+                                        <a href="~/subCategories/Index/@item.categoryId"><i class="bi bi-arrow-right"></i> Shop</a>
+
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -51,113 +78,11 @@
 
                 }
 
-                @*<div class="col-md-6 d-flex align-items-stretch" data-aos="fade-up">
-            <div class="card">
-                <div class="card-img">
-                    <a href="Products.html">
-                        <img src="~/Content/assets/img/Home-bg.jpeg" alt="..." />
-                    </a>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title"><a href="#">Consumables</a></h5>
-                    <p class="card-text">
-                        Our consumables category offers a wide range of premium
-                        quality 3D printing filaments to choose from. Whether you're
-                        looking for ABS, PLA, PETG, Nylon, TPU, or any other
-                        filament material, we have you covered.
-                    </p>
-                    <div class="read-more">
-                        <a href="Products.html"><i class="bi bi-arrow-right"></i> Shop</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 d-flex align-items-stretch" data-aos="fade-up">
-            <div class="card">
-                <div class="card-img">
-                    <a href="Products.html">
-                        <img src="~/Content/assets/img/parts.png" alt="..." />
-                    </a>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title"><a href="#">Parts</a></h5>
-                    <p class="card-text">
-                        The Parts category on Print House offers a wide range of
-                        high-quality, reliable 3D printer parts to keep your machine
-                        running smoothly.
-                    </p>
-                    <div class="read-more">
-                        <a href="Products.html"><i class="bi bi-arrow-right"></i> Shop</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 d-flex align-items-stretch" data-aos="fade-up">
-            <div class="card">
-                <div class="card-img">
-                    <img src="~/Content/assets/img/service-details-4.jpg"
-                         alt="..."
-                         style="height: 356px" />
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title"><a href="#">Our Care</a></h5>
-                    <p class="card-text">
-                        Our team of knowledgeable and experienced technicians is
-                        available to answer any questions and resolve any issues
-                        that may arise with your 3D printer. With our commitment to
-                        excellent customer service and technical expertise, our
-                        technical support section is the ultimate resource for all
-                        your 3D printing needs.
-                    </p>
-                    <div class="read-more">
-                        <a href="Products.html"><i class="bi bi-arrow-right"></i> Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>*@
+ 
             </div>
         </div>
     </section>
 </main>
 
 
-@*<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.categoryName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.categoryDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.categoryImage)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.categoryName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.categoryDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.categoryImage)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.categoryId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.categoryId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.categoryId })
-            </td>
-        </tr>
-    }
-
-</table>*@
