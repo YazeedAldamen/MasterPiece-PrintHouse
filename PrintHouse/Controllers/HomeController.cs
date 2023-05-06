@@ -22,6 +22,7 @@ namespace PrintHouse.Controllers
         PrintHouseEntities db = new PrintHouseEntities();
         public ActionResult Index()
         {
+
             var featured = db.Featureds.ToList();
 
             if (User.Identity.IsAuthenticated)
@@ -68,7 +69,6 @@ namespace PrintHouse.Controllers
                 }
 
             }
-
             return View(featured);
         }
 
