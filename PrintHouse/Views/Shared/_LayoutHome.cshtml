@@ -34,9 +34,9 @@
                         <img src="../../Content/assets\img\print house logo.png" alt="" class="img-fluid" />
                     </a>
                 </h1>
-               
+
             </div>
-            @{ 
+            @{
                 PrintHouse.Models.PrintHouseEntities db = new PrintHouse.Models.PrintHouseEntities();
                 List<PrintHouse.Models.Category> categories = db.Categories.ToList();
             }
@@ -47,7 +47,7 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @*<li>@Html.ActionLink("Categories", "Index", "Categories")</li>*@
 
-                    <li >
+                    <li>
                         <div class="dropdown">
                             <a href="@Url.Action("Index","Categories")" class="dropdown-toggle" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                             <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
@@ -68,7 +68,7 @@
                         </div>
                     </li>
 
-                 
+
 
                     <li><a href="~/Carts/Index"><i class="bi bi-cart-check-fill" style="color: white; font-size:18px"></i></a></li>
 
@@ -277,21 +277,21 @@
             data-aos-easing="ease-in-out"
             data-aos-duration="500">
         @*<div class="footer-newsletter">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <h4>Our Newsletter</h4>
-                        <p>Subscribe To Our Newsletter To Be Updated With What's New</p>
-                    </div>
-                    <div class="col-lg-6">
-                        <form action="" method="post">
-                            <input type="email" name="email" /><input type="submit"
-                                                                      value="Subscribe" />
-                        </form>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h4>Our Newsletter</h4>
+                            <p>Subscribe To Our Newsletter To Be Updated With What's New</p>
+                        </div>
+                        <div class="col-lg-6">
+                            <form action="" method="post">
+                                <input type="email" name="email" /><input type="submit"
+                                                                          value="Subscribe" />
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>*@
+            </div>*@
 
         <div class="footer-top">
             <div class="container">
@@ -303,19 +303,16 @@
                                 <i class="bx bx-chevron-right"></i> <a href="#">Home</a>
                             </li>
                             <li>
-                                <i class="bx bx-chevron-right"></i> <a href="#">About us</a>
+                                <i class="bx bx-chevron-right"></i> <a href="~/Home/About">About us</a>
                             </li>
                             <li>
-                                <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
-                            </li>
-                            <li>
-                                <i class="bx bx-chevron-right"></i>
-                                <a href="#">Terms of service</a>
+                                <i class="bx bx-chevron-right"></i> <a href="~/Home/Contact">Contact Us</a>
                             </li>
                             <li>
                                 <i class="bx bx-chevron-right"></i>
-                                <a href="#">Privacy policy</a>
+                                <a href="~/Categories/Index">Categories</a>
                             </li>
+
                         </ul>
                     </div>
 
@@ -324,23 +321,19 @@
                         <ul>
                             <li>
                                 <i class="bx bx-chevron-right"></i>
-                                <a href="#">3D Printers</a>
+                                <a href="~/subCategories/Index/1">3D Printers</a>
                             </li>
                             <li>
                                 <i class="bx bx-chevron-right"></i>
-                                <a href="#">Filaments</a>
+                                <a href="~/subCategories/Index/2">Consumables</a>
                             </li>
                             <li>
                                 <i class="bx bx-chevron-right"></i>
-                                <a href="#">Parts</a>
+                                <a href="~/subCategories/Index/3">Parts</a>
                             </li>
                             <li>
                                 <i class="bx bx-chevron-right"></i>
-                                <a href="#">Technical Support</a>
-                            </li>
-                            <li>
-                                <i class="bx bx-chevron-right"></i>
-                                <a href="#">Maintenance</a>
+                                <a href="~/Maintenances/Create">Maintenance</a>
                             </li>
                         </ul>
                     </div>
@@ -392,6 +385,7 @@
             </div>
         </div>
     </footer>
+
     <!-- End Footer -->
 
     <a href="#"

@@ -77,10 +77,7 @@
                                 <li><strong>Price</strong>: @Model.productPrice JOD</li>
                                 <li><strong>Quantity</strong> <input type="number" name="quantity" value="1" min="1" /></li>
                                 <li><strong>Units in Stock</strong>: @Model.stock</li>
-                                <li>
-                                    <strong>Specifications</strong>:
-                                    <a href="#specs">Check</a>
-                                </li>
+                               
                             </ul>
 
 
@@ -109,7 +106,7 @@
                 @{
                     PrintHouse.Models.PrintHouseEntities db = new PrintHouse.Models.PrintHouseEntities();
                     PrintHouse.Models.Review reviews = new PrintHouse.Models.Review();
-                    var review = db.Reviews.Where(x => x.productId == Model.productId).ToList();
+                    var review = db.Reviews.Where(x => x.productId == Model.productId && x.show == true).ToList();
 
 
                     foreach (var item in review)
@@ -148,23 +145,26 @@
                                     Your email address will not be published. Required fields
                                     are marked *
                                 </p>
-                                <form action="">
-                                    <div class="row">
+                                @*<form action="/Reviews/Create" method="post">*@
+                                @using (Html.BeginForm("Create", "Reviews", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+
+                                    @Html.AntiForgeryToken()
+                                    <input type="text" hidden name="productId" value="@Model.productId" />
+                                    <input type="text" hidden name="productId" value="@Model.productId" />
+                                    <input type="text" hidden name="userId" value="" />
+                                    <input type="text" hidden name="show" value="" />
+                                    <input type="text" hidden name="rating" value="" />
+
+                                    @*<div class="row">
                                         <div class="col-md-6 form-group">
                                             <input name="name"
                                                    type="text"
                                                    class="form-control"
                                                    placeholder="Your Name*" />
                                         </div>
-                                        <!-- <div class="col-md-6 form-group">
-                                          <input
-                                            name="email"
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="Your Email*"
-                                          />
-                                        </div> -->
-                                    </div>
+
+                                    </div>*@
 
                                     <div class="row">
                                         <div class="col form-group">
@@ -176,7 +176,8 @@
                                     <button type="submit" class="btn btn-primary">
                                         Post Comment
                                     </button>
-                                </form>
+                                }
+                                @*</form>*@
                             </div>
                         </div>
                     </div>

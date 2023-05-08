@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using PrintHouse.Models;
 
 namespace PrintHouse.Controllers
@@ -54,14 +55,18 @@ namespace PrintHouse.Controllers
         {
             if (ModelState.IsValid)
             {
+                review.userId = User.Identity.GetUserId();
+                review.show = true;
+                review.rating = 5;
+
                 db.Reviews.Add(review);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("SingleProduct", "Products", new { id = review.productId });
             }
 
             ViewBag.userId = new SelectList(db.AspNetUsers, "Id", "Email", review.userId);
             ViewBag.productId = new SelectList(db.Products, "productId", "productName", review.productId);
-            return View(review);
+            return RedirectToAction("SingleProduct", "Products", new { id = review.productId });
         }
 
         // GET: Reviews/Edit/5

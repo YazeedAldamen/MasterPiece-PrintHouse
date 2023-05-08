@@ -70,7 +70,7 @@
     </section>
     <!-- End About Section -->
     <!-- ======= Facts Section ======= -->
-    <section class="facts section-bg" data-aos="fade-up">
+    @*<section class="facts section-bg" data-aos="fade-up">
         <div class="container">
             <div class="row counters">
                 <div class="col-lg-3 col-6 text-center">
@@ -106,10 +106,10 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>*@
     <!-- End Facts Section -->
     <!-- ======= Our Skills Section ======= -->
-    <section class="skills" data-aos="fade-up">
+    <!--<section class="skills" data-aos="fade-up">
         <div class="container">
             <div class="section-title">
                 <h2>Our Skills</h2>
@@ -163,7 +163,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
     <!-- End Our Skills Section -->
     <!-- ======= Tetstimonials Section ======= -->
     <section class="testimonials" data-aos="fade-up">
@@ -175,6 +175,27 @@
 
             <div class="testimonials-carousel swiper">
                 <div class="swiper-wrapper">
+                    @{
+                        PrintHouse.Models.PrintHouseEntities db = new PrintHouse.Models.PrintHouseEntities();
+                        PrintHouse.Models.Review reviews = new PrintHouse.Models.Review();
+                        var review = db.Reviews.Where(x => x.show == true).ToList();
+                    }
+                    @foreach (var item in review)
+                    {
+
+
+                        <div class="testimonial-item swiper-slide">
+                            <img src="~/Content/assets/img/@item.AspNetUser.customerImage"
+                                 class="testimonial-img"
+                                 alt="" />
+                            <h3>@item.AspNetUser.customerFirstName @item.AspNetUser.customerLastName</h3>
+                            <p>
+                                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                @item.comment
+                                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                            </p>
+                        </div>
+                    }
                     <div class="testimonial-item swiper-slide">
                         <img src="~/Content/assets/img/testimonials/testimonials-1.jpg"
                              class="testimonial-img"
